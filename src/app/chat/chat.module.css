@@ -1,0 +1,31 @@
+.container {
+    display: flex;
+    height: calc(100vh - 80px);
+    /* Subtract header height */
+    max-width: 1400px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.chatColumn {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid var(--color-border);
+    background-color: var(--color-background);
+    position: relative;
+}
+
+.progressColumn {
+    width: 350px;
+    background-color: var(--color-secondary);
+    padding: 1.5rem;
+    overflow-y: auto;
+}
+
+@media (max-width: 1024px) {
+    .progressColumn {
+        display: none;
+        /* For MVP mobile, hide progress or move it */
+    }
+}

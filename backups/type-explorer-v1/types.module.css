@@ -1,0 +1,173 @@
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem 5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+}
+
+.header {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.headerMinimal {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.kicker {
+    font-size: 0.85rem;
+    letter-spacing: 0.25em;
+    color: var(--color-muted-foreground);
+}
+
+.title {
+    font-size: 3.25rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.subtitle {
+    font-size: 1.125rem;
+    color: var(--color-muted-foreground);
+    max-width: 720px;
+    margin: 0 auto;
+    line-height: 1.8;
+}
+
+.stepsGrid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.stepCard {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    padding: 1.5rem;
+    text-align: left;
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.stepCard h3 {
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.5rem;
+}
+
+.stepCard p {
+    color: var(--color-muted-foreground);
+    line-height: 1.6;
+}
+
+.helperPanel {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-2xl);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.helperText h2 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.helperText p {
+    color: var(--color-muted-foreground);
+}
+
+.helperChips {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+}
+
+.helperChip {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    padding: 1rem 1.25rem;
+    display: flex;
+    gap: 0.75rem;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s ease;
+}
+
+.helperChip:hover {
+    transform: translateY(-2px);
+}
+
+.helperFamily {
+    font-weight: 700;
+    font-size: 1.1rem;
+    letter-spacing: 0.05em;
+}
+
+.helperLabel {
+    font-weight: 600;
+}
+
+.helperHint {
+    color: var(--color-muted-foreground);
+    font-size: 0.9rem;
+}
+
+.ctaPanel {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-2xl);
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.ctaPanel h2 {
+    font-size: 1.75rem;
+    margin-bottom: 0.5rem;
+}
+
+.ctaPanel p {
+    color: var(--color-muted-foreground);
+    margin: 0;
+}
+
+.ctaButtons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 900px) {
+    .stepsGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .title {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .container {
+        padding: 0 1.5rem 4rem;
+    }
+
+    .ctaPanel {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

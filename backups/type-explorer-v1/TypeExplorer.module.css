@@ -1,0 +1,237 @@
+.stage {
+    position: relative;
+}
+
+.sideImage {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: max(0px, calc((100vw - 100%) / 2));
+    border-radius: var(--radius-2xl);
+    border: 1px dashed var(--color-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 1rem;
+    color: var(--color-muted-foreground);
+    opacity: 0.5;
+    font-size: 0.9rem;
+    pointer-events: none;
+    min-width: 0;
+}
+
+.leftImage {
+    left: calc(-1 * ((100vw - 100%) / 2));
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), transparent);
+}
+
+.rightImage {
+    right: calc(-1 * ((100vw - 100%) / 2));
+    background: linear-gradient(135deg, transparent, rgba(255, 255, 255, 0.2));
+}
+
+.sideLabel {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    position: relative;
+}
+
+.groupGrid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+}
+
+.groupCard {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-2xl);
+    padding: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.groupHeader h3 {
+    margin: 0;
+    font-size: 1.4rem;
+}
+
+.groupHeader p {
+    margin: 0.5rem 0 0;
+    color: var(--color-muted-foreground);
+    line-height: 1.6;
+    text-align: center;
+}
+
+.groupCardActive {
+    box-shadow:
+        0 25px 50px -25px rgba(0, 0, 0, 0.45),
+        0 0 0 2px rgba(255, 255, 255, 0.1);
+    transform: translateY(-4px) scale(1.01);
+}
+
+.groupCardActive::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: inherit;
+    background: radial-gradient(circle at top, var(--accent-color, rgba(255, 255, 255, 0.2)), transparent 70%);
+    border: 2px solid var(--accent-border-color, rgba(255, 255, 255, 0.15));
+    opacity: 0.9;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.familyPills {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
+}
+
+.familyCard {
+    cursor: pointer;
+    transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    padding: 1rem 1.25rem;
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+}
+
+.familyCard:hover {
+    transform: translateY(-2px);
+}
+
+.active {
+    box-shadow: 0 10px 25px -10px rgba(0, 0, 0, 0.25);
+    transform: translateY(-2px);
+}
+
+.familyCode {
+    font-weight: 700;
+    font-size: 1.1rem;
+    letter-spacing: 0.05em;
+    margin-top: 0.2rem;
+}
+
+.familyName {
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.familyVibe {
+    font-size: 0.9rem;
+    color: var(--color-muted-foreground);
+    line-height: 1.4;
+}
+
+.placeholder {
+    border: 1px dashed var(--color-border);
+    border-radius: var(--radius-xl);
+    padding: 1.5rem;
+    text-align: center;
+    color: var(--color-muted-foreground);
+}
+
+.detailSection {
+    scroll-margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.detailHeader {
+    display: flex;
+    gap: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.detailBadge {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: #fff;
+}
+
+.detailGroup {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--color-muted-foreground);
+}
+
+.detailTitle {
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin: 0.25rem 0;
+}
+
+.detailIntro {
+    color: var(--color-muted-foreground);
+    margin: 0;
+}
+
+.typeGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.typeCard {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.typeName {
+    font-weight: 600;
+}
+
+.typeCode {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: var(--color-muted-foreground);
+    letter-spacing: 0.05em;
+}
+
+.typeHook {
+    font-size: 0.875rem;
+    color: var(--color-muted-foreground);
+    line-height: 1.4;
+}
+
+@media (max-width: 1024px) {
+    .groupGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .sideImage {
+        display: none;
+    }
+}
+
+@media (max-width: 640px) {
+    .groupCard {
+        padding: 1.25rem;
+    }
+}

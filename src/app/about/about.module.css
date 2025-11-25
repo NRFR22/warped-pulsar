@@ -1,0 +1,242 @@
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 4rem 2rem 6rem;
+}
+
+.hero {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.kicker {
+    font-size: 0.85rem;
+    letter-spacing: 0.25em;
+    color: var(--color-muted-foreground);
+    margin-bottom: 1rem;
+}
+
+.title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+}
+
+.subtitle {
+    font-size: 1.25rem;
+    color: var(--color-muted-foreground);
+    margin: 0 auto 2.5rem;
+    max-width: 720px;
+    line-height: 1.7;
+}
+
+.heroStats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.statCard {
+    padding: 1.5rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05));
+    text-align: left;
+}
+
+.statNumber {
+    font-size: 2.5rem;
+    font-weight: 700;
+    display: block;
+}
+
+.statLabel {
+    color: var(--color-muted-foreground);
+    font-size: 0.95rem;
+}
+
+.section {
+    margin-bottom: 5rem;
+}
+
+.sectionHeader {
+    margin-bottom: 2rem;
+}
+
+.sectionTitle {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+}
+
+.sectionLead {
+    font-size: 1.125rem;
+    color: var(--color-muted-foreground);
+    line-height: 1.8;
+}
+
+.storyGrid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.5rem;
+}
+
+.storyCard {
+    padding: 1.5rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.storyCard h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.75rem;
+}
+
+.storyCard p {
+    color: var(--color-muted-foreground);
+    line-height: 1.6;
+}
+
+.processGrid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.5rem;
+}
+
+.processStep {
+    padding: 1.5rem;
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--color-border);
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.stepNumber {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 999px;
+    background-color: var(--color-secondary);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+}
+
+.processStep h3 {
+    font-size: 1.1rem;
+    margin: 0;
+}
+
+.processStep p {
+    color: var(--color-muted-foreground);
+    line-height: 1.6;
+}
+
+.bentoGrid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+}
+
+.bentoCard {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    padding: 1.75rem;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.01));
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.bentoCard h3 {
+    font-size: 1.2rem;
+    margin: 0;
+}
+
+.bentoCard p {
+    color: var(--color-muted-foreground);
+    line-height: 1.7;
+}
+
+.guardrails {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    padding: 2rem;
+    background-color: rgba(255, 255, 255, 0.04);
+    margin-bottom: 5rem;
+}
+
+.guardrailTitle {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+
+.guardrailList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.guardrailList li {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    color: var(--color-muted-foreground);
+}
+
+.guardrailLabel {
+    font-weight: 600;
+    color: var(--color-foreground);
+}
+
+.ctaBlock {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-2xl);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    text-align: left;
+}
+
+.ctaButtons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+@media (max-width: 900px) {
+    .heroStats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .storyGrid,
+    .processGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .bentoGrid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 640px) {
+    .heroStats {
+        grid-template-columns: 1fr;
+    }
+
+    .title {
+        font-size: 2.5rem;
+    }
+
+    .container {
+        padding: 3rem 1.5rem 4rem;
+    }
+}

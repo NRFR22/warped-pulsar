@@ -1,0 +1,227 @@
+.root {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.collapsed {
+    padding: 3rem 0 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    text-align: center;
+}
+
+.collapsedIntro {
+    font-size: 1.25rem;
+    color: var(--color-muted-foreground);
+    line-height: 1.7;
+    max-width: 640px;
+    margin: 0 auto;
+}
+
+.collapsedGrid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.collapsedCard {
+    border-radius: var(--radius-2xl);
+    border: 1px solid var(--color-border);
+    padding: 1.75rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    text-align: center;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.collapsedCard:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 30px 60px -40px rgba(0, 0, 0, 0.6);
+}
+
+.collapsedCardActive {
+    box-shadow: 0 35px 60px -35px rgba(0, 0, 0, 0.6);
+}
+
+.collapsedToggle {
+    background: transparent;
+    border: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    cursor: pointer;
+}
+
+.collapsedTitle {
+    font-size: 1.35rem;
+    font-weight: 600;
+}
+
+.collapsedDescription {
+    color: var(--color-muted-foreground);
+    line-height: 1.6;
+}
+
+.expandedFamilies {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.familyOption {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    padding: 1rem 1.25rem;
+    flex: 1 1 260px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.08);
+    cursor: pointer;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.familyOption:hover {
+    transform: translateY(-2px);
+}
+
+.familyOptionActive {
+    border-color: var(--color-primary);
+    box-shadow: 0 15px 25px -20px rgba(0, 0, 0, 0.6);
+}
+
+.familyOptionCode {
+    font-weight: 700;
+    font-size: 1.1rem;
+    letter-spacing: 0.1em;
+}
+
+.familyOptionTitle {
+    font-weight: 600;
+}
+
+.familyOptionDescription {
+    color: var(--color-muted-foreground);
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.familyDetail {
+    margin-top: 2rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-2xl);
+    padding: 2rem;
+    background: rgba(0, 0, 0, 0.15);
+}
+
+.detailHeader {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.detailBadge {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: 600;
+}
+
+.detailGroup {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--color-muted-foreground);
+    text-align: center;
+}
+
+.detailTitle {
+    font-size: 1.5rem;
+    margin: 0.15rem 0;
+    text-align: center;
+}
+
+.detailIntro {
+    color: var(--color-muted-foreground);
+    margin: 0;
+    text-align: center;
+}
+
+.typeGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.25rem;
+}
+
+.typeCard {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    border-radius: var(--radius-xl);
+    color: #111;
+}
+
+.typeCardColored {
+    padding: 1.5rem;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 20px 40px -30px rgba(0, 0, 0, 0.7);
+}
+
+.typeBadge {
+    background: rgba(255, 255, 255, 0.85);
+    color: #111;
+    font-weight: 600;
+    font-size: 0.85rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    align-self: center;
+    letter-spacing: 0.05em;
+}
+
+.typeName {
+    font-weight: 600;
+    font-size: 1.15rem;
+}
+
+.typeHook {
+    font-size: 0.95rem;
+    color: rgba(0, 0, 0, 0.8);
+    line-height: 1.5;
+}
+
+.viewProfileButton {
+    color: #111;
+    border: 1px solid rgba(17, 17, 17, 0.6);
+    border-radius: 999px;
+    padding: 0.2rem 0.75rem;
+}
+
+@media (max-width: 640px) {
+    .collapsed {
+        padding-top: 2rem;
+    }
+
+    .familyOption {
+        flex-basis: 100%;
+    }
+
+    .familyDetail {
+        padding: 1.5rem;
+    }
+}
