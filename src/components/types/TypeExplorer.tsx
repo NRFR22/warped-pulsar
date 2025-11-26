@@ -1,162 +1,102 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
-import { cn } from '@/lib/utils';
-import { typesData } from '@/data/types';
+import { cn, getTypeSlug } from '@/lib/utils';
+import { typeGroups } from '@/data/type-groups';
 import styles from './TypeExplorer.module.css';
 
-const FAMILY_GROUPS = [
-    {
-        id: 'feeling',
-        title: 'Feeling',
-        description: 'Lead with empathy, harmony, and personal values.',
-        accent: '#ffe5e0',
-        accentBorder: '#f5a097',
-        families: [
-            { id: 'fe', code: 'Fe', name: 'Fe-types', label: 'Expressive Feeling', description: 'External empathy, social calibration, warmth that broadcasts out.', color: 'var(--color-f)' },
-            { id: 'fi', code: 'Fi', name: 'Fi-types', label: 'Internal Feeling', description: 'Inner conviction, authenticity, a strong personal moral compass.', color: 'var(--color-f)' },
-        ],
-    },
-    {
-        id: 'thinking',
-        title: 'Thinking',
-        description: 'Solve problems with logic, structure, and proof.',
-        accent: '#e0ecff',
-        accentBorder: '#9dbcf8',
-        families: [
-            { id: 'te', code: 'Te', name: 'Te-types', label: 'Extroverted Thinking', description: 'Efficiency, metrics, operational clarity in the real world.', color: 'var(--color-t)' },
-            { id: 'ti', code: 'Ti', name: 'Ti-types', label: 'Introverted Thinking', description: 'Internal logic, precision, frameworks that make sense to you first.', color: 'var(--color-t)' },
-        ],
-    },
-    {
-        id: 'intuition',
-        title: 'Intuition',
-        description: 'Spot patterns, possibilities, and abstract meaning.',
-        accent: '#fff6da',
-        accentBorder: '#ffd063',
-        families: [
-            { id: 'ne', code: 'Ne', name: 'Ne-types', label: 'Extroverted Intuition', description: 'Brainstorming, divergent ideas, connecting dots out loud.', color: 'var(--color-n)' },
-            { id: 'ni', code: 'Ni', name: 'Ni-types', label: 'Introverted Intuition', description: 'Long-range vision, distilled insights, strategic foresight.', color: 'var(--color-n)' },
-        ],
-    },
-    {
-        id: 'sensing',
-        title: 'Sensing',
-        description: 'Trust real-world data, routines, and concrete experience.',
-        accent: '#e0f6e8',
-        accentBorder: '#96ddb0',
-        families: [
-            { id: 'se', code: 'Se', name: 'Se-types', label: 'Extroverted Sensing', description: 'In-the-moment action, improvisation, reacting quickly to reality.', color: 'var(--color-s)' },
-            { id: 'si', code: 'Si', name: 'Si-types', label: 'Introverted Sensing', description: 'Reliability, detailed recall, steady traditions and systems.', color: 'var(--color-s)' },
-        ],
-    },
-];
-
-const FAMILY_LOOKUP = FAMILY_GROUPS.flatMap(group => group.families);
-
 const FUNCTION_COLORS: Record<string, string> = {
-    F: '#ff6b6b',
-    T: '#6c83ff',
-    N: '#ffd75e',
-    S: '#68d391',
+    F: '#FF8A8A',
+    T: '#7FA6FF',
+    N: '#FFE08A',
+    S: '#8EE6A0',
 };
 
-const hexToRgba = (hex: string, alpha: number) => {
-    const sanitized = hex.replace('#', '');
-    const isShort = sanitized.length === 3;
-    const expanded = isShort ? sanitized.split('').map(char => char + char).join('') : sanitized;
-    const bigint = parseInt(expanded, 16);
-    const r = (bigint >> 16) & 255;
-    const g = (bigint >> 8) & 255;
-    const b = bigint & 255;
-    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+const BRANCH_ACCENTS: Record<string, string> = {
+    Fi: '#FF8A8A',
+    Fe: '#FF8A8A',
+    Ti: '#7FA6FF',
+    Te: '#7FA6FF',
+    Ne: '#FFE08A',
+    Ni: '#FFE08A',
+    Se: '#8EE6A0',
+    Si: '#8EE6A0',
 };
 
 const getSplitBackgroundForType = (code: string) => {
     const [firstRaw, secondRaw] = code.split('/');
     const first = firstRaw?.trim().charAt(0).toUpperCase();
     const second = secondRaw?.trim().charAt(0).toUpperCase();
-    const start = FUNCTION_COLORS[first || ''] || '#f4f4f5';
-    const end = FUNCTION_COLORS[second || ''] || '#e5e7eb';
-    return `linear-gradient(135deg, ${hexToRgba(start, 0.5)} 50%, ${hexToRgba(end, 0.5)} 50%)`;
+    const start = `${FUNCTION_COLORS[first || ''] || '#f4f4f5'}33`;
+    const end = `${FUNCTION_COLORS[second || ''] || '#e5e7eb'}33`;
+    return `linear-gradient(135deg, ${start} 50%, ${end} 50%)`;
 };
 
 export function TypeExplorer() {
     const [expandedGroupId, setExpandedGroupId] = useState<string | null>(null);
-    const [activeFamily, setActiveFamily] = useState<string | null>(null);
+    const [activeBranchId, setActiveBranchId] = useState<string | null>(null);
 
-    const handleGroupToggle = (groupId: string) => {
-        setActiveFamily(null);
-        setExpandedGroupId(prev => (prev === groupId ? null : groupId));
-    };
+    const activeGroup = expandedGroupId ? typeGroups.find((group) => group.id === expandedGroupId) : undefined;
+    const activeBranch = activeGroup?.branches.find((branch) => branch.id === activeBranchId);
 
-    const activeFamilyMeta = activeFamily ? FAMILY_LOOKUP.find(f => f.id === activeFamily) : undefined;
+    useEffect(() => {
+        if (!expandedGroupId) {
+            setActiveBranchId(null);
+        }
+    }, [expandedGroupId]);
 
     return (
         <div className={styles.root}>
             <div className={styles.collapsed}>
                 <p className={styles.collapsedIntro}>Start with the core energy that feels most like you.</p>
                 <div className={styles.collapsedGrid}>
-                    {FAMILY_GROUPS.map(group => {
+                    {typeGroups.map((group) => {
                         const isExpanded = expandedGroupId === group.id;
-                        const selectedFamily = activeFamily && group.families.some(f => f.id === activeFamily)
-                            ? activeFamilyMeta
-                            : undefined;
-
                         return (
                             <div
                                 key={group.id}
                                 className={cn(styles.collapsedCard, isExpanded && styles.collapsedCardActive)}
-                                style={{ borderColor: group.accentBorder, background: `linear-gradient(135deg, ${group.accent} 0%, rgba(255,255,255,0) 100%)` }}
+                                style={{ borderColor: group.accent, background: `linear-gradient(135deg, ${group.accent} 0%, rgba(255,255,255,0) 100%)` }}
                             >
                                 <button
                                     type="button"
                                     className={styles.collapsedToggle}
-                                    onClick={() => handleGroupToggle(group.id)}
+                                    onClick={() => setExpandedGroupId((prev) => (prev === group.id ? null : group.id))}
                                 >
-                                    <div className={styles.collapsedTitle}>{group.title}</div>
+                                    <div className={styles.collapsedTitle}>{group.label}</div>
                                     <div className={styles.collapsedDescription}>{group.description}</div>
                                 </button>
                                 {isExpanded && (
                                     <>
                                         <div className={styles.expandedFamilies}>
-                                            {group.families.map(family => (
+                                            {group.branches.map((branch) => (
                                                 <button
-                                                    key={family.id}
+                                                    key={branch.id}
                                                     type="button"
-                                                    className={cn(styles.familyOption, activeFamily === family.id && styles.familyOptionActive)}
-                                                    onClick={() => setActiveFamily(family.id)}
+                                                    className={cn(styles.familyOption, activeBranchId === branch.id && styles.familyOptionActive)}
+                                                    onClick={() => setActiveBranchId((prev) => (prev === branch.id ? null : branch.id))}
+                                                    style={{
+                                                        borderColor: BRANCH_ACCENTS[branch.prefix] || 'var(--color-border)',
+                                                        background: BRANCH_ACCENTS[branch.prefix] || 'rgba(255,255,255,0.08)',
+                                                    }}
                                                 >
-                                                    <div className={styles.familyOptionCode}>{family.code}</div>
+                                                    <div className={styles.familyOptionCode}>{branch.prefix}</div>
                                                     <div>
-                                                        <div className={styles.familyOptionTitle}>{family.label}</div>
-                                                        <div className={styles.familyOptionDescription}>{family.description}</div>
+                                                        <div className={styles.familyOptionTitle}>{branch.label}</div>
+                                                        <div className={styles.familyOptionDescription}>{branch.description}</div>
                                                     </div>
                                                 </button>
                                             ))}
                                         </div>
-                                        {selectedFamily && (
+                                        {activeBranch && (
                                             <div className={styles.familyDetail}>
-                                                <div className={styles.detailHeader}>
-                                                    <div className={styles.detailBadge} style={{ backgroundColor: selectedFamily.color }}>
-                                                        {selectedFamily.code}
-                                                    </div>
-                                                    <div>
-                                                        <div className={styles.detailGroup}>{group.title}</div>
-                                                        <h3 className={styles.detailTitle}>{selectedFamily.name}</h3>
-                                                        <p className={styles.detailIntro}>{selectedFamily.description}</p>
-                                                    </div>
-                                                </div>
                                                 <div className={styles.typeGrid}>
-                                                    {typesData.filter(t => t.familyId === selectedFamily.id).map((type, idx) => (
-                                                        <Link href={`/types/${type.name.toLowerCase().replace(/ /g, '-')}`} key={idx}>
-                                                            <Card
-                                                                className={cn(styles.typeCard, styles.typeCardColored)}
-                                                                style={{ background: getSplitBackgroundForType(type.code) }}
-                                                            >
+                                                    {activeBranch.types.map((type) => (
+                                                        <Link href={`/types/${getTypeSlug(type)}`} key={type.id}>
+                                                            <Card className={cn(styles.typeCard, styles.typeCardColored)} style={{ background: getSplitBackgroundForType(type.code) }}>
                                                                 <div className={styles.typeBadge}>{type.code}</div>
                                                                 <h3 className={styles.typeName}>{type.name}</h3>
                                                                 <p className={styles.typeHook}>{type.shortDescription}</p>

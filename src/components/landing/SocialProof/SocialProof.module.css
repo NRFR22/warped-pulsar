@@ -1,0 +1,42 @@
+.section {
+  padding: 6rem 0;
+  background: linear-gradient(180deg, var(--color-background) 0%, var(--color-muted) 100%);
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 1rem;
+  letter-spacing: -0.02em;
+  color: var(--color-foreground);
+}
+
+.subtitle {
+  font-size: 1.25rem;
+  text-align: center;
+  color: var(--color-muted-foreground);
+  margin-bottom: 3rem;
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 4rem 0;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+  }
+}

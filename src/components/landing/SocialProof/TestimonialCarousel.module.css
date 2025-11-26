@@ -1,0 +1,123 @@
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 0;
+}
+
+.carouselWrapper {
+  position: relative;
+  min-height: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.testimonial {
+  position: absolute;
+  width: 100%;
+  padding: 0 4rem;
+  text-align: center;
+}
+
+.quote {
+  font-size: 1.5rem;
+  line-height: 1.6;
+  color: var(--color-foreground);
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+}
+
+.author {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.authorName {
+  font-weight: 600;
+  color: var(--color-foreground);
+  font-size: 1rem;
+}
+
+.authorType {
+  color: var(--color-muted-foreground);
+  font-size: 0.875rem;
+}
+
+.navButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--color-background);
+  border: 2px solid var(--color-border);
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  z-index: 10;
+}
+
+.navButton:hover {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: white;
+  transform: translateY(-50%) scale(1.1);
+}
+
+.prev {
+  left: 0;
+}
+
+.next {
+  right: 0;
+}
+
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 2rem;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--color-border);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s;
+  padding: 0;
+}
+
+.dot:hover {
+  background: var(--color-muted-foreground);
+  transform: scale(1.2);
+}
+
+.dot.active {
+  background: var(--color-primary);
+  width: 32px;
+  border-radius: 5px;
+}
+
+@media (max-width: 768px) {
+  .testimonial {
+    padding: 0 3rem;
+  }
+
+  .quote {
+    font-size: 1.125rem;
+  }
+
+  .navButton {
+    width: 40px;
+    height: 40px;
+  }
+}

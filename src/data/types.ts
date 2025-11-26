@@ -16,8 +16,7 @@ export const typesData: TypeProfile[] = [
         familyId: "fe",
         color: "var(--gradient-nf)",
         shortDescription: "Bright, expressive emotional presence. Uplifting energy.",
-        fullProfile: `
-**Why this name fits this type**
+        fullProfile: `**Why this name fits this type**
 
 Across this entire group, the shared pattern is:
 * Bright, expressive emotional presence
@@ -32,7 +31,8 @@ This is NOT a chaotic performer type and not a quiet empath type — it’s a co
 People who can teach, charm, communicate, joke, connect, and shine.
 
 **A personality defined by expressive warmth, social brightness, and emotional uplift.**
-`
+
+MBTI: ESFJ`
     },
     {
         code: "Fe/Ni",
@@ -95,6 +95,7 @@ A balanced Oracle is a beacon of wisdom, guiding others without carrying their b
 “Guidance, influence, emotional authority.”
 You don't just help people feel better; you help them become better.
 You are the human equivalent of a lighthouse.
+MBTI: ENFJ
 `
     },
     {
@@ -158,6 +159,7 @@ A balanced Maverick is a visionary builder, turning disruption into progress.
 “Independence, drive, ambition.”
 You don't wait for the future; you build it.
 You are the human equivalent of a spark.
+MBTI: ENFJ
 `
     },
     {
@@ -221,6 +223,7 @@ A balanced Guardian is a wise protector, keeping us safe while letting us grow.
 “Duty, steadiness, protection.”
 You don't just care for people; you secure their future.
 You are the human equivalent of a home.
+MBTI: ESFJ
 `
     },
     {
@@ -284,6 +287,7 @@ A balanced Dreamweaver is a powerful creator, turning dreams into reality.
 “Depth, authenticity, imagination.”
 You don't just imagine the world; you feel it.
 You are the human equivalent of a poem.
+MBTI: INFP
 `
     },
     {
@@ -347,6 +351,7 @@ A balanced Forcebringer is a legendary figure, showing us the power of the human
 “Intensity, self-mastery, drive.”
 You don't just live life; you conquer it.
 You are the human equivalent of a storm.
+MBTI: ISFP
 `
     },
     {
@@ -412,6 +417,7 @@ A balanced Shapeshifter is unstoppable — all the range, with direction.
 "Adaptability, reinvention, charisma."
 You don't just change; you evolve.
 You are the human equivalent of water.
+MBTI: ISFP
 `
     },
     {
@@ -421,8 +427,7 @@ You are the human equivalent of water.
         familyId: "fi",
         color: "var(--gradient-sf)",
         shortDescription: "Soft, disarming social presence and effortless likability.",
-        fullProfile: `
-⭐ THE CHARMIST
+        fullProfile: `⭐ THE CHARMIST
 The ISFP Jumper • Savior Fi/Si • Demon Ne/Te
 
 You make people feel at home.
@@ -477,7 +482,8 @@ A balanced Charmist is a beacon of warmth with quiet confidence.
 "Warmth, approachability, subtle charisma."
 You don't just make friends; you make people feel human.
 You are the human equivalent of home.
-`
+
+MBTI: INFP`
     },
     {
         code: "Ne/Fe",
@@ -542,6 +548,7 @@ A balanced Visionary is a world-changer — all the ideas, with execution.
 "Conceptual depth, originality, intellectual creativity."
 You don't just imagine the future; you design it.
 You are the human equivalent of a blueprint.
+MBTI: ENTP
 `
     },
     {
@@ -607,6 +614,7 @@ A balanced Eccentricist is a creative force — all the weird, with impact.
 "Creative quirk, playful originality, unconventional expression."
 You don't just break the mold; you make a new one.
 You are the human equivalent of a kaleidoscope.
+MBTI: ENFP
 `
     },
     {
@@ -672,6 +680,7 @@ A balanced Storykeeper is a cultural anchor — all the wisdom, with heart.
 "Narrative wisdom, emotional sincerity, grounded communication."
 You don't just tell stories; you give them meaning.
 You are the human equivalent of a library.
+MBTI: ENFP
 `
     },
     {
@@ -737,6 +746,7 @@ Their eyes communicate “I’m processing everything.”
 Compared to other types, they have the strongest cognitive engine.
 
 **A personality defined by analysis, logic, system-building, strategic thought, and a dominant cognitive orientation.**
+MBTI: ENTP
 `
     },
     {
@@ -800,6 +810,7 @@ They’re not the most intense or forceful type, but they excel at:
 This is a people-mover personality.
 
 **A personality defined by charisma, persuasion, social impact, and emotionally engaging presence.**
+MBTI: INFJ
 `
     },
     {
@@ -869,6 +880,7 @@ Their expressions tend to be:
 They command attention without trying to be charming, warm, or intense.
 
 **A personality defined by bold individuality, cultural imprint, stylistic distinction, and confident nonconformity.**
+MBTI: INTJ
 `
     },
     {
@@ -937,6 +949,7 @@ Their facial expressions tend to be:
 They project the energy of people who architect their lives rather than drift through them.
 
 **A personality defined by ambition, polished communication, tactical thinking, and intentional life design.**
+MBTI: INTJ
 `
     },
     {
@@ -1003,6 +1016,7 @@ Key distinction:
 This is the “wake-up-call” type.
 
 **A personality defined by emotional intensity, radical honesty, cultural challenge, and catalytic personal impact.**
+MBTI: INFJ
 `
     },
     {
@@ -1068,6 +1082,7 @@ Most of these people are loved specifically because they:
 Their power comes from engaging attention and emotion directly.
 
 **A personality defined by expressive energy, emotional presence, physical charisma, and the ability to captivate audiences.**
+MBTI: ESTP
 `
     },
     {
@@ -1138,6 +1153,7 @@ Their power comes from:
 Think of them as ambassadors of brightness.
 
 **A personality defined by aesthetic expression, radiant charm, emotional warmth, and a life centered around celebrating beauty, joy, and human connection.**
+MBTI: ESFP
 `
     },
     {
@@ -1201,6 +1217,7 @@ Unlike The Performer:
 Their social energy is functional, not theatrical — “Let’s get to work. Let’s build. Let’s make progress.”
 
 **A personality defined by action, production, practical ambition, and the drive to build real-world results.**
+MBTI: ESFP
 `
     },
     {
@@ -1272,6 +1289,7 @@ They don’t just act. They don’t just build. They don’t just charm.
 They dominate spaces.
 
 **A personality defined by commanding presence, high agency, physical and energetic intensity, and the instinct to lead through strength and momentum.**
+MBTI: ESTP
 `
     },
     {
@@ -1333,6 +1351,7 @@ Not volatile (Provocateur). Not dominant (Powerhouse). Not eccentric (Eccentrici
 They’re stable, steady, emotion-forward, values-driven.
 
 **A personality defined by empathy, emotional sincerity, grounded values, and the desire to uplift others through warmth and human connection.**
+MBTI: ISFJ
 `
     },
     {
@@ -1396,11 +1415,12 @@ Compared to:
 The Executor does. Calmly, consistently, effectively — with minimal theatrics.
 
 **A personality defined by discipline, responsibility, reliability, and the ability to turn plans into tangible, real-world outcomes.**
+MBTI: ISTJ
 `
     },
     {
         code: "Si/Te",
-        name: "The Guardian-Advocate",
+        name: "The Guardian",
         family: "Si-types",
         familyId: "si",
         color: "var(--gradient-st)",
@@ -1464,10 +1484,11 @@ This is ethical stewardship.
 5. **“Guardian of values and communities” is the unique vibe**
 The distinct difference from “Executor”:
 * Executors = disciplined, productive doers
-* Guardian-Advocates = socially responsible protectors of people + values
+* Guardians = socially responsible protectors of people + values
 This group stands up, speaks out, represents, defends.
 
 **A personality defined by principled leadership, ethical responsibility, advocacy for others, and a calm yet powerful commitment to community and truth.**
+MBTI: ISTJ
 `
     },
     {
@@ -1521,6 +1542,7 @@ But you haven’t yet had the quiet, grounded, stabilizing, routine-keeping, det
 This group fills that gap perfectly.
 
 **A personality defined by steadiness, structure, humility, practical responsibility, and the quiet maintenance of order and continuity.**
+MBTI: ISFJ
 `
     },
     {
@@ -1533,7 +1555,7 @@ This group fills that gap perfectly.
         fullProfile: `
 **Why this name fits this type**
 
-This group’s energy is powerful, directive, outspoken, commanding, and assertive — but in a way that is social, public, vocal, and leading-from-the-front rather than physical (Powerhouse) or ethical (Guardian-Advocate).
+This group’s energy is powerful, directive, outspoken, commanding, and assertive — but in a way that is social, public, vocal, and leading-from-the-front rather than physical (Powerhouse) or ethical (Guardian).
 This is the “strong voice in the room” type.
 Here’s the breakdown:
 
@@ -1547,7 +1569,7 @@ Everyone here radiates:
 This group talks loudly, acts decisively, and leads boldly.
 
 2. **Directive leadership (not soft leadership)**
-Unlike Humanitarian (warm), Guardian-Advocate (ethical), Strategist (polished), or Executor (dutiful):
+Unlike Humanitarian (warm), Guardian (ethical), Strategist (polished), or Executor (dutiful):
 This group leads through force of personality.
 They don’t ask — they tell.
 They don’t persuade — they declare.
@@ -1578,6 +1600,7 @@ This is THE public-facing, outspoken, directive personality.
 This type speaks, critiques, directs, commands, and drives action through presence + voice.
 
 **A personality defined by outspoken leadership, direct communication, assertive presence, and the ability to take charge through force of personality.**
+MBTI: ESTJ
 `
     },
     {
@@ -1595,7 +1618,7 @@ They all radiate mission-driven intensity, moral fire, public conviction, and a 
 This is NOT:
 * The Commander (directive leadership through authority)
 * The Provocateur (shock + disruption)
-* The Guardian-Advocate (ethical, calm stewardship)
+* The Guardian (ethical, calm stewardship)
 * The Strategist (polished influence)
 * The Powerhouse (dominant physical/energetic agency)
 This type leads through PURPOSE.
@@ -1649,6 +1672,7 @@ They’re not just leaders. They’re crusaders — people who step into conflic
 Whether they’re right or wrong, benevolent or harmful, calm or explosive — their identity is tied to a cause.
 
 **A personality defined by mission-driven conviction, moral intensity, public advocacy, and the instinct to fight for causes, truth, and transformation.**
+MBTI: ENTJ
 `
     },
     {
@@ -1725,6 +1749,7 @@ This group is filled with people who embody:
 Not shallow — just visually and socially magnetic in a uniquely composed way.
 
 **A personality defined by poised charisma, cultural taste-making, magnetic polish, and an iconic, aspirational presence that shapes how others define “style” and “star power.”**
+MBTI: ENTJ
 `
     },
     {
@@ -1739,7 +1764,7 @@ Not shallow — just visually and socially magnetic in a uniquely composed way.
 
 This group has one of the strongest, most unmistakable signatures of any cluster so far:
 They radiate command, expertise, standards, credibility, and high expectations.
-Not dominance-by-force (Powerhouse). Not mission intensity (Crusader). Not outspoken fire (Commander). Not strategic polish (Strategist). Not ethical steadiness (Guardian-Advocate). Not execution (Executor).
+Not dominance-by-force (Powerhouse). Not mission intensity (Crusader). Not outspoken fire (Commander). Not strategic polish (Strategist). Not ethical steadiness (Guardian). Not execution (Executor).
 This type leads through credibility, mastery, competence, and the expectation that others rise to their level.
 Here’s the breakdown:
 
@@ -1788,6 +1813,7 @@ This type has:
 Instead, they’re solid, reliable, the senior in the room, the kind of people who others look at before making a decision.
 
 **A personality defined by expertise, high standards, competence, credibility, and the ability to lead through mastery rather than noise.**
+MBTI: ESTJ
 `
     },
     {
@@ -1797,13 +1823,12 @@ Instead, they’re solid, reliable, the senior in the room, the kind of people w
         familyId: "ti",
         color: "var(--gradient-nt)",
         shortDescription: "Wisdom, reflection, depth, and intellectual calm.",
-        fullProfile: `
-**Why this name fits this type**
+        fullProfile: `**Why this name fits this type**
 
 This group has one of the most coherent, unmistakable, and intellectually/spiritually mature energy signatures in your entire 32-type system.
 The pattern is extremely clear:
 They radiate wisdom, knowledge, insight, reflection, and a calm mastery of ideas.
-They’re not strategic (Strategist), logical-intense (Intellector), visionary-creative (Visionary), ethical-steward (Guardian-Advocate), intense/emotional (Provocateur), dominant (Powerhouse), expressive (Performer), rebellious (Iconoclast), or aesthetic (Celebrant).
+They’re not strategic (Strategist), logical-intense (Intellector), visionary-creative (Visionary), ethical-steward (Guardian), intense/emotional (Provocateur), dominant (Powerhouse), expressive (Performer), rebellious (Iconoclast), or aesthetic (Celebrant).
 This type is wisdom-first, not intelligence-first.
 Here’s the breakdown:
 
@@ -1848,7 +1873,8 @@ Very little flashy expressiveness. Very little chaos. Very little performance.
 This is the highest internal-processing type in the system.
 
 **A personality defined by wisdom, reflection, depth, intellectual calm, and a life centered around understanding truth and sharing insight.**
-`
+
+MBTI: INTP`
     },
     {
         code: "Ti/Ni",
@@ -1857,8 +1883,7 @@ This is the highest internal-processing type in the system.
         familyId: "ti",
         color: "var(--gradient-nt)",
         shortDescription: "Disciplined skill, applied excellence, and lifelong refinement.",
-        fullProfile: `
-**Why this name fits this type**
+        fullProfile: `**Why this name fits this type**
 
 This group has one of the clearest, strongest, and most unified energetic signatures of ANY type in your entire 32-type system.
 They radiate skill, craftsmanship, discipline, precision, applied expertise, and mastery-through-practice.
@@ -1904,7 +1929,8 @@ They don’t radiate passion outwardly (Provocateur), nor dominance (Powerhouse)
 They radiate craft.
 
 **A personality defined by disciplined skill, applied excellence, lifelong refinement, and the calm confidence of someone who has devoted themselves fully to mastering a craft.**
-`
+
+MBTI: ISTP`
     },
     {
         code: "Ti/Se",
@@ -1913,8 +1939,7 @@ They radiate craft.
         familyId: "ti",
         color: "var(--gradient-st)",
         shortDescription: "Resilience, stoic strength, hardened will, and endurance.",
-        fullProfile: `
-**Why this name fits this type**
+        fullProfile: `**Why this name fits this type**
 
 This group has one of the strongest, most force-forward, and unyielding energy signatures in your entire 32-type system so far.
 While Powerhouse was about presence, and Master was about craft, and Commander was about voice,
@@ -1974,7 +1999,8 @@ They feel like the type who:
 This is willpower embodied.
 
 **A personality defined by resilience, stoic strength, hardened will, and the ability to endure and overcome through sheer internal fortitude.**
-`
+
+MBTI: ISTP`
     },
     {
         code: "Ti/Si",
@@ -1983,8 +2009,7 @@ This is willpower embodied.
         familyId: "ti",
         color: "var(--gradient-st)",
         shortDescription: "Curiosity, experimentation, inventive thinking, and creative problem-solving.",
-        fullProfile: `
-**Why this name fits this type**
+        fullProfile: `**Why this name fits this type**
 
 This group has an extremely clean, coherent, and unmistakable energetic signature — a blend of curiosity, experimentation, original thinking, and forward-looking creativity.
 They’re not wisdom-first like The Sage, intensity-first like The Titan, craft-first like The Master, charisma-first like The Performer or Starmaker, moral-first like The Crusader, or strategic-first like The Strategist.
@@ -2039,6 +2064,7 @@ This type mixes:
 This is engineering creativity, scientific creativity, life-hack creativity, philosophical creativity — all under one umbrella.
 
 **A personality defined by curiosity, experimentation, inventive thinking, and the desire to reshape systems, ideas, and the future through creative problem-solving.**
-`
+
+MBTI: INTP`
     }
 ];

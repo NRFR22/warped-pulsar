@@ -199,6 +199,32 @@
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
 }
 
+.diagramSection {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem 4rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  align-items: center;
+}
+
+.diagramTitle {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.diagramCopy {
+  color: var(--color-muted-foreground);
+  line-height: 1.6;
+}
+
+.diagramImageWrapper {
+  display: flex;
+  justify-content: center;
+}
+
 .featureIcon {
   width: 4rem;
   height: 4rem;
@@ -272,6 +298,10 @@
     grid-template-columns: repeat(2, 1fr);
   }
 
+  .diagramSection {
+    grid-template-columns: 1fr;
+  }
+
   .featureGrid {
     grid-template-columns: 1fr;
     gap: 1.5rem;
@@ -289,6 +319,10 @@
 
   .familyGrid {
     grid-template-columns: 1fr;
+  }
+
+  .diagramSection {
+    padding: 0 1.5rem 3rem;
   }
 
   .ctaTitle {

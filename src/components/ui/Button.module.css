@@ -42,3 +42,20 @@
     background-color: var(--color-secondary);
     color: var(--color-foreground);
 }
+
+/* Size variants */
+.sm {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+}
+
+.md {
+    padding: 0.625rem 1.25rem;
+    font-size: 0.9375rem;
+}
+
+.lg {
+    padding: 0.875rem 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+}

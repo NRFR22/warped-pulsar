@@ -2,10 +2,17 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
+import dynamic from 'next/dynamic';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
-import { Mic, Brain, Sparkles, ArrowRight, Zap, Users, TrendingUp } from 'lucide-react';
+import { Mic, Brain, Sparkles, ArrowRight, Zap, Users } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { EnhancedHero } from '@/components/landing/Hero/EnhancedHero';
+import { SocialProof } from '@/components/landing/SocialProof/SocialProof';
+import { InteractiveDemo } from '@/components/landing/InteractiveDemo/InteractiveDemo';
+import { EnhancedTypeCosmos } from '@/components/landing/TypeCosmos/EnhancedTypeCosmos';
+import { Differentiators } from '@/components/landing/Differentiators/Differentiators';
+import { EnhancedCTA } from '@/components/landing/CTASection/EnhancedCTA';
 import styles from './page.module.css';
 
 const fadeInUp = {
@@ -25,48 +32,14 @@ const staggerContainer = {
 export default function Home() {
   return (
     <main className={styles.main}>
-      {/* Hero Section */}
-      <section className={styles.hero}>
-        <motion.div
-          className={styles.heroContent}
-          initial="initial"
-          animate="animate"
-          variants={staggerContainer}
-        >
-          <motion.h1 className={styles.title} variants={fadeInUp}>
-            Meet your inner operating system.
-          </motion.h1>
-          <motion.p className={styles.subtitle} variants={fadeInUp}>
-            Talk to an AI that listens to how you think and feel, then sorts you into one of <strong>32 personality archetypes</strong>.
-          </motion.p>
-          <motion.div className={styles.heroButtons} variants={fadeInUp}>
-            <Link href="/chat">
-              <Button>Talk to your inner OS</Button>
-            </Link>
-            <Link href="/types">
-              <Button variant="secondary">Browse the 32 types</Button>
-            </Link>
-          </motion.div>
-          <motion.p className="text-sm text-gray-500 mt-2" variants={fadeInUp}>
-            Voice-only. No quiz questions. Just talk.
-          </motion.p>
-        </motion.div>
-        <motion.div
-          className={styles.heroImage}
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-        >
-          <Image
-            src="/interactive-ai.png"
-            alt="Humanoid AI avatar with cognitive functions radiating outward"
-            width={420}
-            height={560}
-            className={styles.heroIllustration}
-            priority
-          />
-        </motion.div>
-      </section>
+      {/* Enhanced Hero Section */}
+      <EnhancedHero />
+
+      {/* Social Proof */}
+      <SocialProof />
+
+      {/* Interactive Demo */}
+      <InteractiveDemo />
 
       {/* How it works */}
       <motion.section
@@ -142,76 +115,8 @@ export default function Home() {
         </motion.div>
       </motion.section>
 
-      {/* 32-type universe */}
-      <motion.section
-        className={styles.universe}
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.6 }}
-      >
-        <motion.h2
-          className={styles.sectionTitle}
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          32 archetypes, one inner OS.
-        </motion.h2>
-        <motion.p
-          className={styles.universeText}
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
-          We've mapped 32 distinct patterns of motivation, perception, and behavior. You don't have to understand the system — just explore what resonates.
-        </motion.p>
-
-        <motion.div
-          className={styles.familyGrid}
-          variants={staggerContainer}
-          initial="initial"
-          whileInView="animate"
-          viewport={{ once: true, margin: "-50px" }}
-        >
-          {[
-            { name: 'Fe-types', vibe: 'Expressive, people-centered', color: 'var(--color-f)' },
-            { name: 'Fi-types', vibe: 'Authentic, value-driven', color: 'var(--color-f)' },
-            { name: 'Ne-types', vibe: 'Explorative, idea-generators', color: 'var(--color-n)' },
-            { name: 'Ni-types', vibe: 'Strategic, pattern-seekers', color: 'var(--color-n)' },
-            { name: 'Se-types', vibe: 'Present, action-oriented', color: 'var(--color-s)' },
-            { name: 'Si-types', vibe: 'Reliable, detail-focused', color: 'var(--color-s)' },
-            { name: 'Te-types', vibe: 'Efficient, system-builders', color: 'var(--color-t)' },
-            { name: 'Ti-types', vibe: 'Analytical, logic-driven', color: 'var(--color-t)' },
-          ].map((family) => (
-            <motion.div key={family.name} variants={fadeInUp}>
-              <Link href={`/types?family=${family.name.split('-')[0]}`}>
-                <Card className={styles.familyCard}>
-                  <div className={styles.familyHeader}>
-                    <span className={styles.familyName}>{family.name}</span>
-                    <div className={styles.pill} style={{ backgroundColor: family.color }} />
-                  </div>
-                  <p className={styles.familyVibe}>{family.vibe}</p>
-                  <p className={styles.familyExamples}>Includes: The Illuminator, The Oracle...</p>
-                </Card>
-              </Link>
-            </motion.div>
-          ))}
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.4, duration: 0.6 }}
-        >
-          <Link href="/types">
-            <Button variant="secondary">Browse all 32 types</Button>
-          </Link>
-        </motion.div>
-      </motion.section>
+      {/* Enhanced Type Cosmos */}
+      <EnhancedTypeCosmos />
 
       {/* Why it's different */}
       <motion.section
@@ -273,24 +178,11 @@ export default function Home() {
         </motion.div>
       </motion.section>
 
-      {/* Final CTA */}
-      <motion.section
-        className={styles.finalCta}
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8 }}
-      >
-        <div className={styles.ctaContent}>
-          <h2 className={styles.ctaTitle}>Ready to discover your type?</h2>
-          <p className={styles.ctaText}>
-            Start a conversation with your inner OS. No signup required.
-          </p>
-          <Link href="/chat">
-            <Button size="lg">Start talking now</Button>
-          </Link>
-        </div>
-      </motion.section>
+      {/* Differentiators / Comparison */}
+      <Differentiators />
+
+      {/* Enhanced Final CTA */}
+      <EnhancedCTA />
     </main>
   );
 }

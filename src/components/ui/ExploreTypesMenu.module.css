@@ -1,0 +1,161 @@
+
+.panel {
+    width: min(900px, 85vw);
+    background: rgba(255, 255, 255, 0.98);
+    border-radius: 1.5rem;
+    border: 1px solid var(--color-border);
+    box-shadow: 0 30px 80px -40px rgba(0, 0, 0, 0.25);
+    padding: 1.75rem 1.5rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    position: relative;
+}
+
+.panelLabel {
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    font-size: 0.75rem;
+    margin-bottom: 0.25rem;
+}
+
+.headerIntro h3 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.panelSubtext {
+    margin: 0.3rem 0 0;
+    color: var(--color-muted-foreground);
+}
+
+.groupSection {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.groupInfo {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+}
+
+.groupLabel {
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-size: 0.9rem;
+}
+
+.groupInfo p {
+    margin: 0;
+    color: var(--color-muted-foreground);
+    font-size: 0.95rem;
+}
+
+.functionHint {
+    font-size: 0.75rem;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.cardsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(135px, 1fr));
+    gap: 0.75rem;
+}
+
+.mbtiCard {
+    border-radius: 0.75rem;
+    padding: 0.85rem;
+    min-height: 105px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-decoration: none;
+    color: inherit;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.mbtiCard:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.mbtiCode {
+    font-size: 1rem;
+    font-weight: 700;
+    text-align: center;
+    color: #111827;
+}
+
+.variantList {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    font-size: 0.8rem;
+    color: #374151;
+}
+
+.variantRow {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 500;
+    align-items: center;
+}
+
+.variantName {
+    font-weight: 500;
+}
+
+.variantTag {
+    font-weight: 600;
+    font-size: 0.65rem;
+    letter-spacing: 0.05em;
+    color: #4338ca;
+    background: rgba(67, 56, 202, 0.1);
+    padding: 0.15rem 0.45rem;
+    border-radius: 4px;
+}
+
+.cardHint {
+    margin-top: 0.35rem;
+    font-size: 0.7rem;
+    text-align: right;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.footerLink {
+    text-align: center;
+    font-weight: 600;
+}
+
+.mobileClose {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 1.5rem;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    display: none;
+}
+
+@media (max-width: 800px) {
+    .panel {
+        width: 100%;
+        border-radius: 0;
+        min-height: 100vh;
+        padding-top: 3.5rem;
+    }
+
+    .cardsGrid {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    }
+
+    .mobileClose {
+        display: block;
+    }
+}

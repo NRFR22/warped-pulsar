@@ -4,6 +4,7 @@ import { Card } from '@/components/ui/Card';
 import styles from './result.module.css';
 
 import { typesData } from '@/data/types';
+import { getTypeSlug } from '@/lib/utils';
 
 export default function ResultPage() {
     // Mock result for now
@@ -31,7 +32,7 @@ export default function ResultPage() {
                 </div>
                 <div className="text-sm text-gray-500 mt-2">
                     <span className="mr-2">Next most likely:</span>
-                    <Link href={`/types/${secondaryType.name.toLowerCase().replace(/ /g, '-')}`} className="underline hover:text-black">
+                    <Link href={`/types/${getTypeSlug(secondaryType)}`} className="underline hover:text-black">
                         {secondaryType.name} (12%)
                     </Link>
                 </div>
@@ -43,7 +44,7 @@ export default function ResultPage() {
                     {resultType.fullProfile.split('\n').slice(0, 10).join('\n')}...
                 </div>
                 <div className="mt-4">
-                    <Link href={`/types/${resultType.name.toLowerCase().replace(/ /g, '-')}`}>
+                    <Link href={`/types/${getTypeSlug(resultType)}`}>
                         <Button variant="ghost">Read full profile</Button>
                     </Link>
                 </div>

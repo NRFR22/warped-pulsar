@@ -2,14 +2,56 @@ import React from 'react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Button } from '@/components/ui/Button';
-import { typesData } from '@/data/types';
+import { typesData, type TypeProfile } from '@/data/types';
+import { getTypeSlug } from '@/lib/utils';
+import { VariantComparisonPage } from './VariantComparisonPage';
 import styles from './type-detail.module.css';
+
+const MBTI_REGEX = /MBTI:\s*([A-Z]{4})/;
+
+const getMbtiLabel = (type: TypeProfile) => {
+    const match = type.fullProfile.match(MBTI_REGEX);
+    return match ? match[1] : '';
+};
+
+const getVariantLabel = (type: TypeProfile) => {
+    const [firstRaw, secondRaw] = type.code.split('/');
+    const firstOrientation = firstRaw.trim().charAt(1).toLowerCase();
+    const secondOrientation = secondRaw.trim().charAt(1).toLowerCase();
+    return firstOrientation === secondOrientation ? 'Jumper' : 'Standard';
+};
+
+const getVariantHighlights = (profile: string, limit = 2) => {
+    const lines = profile
+        .split('\n')
+        .map((line) => line.trim())
+        .filter((line) => line && !line.startsWith('⭐') && !line.startsWith('**') && !line.startsWith('MBTI'));
+    return lines.slice(0, limit);
+};
 
 export default async function TypeDetailPage({ params }: { params: Promise<{ slug: string }> }) {
     const { slug } = await params;
-    const type = typesData.find(t => t.name.toLowerCase().replace(/ /g, '-') === slug);
+    const type = typesData.find(t => getTypeSlug(t) === slug)
+        || typesData.find(t => t.name.toLowerCase().replace(/ /g, '-') === slug);
 
     if (!type) {
+        const mbtiSlug = slug.toUpperCase();
+        const isMbti = /^[A-Z]{4}$/.test(mbtiSlug);
+        if (isMbti) {
+                            const variants = typesData
+                                .filter((t) => getMbtiLabel(t) === mbtiSlug)
+                                .map((variant) => ({ ...variant, mbtiVariant: getVariantLabel(variant) }))
+                                .sort((a, b) => {
+                                    if (a.mbtiVariant === b.mbtiVariant) return 0;
+                                    return a.mbtiVariant === 'Standard' ? -1 : 1;
+                                });
+
+            if (variants.length > 0) {
+                // Use the new comprehensive variant comparison page
+                return <VariantComparisonPage mbtiCode={mbtiSlug} variants={variants} />;
+            }
+        }
+
         notFound();
     }
 

@@ -26,6 +26,48 @@
     display: flex;
     align-items: center;
     gap: 2rem;
+    flex: 1;
+}
+
+.navLinks {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    flex: 1;
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropdownPanel {
+    position: absolute;
+    top: calc(100% + 0.75rem);
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(900px, 85vw);
+    background: rgba(255, 255, 255, 0.98);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-2xl);
+    box-shadow: 0 30px 60px -35px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    padding: 0;
+    z-index: 100;
+}
+
+.dropdownPanelOpen {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.dropdownFooter {
+    display: block;
+    margin-top: 1.5rem;
+    text-align: center;
+    font-weight: 600;
 }
 
 .link {
@@ -41,4 +83,46 @@
 
 .cta {
     margin-left: 1rem;
+}
+.lessonPreviewGrid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.lessonPreviewCard {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    padding: 0.75rem 1rem;
+    text-decoration: none;
+    color: inherit;
+    background: rgba(255, 255, 255, 0.6);
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.lessonPreviewCard h4 {
+    margin: 0;
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.lessonPreviewCard p {
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--color-muted-foreground);
+}
+
+@media (max-width: 800px) {
+    .dropdownPanel {
+        position: fixed;
+        top: 0;
+        left: 0;
+        transform: none;
+        width: 100vw;
+        height: 100vh;
+        padding: 0;
+        overflow-y: auto;
+    }
 }

@@ -1,0 +1,122 @@
+.container {
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+    animation: fadeIn 400ms ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.svg {
+    width: 100%;
+    height: auto;
+    overflow: visible;
+}
+
+.bubble {
+    cursor: pointer;
+    transition: transform 200ms ease-out, filter 200ms ease-out;
+    transform-origin: center;
+    animation: popIn 400ms ease-out backwards;
+}
+
+/* Stagger animation for bubbles */
+.bubble:nth-child(1) {
+    animation-delay: 0ms;
+}
+
+.bubble:nth-child(2) {
+    animation-delay: 100ms;
+}
+
+.bubble:nth-child(3) {
+    animation-delay: 200ms;
+}
+
+.bubble:nth-child(4) {
+    animation-delay: 300ms;
+}
+
+@keyframes popIn {
+    from {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.bubble:hover {
+    transform: scale(1.08);
+}
+
+.bubble:hover circle:first-child {
+    filter: brightness(1.15);
+}
+
+.bubble:active {
+    transform: scale(1.02);
+}
+
+.label {
+    pointer-events: none;
+    user-select: none;
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    .container,
+    .bubble {
+        animation: none;
+    }
+
+    .bubble {
+        transition: none;
+    }
+}
+
+/* Size variants */
+.small {
+    max-width: 160px;
+}
+
+.medium {
+    max-width: 240px;
+}
+
+.large {
+    max-width: 320px;
+}
+
+@media (max-width: 768px) {
+    .container {
+        max-width: 280px;
+    }
+
+    .small {
+        max-width: 140px;
+    }
+
+    .medium {
+        max-width: 200px;
+    }
+
+    .large {
+        max-width: 280px;
+    }
+}

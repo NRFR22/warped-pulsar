@@ -1,0 +1,85 @@
+.cardContainer {
+  transform-style: preserve-3d;
+  transition: transform 0.1s ease-out;
+  cursor: pointer;
+  position: relative;
+}
+
+.card {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  border: 2px solid var(--color-border);
+  background: var(--color-background);
+}
+
+.cardContainer:hover .card {
+  border-color: var(--color-primary);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.glow {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  opacity: 0;
+  filter: blur(40px);
+  transition: opacity 0.3s ease;
+  z-index: 0;
+}
+
+.cardContainer:hover .glow {
+  opacity: 0.1;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.name {
+  font-weight: 600;
+  font-size: 1.125rem;
+  color: var(--color-foreground);
+}
+
+.pill {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+}
+
+.vibe {
+  font-size: 0.875rem;
+  color: var(--color-muted-foreground);
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.examples {
+  font-size: 0.75rem;
+  color: var(--color-muted-foreground);
+  opacity: 0.8;
+  position: relative;
+  z-index: 1;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--color-primary), #8b5cf6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  z-index: 2;
+}

@@ -1,0 +1,86 @@
+{
+  "Fe/Ne": [
+    "The Illuminator",
+    "ESFJ"
+  ],
+  "Fe/Ni": [
+    "The Oracle",
+    "ENFJ"
+  ],
+  "Fe/Se": [
+    "The Maverick",
+    "ESFJ"
+  ],
+  "Fi/Ne": [
+    "The Dreamweaver",
+    "INFP"
+  ],
+  "Fi/Ni": [
+    "The Forcebringer",
+    "ISFP"
+  ],
+  "Fi/Se": [
+    "The Shapeshifter",
+    "ISFP"
+  ],
+  "Fi/Si": [
+    "The Charmist",
+    "INFP"
+  ],
+  "Ne/Fe": [
+    "The Visionary",
+    "ENTP"
+  ],
+  "Ne/Fi": [
+    "The Eccentricist",
+    "ENFP"
+  ],
+  "Ne/Ti": [
+    "The Intellector",
+    "INTJ"
+  ],
+  "Ni/Te": [
+    "The Strategist",
+    "INFJ"
+  ],
+  "Se/Fe": [
+    "The Performer",
+    "ESTP"
+  ],
+  "Se/Fi": [
+    "The Celebrant",
+    "ESFP"
+  ],
+  "Se/Ti": [
+    "The Powerhouse",
+    "ISTJ"
+  ],
+  "Si/Te": [
+    "The Guardian",
+    "ISTJ"
+  ],
+  "Te/Ne": [
+    "The Commander",
+    "ESTJ"
+  ],
+  "Te/Ni": [
+    "The Crusader",
+    "ENTJ"
+  ],
+  "Te/Si": [
+    "The Authority",
+    "ESTJ"
+  ],
+  "Ti/Ni": [
+    "The Master",
+    "ISTP"
+  ],
+  "Ti/Se": [
+    "The Titan",
+    "ISTP"
+  ],
+  "Ti/Si": [
+    "The Innovator",
+    "INTP"
+  ]
+}

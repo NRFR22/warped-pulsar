@@ -1,0 +1,22 @@
+<svg width="560" height="380" viewBox="0 0 560 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="fiBlend" x1="80" y1="190" x2="320" y2="190" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FF6F91"/>
+      <stop offset="0.5" stop-color="#C480F1"/>
+      <stop offset="1" stop-color="#7BCF9F"/>
+    </linearGradient>
+  </defs>
+  <!-- connectors -->
+  <path d="M360 120C330 150 260 150 220 210" stroke="#e5a04a" stroke-width="18" stroke-linecap="round"/>
+  <path d="M180 220C140 240 120 270 70 290" stroke="#e5a04a" stroke-width="18" stroke-linecap="round"/>
+  <!-- Ne bubble -->
+  <ellipse cx="410" cy="90" rx="100" ry="90" fill="#FFC94D" stroke="#333" stroke-width="6"/>
+  <text x="410" y="105" text-anchor="middle" font-family="'Inter', sans-serif" font-size="48" font-weight="600" fill="#333">Ne</text>
+  <!-- Si bubble -->
+  <ellipse cx="40" cy="315" rx="55" ry="52" fill="#7BCF9F" stroke="#333" stroke-width="6"/>
+  <text x="40" y="330" text-anchor="middle" font-family="'Inter', sans-serif" font-size="32" font-weight="600" fill="#333">Si</text>
+  <!-- Fi/Ti blended form -->
+  <path d="M130 120C80 150 60 220 120 260C240 330 360 300 360 210C360 150 320 120 250 110C210 104 170 105 130 120Z" fill="url(#fiBlend)" stroke="#333" stroke-width="6"/>
+  <text x="150" y="200" font-family="'Inter', sans-serif" font-size="48" font-weight="600" fill="#222">Fi</text>
+  <text x="300" y="240" font-family="'Inter', sans-serif" font-size="42" font-weight="600" fill="#222">Ti</text>
+</svg>

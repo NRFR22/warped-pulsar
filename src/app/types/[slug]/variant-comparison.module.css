@@ -1,0 +1,886 @@
+/* ======================================
+   VARIANT COMPARISON PAGE STYLES
+   ====================================== */
+
+/* Container */
+.variantContainer {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem 2rem 4rem;
+    position: relative;
+    z-index: 1;
+}
+
+.breadcrumb {
+    font-size: 0.875rem;
+    color: var(--color-muted-foreground);
+    margin-bottom: 2rem;
+    font-weight: 500;
+    opacity: 0.8;
+}
+
+/* ======================================
+   HERO SECTION
+   ====================================== */
+
+.hero {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.heroTitle {
+    font-size: 3rem;
+    font-weight: 900;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.02em;
+    background: linear-gradient(135deg, #1a1a1a 0%, #4a4a4a 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.heroSubtitle {
+    font-size: 1.25rem;
+    color: var(--color-muted-foreground);
+    margin-bottom: 0.75rem;
+}
+
+.heroDescription {
+    font-size: 1rem;
+    color: var(--color-muted-foreground);
+    max-width: 700px;
+    margin: 0 auto 2rem;
+    line-height: 1.6;
+}
+
+.variantBadges {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.variantBadge {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 1.5rem 2.5rem;
+    border-radius: 999px;
+    font-weight: 600;
+    border: 3px solid;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    background: white;
+    box-shadow: 0 4px 16px -4px rgba(0, 0, 0, 0.1);
+}
+
+.variantBadge:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px -8px rgba(0, 0, 0, 0.2);
+}
+
+.badgeAvatar {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    font-weight: 800;
+    color: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.badgeLabel {
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    opacity: 0.7;
+    font-weight: 700;
+}
+
+.badgeName {
+    font-size: 1.75rem;
+    font-weight: 800;
+    line-height: 1.2;
+}
+
+/* ======================================
+   VISUAL COMPARISON (Character + Bubbles)
+   ====================================== */
+
+.visualComparison {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    margin-top: 3rem;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.variantVisual {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.variantHeader {
+    text-align: center;
+}
+
+.variantLabel {
+    display: block;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-muted-foreground);
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.variantName {
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin: 0;
+}
+
+.characterPlaceholder {
+    width: 100%;
+    max-width: 320px;
+    aspect-ratio: 1;
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.08);
+}
+
+.characterIcon {
+    font-size: 8rem;
+    opacity: 0.3;
+}
+
+.functionStackVisual {
+    width: 100%;
+    max-width: 320px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bubbleImage {
+    width: 100%;
+    height: auto;
+    max-width: 320px;
+}
+
+/* ======================================
+   QUICK COMPARISON TABLE
+   ====================================== */
+
+.quickComparison {
+    background: white;
+    border-radius: var(--radius-xl);
+    padding: 2rem;
+    margin-bottom: 3rem;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.04);
+}
+
+.comparisonTitle {
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.comparisonTable {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1px;
+    background: rgba(0, 0, 0, 0.06);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+}
+
+.tableHeader {
+    background: rgba(0, 0, 0, 0.02);
+    padding: 1rem;
+    font-weight: 700;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    text-align: center;
+}
+
+.tableCell {
+    background: white;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 0.5rem;
+}
+
+.tableCellLabel {
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: var(--color-muted-foreground);
+}
+
+.tableCellValue {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+/* ======================================
+   SIDE-BY-SIDE COMPARISON
+   ====================================== */
+
+.sideBySide {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.variantColumn {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* Card Styles */
+.card {
+    background: white;
+    border-radius: var(--radius-xl);
+    padding: 1.75rem;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.04);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px -6px rgba(0, 0, 0, 0.08);
+}
+
+.cardTitle {
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-muted-foreground);
+    margin-bottom: 1rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.cardIcon {
+    font-size: 1.25rem;
+}
+
+/* Core Vibe Card */
+.coreVibeList {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.vibeItem {
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.4;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+}
+
+.vibeItem::before {
+    content: "•";
+    color: var(--color-primary);
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+/* Intro Essence Card */
+.introEssence {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.quoteBlock {
+    font-size: 1.25rem;
+    font-style: italic;
+    font-weight: 600;
+    line-height: 1.4;
+    padding: 1rem;
+    border-left: 4px solid var(--color-primary);
+    background: rgba(0, 0, 0, 0.02);
+    border-radius: var(--radius-md);
+}
+
+.introText {
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    color: var(--color-foreground);
+}
+
+/* Superpowers Card */
+.superpowersGrid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.superpower {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.superpowerIcon {
+    width: 1.5rem;
+    height: 1.5rem;
+    background: var(--color-primary);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+}
+
+.superpowerContent {
+    flex: 1;
+}
+
+.superpowerTitle {
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+}
+
+.superpowerDesc {
+    font-size: 0.875rem;
+    color: var(--color-muted-foreground);
+    line-height: 1.4;
+}
+
+/* Inner Engine Card */
+.engineContent {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.engineFunction {
+    font-size: 0.875rem;
+    font-weight: 600;
+    padding: 0.5rem 0.75rem;
+    border-radius: var(--radius-md);
+    background: rgba(0, 0, 0, 0.04);
+}
+
+.engineSavior {
+    border-left: 3px solid #10b981;
+}
+
+.engineDemon {
+    border-left: 3px solid #ef4444;
+    opacity: 0.8;
+}
+
+.engineText {
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: var(--color-muted-foreground);
+}
+
+/* Growth Card */
+.growthList {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.growthItem {
+    display: flex;
+    gap: 0.5rem;
+    font-size: 0.9375rem;
+    line-height: 1.5;
+}
+
+.growthItem::before {
+    content: "→";
+    color: var(--color-primary);
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+/* ======================================
+   KEY DIFFERENCES SECTION
+   ====================================== */
+
+.keyDifferences {
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    border-radius: var(--radius-xl);
+    padding: 3rem 2rem;
+    margin-bottom: 3rem;
+}
+
+.sectionTitle {
+    font-size: 2rem;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 0.75rem;
+}
+
+.sectionSubtitle {
+    text-align: center;
+    color: var(--color-muted-foreground);
+    margin-bottom: 2.5rem;
+    font-size: 1rem;
+}
+
+.differencesGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.differenceCard {
+    background: white;
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.04);
+}
+
+.differenceIcon {
+    font-size: 2rem;
+    margin-bottom: 0.75rem;
+}
+
+.differenceAspect {
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+.differenceComparison {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.differenceItem {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.differenceLabel {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+    opacity: 0.6;
+}
+
+.differenceText {
+    font-size: 0.9375rem;
+    line-height: 1.4;
+}
+
+/* ======================================
+   INTERACTIVE QUIZ SECTION
+   ====================================== */
+
+.interactiveQuiz {
+    background: white;
+    border-radius: var(--radius-xl);
+    padding: 3rem 2rem;
+    margin-bottom: 3rem;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.06);
+}
+
+.quizContent {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.quizQuestion {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.quizOptions {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.quizOption {
+    background: #f8fafc;
+    border: 2px solid transparent;
+    border-radius: var(--radius-lg);
+    padding: 1.25rem 1.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.quizOption:hover {
+    border-color: var(--color-primary);
+    background: white;
+    transform: translateX(4px);
+}
+
+.quizOptionLetter {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background: var(--color-primary);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.quizOptionText {
+    font-size: 1rem;
+    line-height: 1.4;
+}
+
+.quizResult {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+    border-radius: var(--radius-lg);
+    text-align: center;
+}
+
+.quizResultTitle {
+    font-weight: 700;
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.quizResultText {
+    font-size: 1rem;
+    color: var(--color-muted-foreground);
+}
+
+/* ======================================
+   COMMUNITY INSIGHTS SECTION
+   ====================================== */
+
+.communityInsights {
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+    border-radius: var(--radius-xl);
+    padding: 3rem 2rem;
+    margin-bottom: 3rem;
+}
+
+.insightsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.insightCard {
+    background: white;
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.insightStat {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--color-primary);
+    margin-bottom: 0.25rem;
+}
+
+.insightLabel {
+    font-size: 0.875rem;
+    color: var(--color-muted-foreground);
+    margin-bottom: 0.75rem;
+}
+
+.insightText {
+    font-size: 0.9375rem;
+    line-height: 1.4;
+}
+
+/* ======================================
+   EXPERT DEEP DIVE SECTION
+   ====================================== */
+
+.expertDeepDive {
+    background: white;
+    border-radius: var(--radius-xl);
+    padding: 3rem 2rem;
+    margin-bottom: 3rem;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.06);
+}
+
+.deepDiveContent {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.deepDiveSection {
+    margin-bottom: 2rem;
+}
+
+.deepDiveSectionTitle {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.deepDiveText {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--color-foreground);
+    margin-bottom: 1rem;
+}
+
+.deepDiveHighlight {
+    background: #fef3c7;
+    padding: 1.25rem;
+    border-left: 4px solid #f59e0b;
+    border-radius: var(--radius-md);
+    font-style: italic;
+    font-weight: 500;
+}
+
+/* ======================================
+   RELATED TYPES SECTION
+   ====================================== */
+
+.relatedTypes {
+    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+    border-radius: var(--radius-xl);
+    padding: 3rem 2rem;
+    margin-bottom: 3rem;
+}
+
+.relatedGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.relatedCard {
+    background: white;
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.relatedCard:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px -20px rgba(0, 0, 0, 0.35);
+}
+
+.relatedMbti {
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+}
+
+.relatedName {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+}
+
+.relatedSimilarity {
+    font-size: 0.875rem;
+    color: var(--color-muted-foreground);
+    line-height: 1.4;
+}
+
+/* ======================================
+   FINAL CTA SECTION
+   ====================================== */
+
+.finalCta {
+    background: linear-gradient(135deg, var(--color-foreground) 0%, #2d3748 100%);
+    color: white;
+    border-radius: var(--radius-xl);
+    padding: 4rem 2rem;
+    text-align: center;
+}
+
+.ctaTitle {
+    font-size: 2.5rem;
+    font-weight: 900;
+    margin-bottom: 1rem;
+    color: white;
+}
+
+.ctaSubtitle {
+    font-size: 1.25rem;
+    opacity: 0.9;
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.ctaButtons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* ======================================
+   MOBILE RESPONSIVE
+   ====================================== */
+
+@media (max-width: 1024px) {
+    .sideBySide {
+        grid-template-columns: 1fr;
+    }
+
+    .comparisonTable {
+        grid-template-columns: 1fr;
+    }
+
+    .differencesGrid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .variantContainer {
+        padding: 1rem;
+    }
+
+    .heroTitle {
+        font-size: 2rem;
+    }
+
+    .heroSubtitle {
+        font-size: 1rem;
+    }
+
+    .variantBadges {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .visualComparison {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .characterPlaceholder {
+        max-width: 280px;
+    }
+
+    .characterIcon {
+        font-size: 6rem;
+    }
+
+    .functionStackVisual {
+        max-width: 280px;
+    }
+
+    .bubbleImage {
+        max-width: 280px;
+    }
+
+    .sectionTitle {
+        font-size: 1.5rem;
+    }
+
+    .ctaTitle {
+        font-size: 1.75rem;
+    }
+
+    .ctaSubtitle {
+        font-size: 1rem;
+    }
+
+    .relatedGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .insightsGrid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Mobile Tabs */
+.mobileTabs {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .mobileTabs {
+        display: flex;
+        gap: 0.5rem;
+        margin-bottom: 1.5rem;
+        overflow-x: auto;
+    }
+
+    .mobileTab {
+        padding: 0.75rem 1.5rem;
+        border-radius: 999px;
+        border: 2px solid rgba(0, 0, 0, 0.1);
+        background: white;
+        font-weight: 600;
+        white-space: nowrap;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+
+    .mobileTab.active {
+        border-color: var(--color-primary);
+        background: var(--color-primary);
+        color: white;
+    }
+
+    .sideBySide {
+        display: block;
+    }
+
+    .variantColumn {
+        display: none;
+    }
+
+    .variantColumn.active {
+        display: flex;
+    }
+}
