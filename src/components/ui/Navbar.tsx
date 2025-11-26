@@ -8,19 +8,49 @@ import { ExploreTypesMenu } from './ExploreTypesMenu';
 import { Button } from './Button';
 import styles from './Navbar.module.css';
 
-export function Navbar() {
+function Navbar() {
     const [showTypesDropdown, setShowTypesDropdown] = useState(false);
     const [showLessonsDropdown, setShowLessonsDropdown] = useState(false);
     const typesTimeout = useRef<NodeJS.Timeout | null>(null);
     const lessonsTimeout = useRef<NodeJS.Timeout | null>(null);
 
     const LESSONS_PREVIEW = [
-        { title: 'Feeling vs Thinking', summary: 'How Fe/Fi differ from Te/Ti in real decisions.' },
-        { title: 'Sensing vs Intuition', summary: 'Spot SE/SI tells versus NE/NI patterns.' },
-        { title: 'Di vs De', summary: 'Why decider vs. decider stacking matters.' },
-        { title: 'Oi vs Oe', summary: 'Observer polarity and how it shapes planning.' },
-        { title: 'Observer vs Decider', summary: 'Savior focus and common stress behaviors.' },
-        { title: 'Introvert vs Extrovert', summary: 'Energy flow and how it shows up in conversation.' },
+        {
+            title: 'Feeling vs Thinking',
+            summary: 'How Fe/Fi differ from Te/Ti in real decisions.',
+            color: 'linear-gradient(135deg, #ef4444 0%, #3b82f6 100%)',
+            borderColor: '#ef4444'
+        },
+        {
+            title: 'Sensing vs Intuition',
+            summary: 'Spot SE/SI tells versus NE/NI patterns.',
+            color: 'linear-gradient(135deg, #10b981 0%, #eab308 100%)',
+            borderColor: '#10b981'
+        },
+        {
+            title: 'Di vs De',
+            summary: 'Why decider vs. decider stacking matters.',
+            color: 'linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%)',
+            borderColor: '#8b5cf6'
+        },
+        {
+            title: 'Oi vs Oe',
+            summary: 'Observer polarity and how it shapes planning.',
+            color: 'linear-gradient(135deg, #f59e0b 0%, #f97316 100%)',
+            borderColor: '#f59e0b'
+        },
+        {
+            title: 'Observer vs Decider',
+            summary: 'Savior focus and common stress behaviors.',
+            color: 'linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%)',
+            borderColor: '#06b6d4'
+        },
+        {
+            title: 'Introvert vs Extrovert',
+            summary: 'Energy flow and how it shows up in conversation.',
+            color: 'linear-gradient(135deg, #6366f1 0%, #ec4899 100%)',
+            borderColor: '#6366f1'
+        },
     ];
 
     return (
@@ -78,7 +108,15 @@ export function Navbar() {
                         <div className={cn(styles.dropdownPanel, showLessonsDropdown && styles.dropdownPanelOpen)}>
                             <div className={styles.lessonPreviewGrid}>
                                 {LESSONS_PREVIEW.map((lesson) => (
-                                    <Link key={lesson.title} href="/lessons" className={styles.lessonPreviewCard}>
+                                    <Link
+                                        key={lesson.title}
+                                        href="/lessons"
+                                        className={styles.lessonPreviewCard}
+                                        style={{
+                                            background: lesson.color,
+                                            borderColor: lesson.borderColor,
+                                        }}
+                                    >
                                         <h4>{lesson.title}</h4>
                                         <p>{lesson.summary}</p>
                                     </Link>
@@ -106,3 +144,6 @@ export function Navbar() {
         </header>
     );
 }
+
+export { Navbar };
+export default Navbar;
