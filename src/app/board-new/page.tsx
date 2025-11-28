@@ -185,7 +185,7 @@ export default function BoardNewPage() {
                             <>
                                 <line x1="94.4" y1="93.0" x2="113.3" y2="113.2"
                                     stroke="#bbbbbb" strokeWidth="3" strokeLinecap="round" />
-                                <line x1="113.3" y1="113.2" x2="126.6" y2="102.2"
+                                <line x1="113.3" y1="113.2" x2="130.0" y2="96.0"
                                     stroke="#bbbbbb" strokeWidth="3" strokeLinecap="round" />
                             </>
                         )}
