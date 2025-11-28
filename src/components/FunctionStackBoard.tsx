@@ -18,6 +18,7 @@ export interface FunctionStackBoardProps {
     interactive?: boolean;          // click to toggle coins (default: true)
     showBoard?: boolean;            // show board boxes and axis labels (default: true)
     compactEndpoints?: boolean;     // shrink and move hero/inferior closer to center (default: false)
+    snugFit?: boolean;              // crop viewBox to fit tightly around bubbles (default: false)
 }
 
 // Board anchor points (SVG viewBox 0 0 300 300)
@@ -102,6 +103,7 @@ export function FunctionStackBoard({
     interactive = true,
     showBoard = true,
     compactEndpoints = false,
+    snugFit = false,
 }: FunctionStackBoardProps) {
     // Find functions by ID
     const A = stack.find(f => f.id === 'A')!;
@@ -246,7 +248,12 @@ export function FunctionStackBoard({
     };
 
     return (
-        <svg viewBox="0 0 300 300" width="100%" height="100%" style={{ maxWidth: '500px', margin: '0 auto', display: 'block' }}>
+        <svg
+            viewBox={snugFit && compactEndpoints ? "70 70 160 160" : "0 0 300 300"}
+            width="100%"
+            height="100%"
+            style={{ maxWidth: snugFit ? '300px' : '500px', margin: '0 auto', display: 'block' }}
+        >
             <defs>
                 {/* Radial gradients for each function type */}
                 {Object.entries(FUNCTION_GRADIENTS).map(([type, colors]) => (
