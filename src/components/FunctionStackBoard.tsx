@@ -78,6 +78,44 @@ interface Position {
     y: number;
 }
 
+interface CircleSpec {
+    x: number;
+    y: number;
+    r: number;
+}
+
+function computeBounds(
+    circles: CircleSpec[],
+    padding: number = 12
+) {
+    if (circles.length === 0) {
+        return { minX: 0, minY: 0, width: 300, height: 300 };
+    }
+
+    const xs: number[] = [];
+    const ys: number[] = [];
+
+    circles.forEach(({ x, y, r }) => {
+        xs.push(x - r, x + r);
+        ys.push(y - r, y + r);
+    });
+
+    const minX = Math.min(...xs);
+    const maxX = Math.max(...xs);
+    const minY = Math.min(...ys);
+    const maxY = Math.max(...ys);
+
+    const width = maxX - minX;
+    const height = maxY - minY;
+
+    return {
+        minX: minX - padding,
+        minY: minY - padding,
+        width: width + padding * 2,
+        height: height + padding * 2,
+    };
+}
+
 // Compact mode settings
 const A_INSET = 0.65; // 65% of distance toward center (A ball)
 const D_INSET = 0.7; // 70% of distance toward center (D ball)
@@ -234,6 +272,31 @@ export function FunctionStackBoard({
     const aFontSize = compactEndpoints ? A_FONTSIZE_COMPACT : 20;
     const dFontSize = compactEndpoints ? D_FONTSIZE_COMPACT : 14;
 
+    // Build circle list for snug viewBox computation
+    const activeCircles: CircleSpec[] = [
+        { x: aActivePos.x, y: aActivePos.y, r: aRadius },
+        { x: bActivePos.x, y: bActivePos.y, r: bRadius },
+        { x: cActivePos.x, y: cActivePos.y, r: cRadius },
+        { x: dActivePos.x, y: dActivePos.y, r: dRadius },
+    ];
+
+    if (showGhosts) {
+        activeCircles.push(
+            { x: aGhostPos.x, y: aGhostPos.y, r: aRadius },
+            { x: bGhostPos.x, y: bGhostPos.y, r: bRadius },
+            { x: cGhostPos.x, y: cGhostPos.y, r: cRadius },
+            { x: dGhostPos.x, y: dGhostPos.y, r: dRadius },
+        );
+    }
+
+    // Compute dynamic viewBox
+    let viewBox = "0 0 300 300";
+
+    if (snugFit && !showBoard) {
+        const { minX, minY, width, height } = computeBounds(activeCircles, 14);
+        viewBox = `${minX} ${minY} ${width} ${height}`;
+    }
+
     // Handle clicks
     const handleOuterCoinClick = () => {
         if (interactive) {
@@ -249,10 +312,17 @@ export function FunctionStackBoard({
 
     return (
         <svg
-            viewBox={snugFit && compactEndpoints ? "70 70 160 160" : "0 0 300 300"}
+            viewBox={viewBox}
+            preserveAspectRatio="xMidYMid meet"
             width="100%"
             height="100%"
-            style={{ maxWidth: snugFit ? '300px' : '500px', margin: '0 auto', display: 'block' }}
+            style={{
+                width: '100%',
+                height: '100%',
+                maxWidth: snugFit ? '260px' : '500px',
+                margin: '0 auto',
+                display: 'block',
+            }}
         >
             <defs>
                 {/* Radial gradients for each function type */}
