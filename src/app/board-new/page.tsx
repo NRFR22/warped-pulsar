@@ -1,9 +1,54 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import styles from './board.module.css';
+import { getAllTypeOptions } from '@/lib/typeDatabase';
+
+// Color mapping for function types
+const FUNCTION_COLORS: Record<string, string> = {
+    'F': '#e74c3c', // red for Feeling
+    'T': '#3498db', // blue for Thinking
+    'S': '#2ecc71', // green for Sensing
+    'N': '#f1c40f', // yellow for iNtuition
+};
+
+const DEMON_COLOR = '#999999'; // grey for demon functions
+
+function getFunctionColor(code: string, isSavior: boolean): string {
+    if (!isSavior) return DEMON_COLOR;
+    const functionType = code.charAt(0); // F, T, S, or N
+    return FUNCTION_COLORS[functionType] || '#ffffff';
+}
 
 export default function BoardNewPage() {
+    // Get all type options and split into extraverted-first and introverted-first
+    const allTypes = useMemo(() => getAllTypeOptions(), []);
+
+    const extravertedTypes = useMemo(() =>
+        allTypes.filter(t => t.stack[0].code.endsWith('e')),
+        [allTypes]
+    );
+
+    const introvertedTypes = useMemo(() =>
+        allTypes.filter(t => t.stack[0].code.endsWith('i')),
+        [allTypes]
+    );
+
+    // Selected type for each layout
+    const [selectedExtravertedType, setSelectedExtravertedType] = useState(extravertedTypes[0]?.value || '');
+    const [selectedIntrovertedType, setSelectedIntrovertedType] = useState(introvertedTypes[0]?.value || '');
+
+    // Get the current stack for each layout
+    const extravertedStack = useMemo(() => {
+        const type = extravertedTypes.find(t => t.value === selectedExtravertedType);
+        return type?.stack || [];
+    }, [extravertedTypes, selectedExtravertedType]);
+
+    const introvertedStack = useMemo(() => {
+        const type = introvertedTypes.find(t => t.value === selectedIntrovertedType);
+        return type?.stack || [];
+    }, [introvertedTypes, selectedIntrovertedType]);
+
     const [showBall1, setShowBall1] = useState(true);
     const [showBall2, setShowBall2] = useState(true);
     const [showBall3, setShowBall3] = useState(true);
@@ -150,70 +195,164 @@ export default function BoardNewPage() {
                 </div>
 
                 <div style={{ display: 'flex', gap: '2rem', justifyContent: 'center', marginTop: '2rem' }}>
-                    {/* First ball matrix (1-4) */}
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="9.3 8.6 186.4 171.8" width="225" height="208">
-                        {/* Line 1-4 (grey) */}
-                        {showLine1_4 && (
-                            <line x1="110.6" y1="96.0" x2="75.5" y2="131.2"
-                                stroke="#bbbbbb" strokeWidth="3" strokeLinecap="round" />
-                        )}
-                        {/* Line 2-3 */}
-                        {showLine2_3 && (
-                            <line x1="76.0" y1="101.7" x2="101.9" y2="124.5"
-                                stroke="#bbbbbb" strokeWidth="3" strokeLinecap="round" />
-                        )}
-
-                        {/* circles 1-4 */}
-                        {showBall1 && (
-                            <circle cx="143.4" cy="63.0" r="46.5" fill="#ffffff" stroke="#cccccc" strokeWidth="2" />
-                        )}
-                        {showBall2 && (
-                            <circle cx="51.0" cy="79.8" r="33.2" fill="#ffffff" stroke="#cccccc" strokeWidth="2" />
-                        )}
-                        {showBall3 && (
-                            <circle cx="119.4" cy="139.8" r="23.2" fill="#ffffff" stroke="#cccccc" strokeWidth="2" />
-                        )}
-                        {showBall4 && (
-                            <circle cx="63.8" cy="143.0" r="16.6" fill="#ffffff" stroke="#cccccc" strokeWidth="2" />
-                        )}
-                    </svg>
-
-                    {/* Second ball matrix (5-8) */}
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="9.3 8.1 184.5 161.8" width="223" height="196">
-                        {/* Line 5-8 (grey, two segments) */}
-                        {showLine5_8 && (
-                            <>
-                                <line x1="94.4" y1="93.0" x2="113.3" y2="113.2"
+                    {/* First ball matrix (1-4) - Extraverted first function */}
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="9.3 8.6 186.4 171.8" width="225" height="208">
+                            {/* Line 1-4 (grey) */}
+                            {showLine1_4 && (
+                                <line x1="110.6" y1="96.0" x2="75.5" y2="131.2"
                                     stroke="#bbbbbb" strokeWidth="3" strokeLinecap="round" />
-                                <line x1="113.3" y1="113.2" x2="130.0" y2="96.0"
+                            )}
+                            {/* Line 2-3 */}
+                            {showLine2_3 && (
+                                <line x1="76.0" y1="101.7" x2="101.9" y2="124.5"
                                     stroke="#bbbbbb" strokeWidth="3" strokeLinecap="round" />
-                            </>
-                        )}
+                            )}
 
-                        {/* Line 6-7 (two segments) */}
-                        {showLine6_7 && (
-                            <>
-                                <line x1="101.7" y1="123.3" x2="113.3" y2="113.2"
-                                    stroke="#bbbbbb" strokeWidth="3" strokeLinecap="round" />
-                                <line x1="113.3" y1="113.2" x2="129.0" y2="126.7"
-                                    stroke="#bbbbbb" strokeWidth="3" strokeLinecap="round" />
-                            </>
-                        )}
+                            {/* circles 1-4 with type colors */}
+                            {showBall1 && extravertedStack[0] && (
+                                <>
+                                    <circle cx="143.4" cy="63.0" r="46.5"
+                                        fill={getFunctionColor(extravertedStack[0].code, extravertedStack[0].isSavior)}
+                                        stroke="#333" strokeWidth="2" />
+                                    <text x="143.4" y="63.0" textAnchor="middle" dominantBaseline="central"
+                                        fill="#fff" fontSize="18" fontWeight="bold">{extravertedStack[0].code}</text>
+                                </>
+                            )}
+                            {showBall2 && extravertedStack[1] && (
+                                <>
+                                    <circle cx="51.0" cy="79.8" r="33.2"
+                                        fill={getFunctionColor(extravertedStack[1].code, extravertedStack[1].isSavior)}
+                                        stroke="#333" strokeWidth="2" />
+                                    <text x="51.0" y="79.8" textAnchor="middle" dominantBaseline="central"
+                                        fill="#fff" fontSize="14" fontWeight="bold">{extravertedStack[1].code}</text>
+                                </>
+                            )}
+                            {showBall3 && extravertedStack[2] && (
+                                <>
+                                    <circle cx="119.4" cy="139.8" r="23.2"
+                                        fill={getFunctionColor(extravertedStack[2].code, extravertedStack[2].isSavior)}
+                                        stroke="#333" strokeWidth="2" />
+                                    <text x="119.4" y="139.8" textAnchor="middle" dominantBaseline="central"
+                                        fill="#fff" fontSize="12" fontWeight="bold">{extravertedStack[2].code}</text>
+                                </>
+                            )}
+                            {showBall4 && extravertedStack[3] && (
+                                <>
+                                    <circle cx="63.8" cy="143.0" r="16.6"
+                                        fill={getFunctionColor(extravertedStack[3].code, extravertedStack[3].isSavior)}
+                                        stroke="#333" strokeWidth="2" />
+                                    <text x="63.8" y="143.0" textAnchor="middle" dominantBaseline="central"
+                                        fill="#fff" fontSize="10" fontWeight="bold">{extravertedStack[3].code}</text>
+                                </>
+                            )}
+                        </svg>
 
-                        {/* circles 5-8 */}
-                        {showBall5 && (
-                            <circle cx="63.0" cy="59.4" r="45.9" fill="#ffffff" stroke="#cccccc" strokeWidth="2" />
-                        )}
-                        {showBall6 && (
-                            <circle cx="153.8" cy="79.8" r="35.2" fill="#ffffff" stroke="#cccccc" strokeWidth="2" />
-                        )}
-                        {showBall7 && (
-                            <circle cx="85.0" cy="137.8" r="22.1" fill="#ffffff" stroke="#cccccc" strokeWidth="2" />
-                        )}
-                        {showBall8 && (
-                            <circle cx="141.8" cy="137.8" r="17.0" fill="#ffffff" stroke="#cccccc" strokeWidth="2" />
-                        )}
-                    </svg>
+                        {/* Dropdown for extraverted types */}
+                        <select
+                            value={selectedExtravertedType}
+                            onChange={(e) => setSelectedExtravertedType(e.target.value)}
+                            style={{
+                                padding: '0.5rem 1rem',
+                                fontSize: '1rem',
+                                borderRadius: '4px',
+                                border: '1px solid #ccc',
+                                background: '#fff',
+                                cursor: 'pointer',
+                                minWidth: '200px',
+                            }}
+                        >
+                            {extravertedTypes.map((type) => (
+                                <option key={type.value} value={type.value}>
+                                    {type.label}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+
+                    {/* Second ball matrix (5-8) - Introverted first function */}
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="9.3 8.1 184.5 161.8" width="223" height="196">
+                            {/* Line 5-8 (grey, two segments) */}
+                            {showLine5_8 && (
+                                <>
+                                    <line x1="94.4" y1="93.0" x2="113.3" y2="113.2"
+                                        stroke="#bbbbbb" strokeWidth="3" strokeLinecap="round" />
+                                    <line x1="113.3" y1="113.2" x2="130.0" y2="96.0"
+                                        stroke="#bbbbbb" strokeWidth="3" strokeLinecap="round" />
+                                </>
+                            )}
+
+                            {/* Line 6-7 (two segments) */}
+                            {showLine6_7 && (
+                                <>
+                                    <line x1="101.7" y1="123.3" x2="113.3" y2="113.2"
+                                        stroke="#bbbbbb" strokeWidth="3" strokeLinecap="round" />
+                                    <line x1="113.3" y1="113.2" x2="129.0" y2="126.7"
+                                        stroke="#bbbbbb" strokeWidth="3" strokeLinecap="round" />
+                                </>
+                            )}
+
+                            {/* circles 5-8 with type colors */}
+                            {showBall5 && introvertedStack[0] && (
+                                <>
+                                    <circle cx="63.0" cy="59.4" r="45.9"
+                                        fill={getFunctionColor(introvertedStack[0].code, introvertedStack[0].isSavior)}
+                                        stroke="#333" strokeWidth="2" />
+                                    <text x="63.0" y="59.4" textAnchor="middle" dominantBaseline="central"
+                                        fill="#fff" fontSize="18" fontWeight="bold">{introvertedStack[0].code}</text>
+                                </>
+                            )}
+                            {showBall6 && introvertedStack[1] && (
+                                <>
+                                    <circle cx="153.8" cy="79.8" r="35.2"
+                                        fill={getFunctionColor(introvertedStack[1].code, introvertedStack[1].isSavior)}
+                                        stroke="#333" strokeWidth="2" />
+                                    <text x="153.8" y="79.8" textAnchor="middle" dominantBaseline="central"
+                                        fill="#fff" fontSize="14" fontWeight="bold">{introvertedStack[1].code}</text>
+                                </>
+                            )}
+                            {showBall7 && introvertedStack[2] && (
+                                <>
+                                    <circle cx="85.0" cy="137.8" r="22.1"
+                                        fill={getFunctionColor(introvertedStack[2].code, introvertedStack[2].isSavior)}
+                                        stroke="#333" strokeWidth="2" />
+                                    <text x="85.0" y="137.8" textAnchor="middle" dominantBaseline="central"
+                                        fill="#fff" fontSize="12" fontWeight="bold">{introvertedStack[2].code}</text>
+                                </>
+                            )}
+                            {showBall8 && introvertedStack[3] && (
+                                <>
+                                    <circle cx="141.8" cy="137.8" r="17.0"
+                                        fill={getFunctionColor(introvertedStack[3].code, introvertedStack[3].isSavior)}
+                                        stroke="#333" strokeWidth="2" />
+                                    <text x="141.8" y="137.8" textAnchor="middle" dominantBaseline="central"
+                                        fill="#fff" fontSize="10" fontWeight="bold">{introvertedStack[3].code}</text>
+                                </>
+                            )}
+                        </svg>
+
+                        {/* Dropdown for introverted types */}
+                        <select
+                            value={selectedIntrovertedType}
+                            onChange={(e) => setSelectedIntrovertedType(e.target.value)}
+                            style={{
+                                padding: '0.5rem 1rem',
+                                fontSize: '1rem',
+                                borderRadius: '4px',
+                                border: '1px solid #ccc',
+                                background: '#fff',
+                                cursor: 'pointer',
+                                minWidth: '200px',
+                            }}
+                        >
+                            {introvertedTypes.map((type) => (
+                                <option key={type.value} value={type.value}>
+                                    {type.label}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
                 </div>
             </div>
         </div>
