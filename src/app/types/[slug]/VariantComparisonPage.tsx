@@ -16,6 +16,9 @@ interface VariantComparisonPageProps {
 }
 
 export function VariantComparisonPage({ mbtiCode, variants }: VariantComparisonPageProps) {
+    const [activeTab, setActiveTab] = useState<'standard' | 'jumper'>('standard');
+    const [quizAnswer, setQuizAnswer] = useState<string | null>(null);
+
     // Board section state
     const [selectedType, setSelectedType] = useState<string | null>(null);
 
