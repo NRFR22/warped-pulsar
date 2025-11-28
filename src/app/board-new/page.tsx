@@ -155,7 +155,7 @@ export default function BoardNewPage() {
                     padding: '1.5rem',
                     background: '#fafafa',
                 }}>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 205 189" width="205" height="189">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="9.3 8.6 186.4 171.8" width="205" height="189">
                         {/* Line 1-4 (grey) */}
                         {showLine1_4 && (
                             <line x1="110.6" y1="96.0" x2="75.5" y2="131.2"
