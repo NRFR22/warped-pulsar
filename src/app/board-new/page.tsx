@@ -4,20 +4,109 @@ import React, { useState, useMemo } from 'react';
 import styles from './board.module.css';
 import { getAllTypeOptions } from '@/lib/typeDatabase';
 
-// Color mapping for function types
-const FUNCTION_COLORS: Record<string, string> = {
-    'F': '#e74c3c', // red for Feeling
-    'T': '#3498db', // blue for Thinking
-    'S': '#2ecc71', // green for Sensing
-    'N': '#f1c40f', // yellow for iNtuition
-};
-
-const DEMON_COLOR = '#999999'; // grey for demon functions
-
-function getFunctionColor(code: string, isSavior: boolean): string {
-    if (!isSavior) return DEMON_COLOR;
+// Get gradient ID based on function code and savior status
+function getGradientId(code: string, isSavior: boolean): string {
+    if (!isSavior) return 'url(#gradient-grey)';
     const functionType = code.charAt(0); // F, T, S, or N
-    return FUNCTION_COLORS[functionType] || '#ffffff';
+    return `url(#gradient-${functionType})`;
+}
+
+// SVG Defs component for glossy gradients and filters
+function GlossyDefs() {
+    return (
+        <defs>
+            {/* Glossy gradient for F (Feeling) - Red */}
+            <radialGradient id="gradient-F" cx="35%" cy="35%">
+                <stop offset="0%" stopColor="#fca5a5" />
+                <stop offset="30%" stopColor="#ef4444" />
+                <stop offset="70%" stopColor="#b91c1c" />
+                <stop offset="100%" stopColor="#b91c1c" stopOpacity="0.9" />
+            </radialGradient>
+
+            {/* Glossy gradient for T (Thinking) - Blue */}
+            <radialGradient id="gradient-T" cx="35%" cy="35%">
+                <stop offset="0%" stopColor="#93c5fd" />
+                <stop offset="30%" stopColor="#3b82f6" />
+                <stop offset="70%" stopColor="#1e40af" />
+                <stop offset="100%" stopColor="#1e40af" stopOpacity="0.9" />
+            </radialGradient>
+
+            {/* Glossy gradient for S (Sensing) - Green */}
+            <radialGradient id="gradient-S" cx="35%" cy="35%">
+                <stop offset="0%" stopColor="#6ee7b7" />
+                <stop offset="30%" stopColor="#10b981" />
+                <stop offset="70%" stopColor="#047857" />
+                <stop offset="100%" stopColor="#047857" stopOpacity="0.9" />
+            </radialGradient>
+
+            {/* Glossy gradient for N (iNtuition) - Yellow */}
+            <radialGradient id="gradient-N" cx="35%" cy="35%">
+                <stop offset="0%" stopColor="#fde047" />
+                <stop offset="30%" stopColor="#eab308" />
+                <stop offset="70%" stopColor="#ca8a04" />
+                <stop offset="100%" stopColor="#ca8a04" stopOpacity="0.9" />
+            </radialGradient>
+
+            {/* Grey gradient for demon functions */}
+            <radialGradient id="gradient-grey" cx="35%" cy="35%">
+                <stop offset="0%" stopColor="#d1d5db" />
+                <stop offset="30%" stopColor="#9ca3af" />
+                <stop offset="70%" stopColor="#6b7280" />
+                <stop offset="100%" stopColor="#6b7280" stopOpacity="0.9" />
+            </radialGradient>
+
+            {/* Shine gradient for glossy highlight */}
+            <radialGradient id="shine" cx="30%" cy="30%">
+                <stop offset="0%" stopColor="#ffffff" stopOpacity="0.8" />
+                <stop offset="50%" stopColor="#ffffff" stopOpacity="0.3" />
+                <stop offset="100%" stopColor="#ffffff" stopOpacity="0" />
+            </radialGradient>
+
+            {/* Shadow filter */}
+            <filter id="shadow">
+                <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+                <feOffset dx="0" dy="3"/>
+                <feComponentTransfer><feFuncA type="linear" slope="0.3"/></feComponentTransfer>
+                <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+        </defs>
+    );
+}
+
+// Glossy ball component
+interface GlossyBallProps {
+    cx: number;
+    cy: number;
+    r: number;
+    code: string;
+    isSavior: boolean;
+    fontSize: number;
+}
+
+function GlossyBall({ cx, cy, r, code, isSavior, fontSize }: GlossyBallProps) {
+    return (
+        <g filter="url(#shadow)">
+            {/* Main ball with gradient */}
+            <circle cx={cx} cy={cy} r={r} fill={getGradientId(code, isSavior)} />
+            {/* Inner edge highlight */}
+            <circle cx={cx} cy={cy} r={r - 1} fill="none" stroke="rgba(255,255,255,0.2)" strokeWidth={2} />
+            {/* Shine overlay */}
+            <circle cx={cx - r * 0.15} cy={cy - r * 0.15} r={r * 0.35} fill="url(#shine)" />
+            {/* Label */}
+            <text
+                x={cx}
+                y={cy}
+                textAnchor="middle"
+                dominantBaseline="central"
+                fontSize={fontSize}
+                fontWeight="700"
+                fill="white"
+                style={{ textShadow: '0 2px 4px rgba(0,0,0,0.4)' }}
+            >
+                {code}
+            </text>
+        </g>
+    );
 }
 
 export default function BoardNewPage() {
@@ -198,6 +287,7 @@ export default function BoardNewPage() {
                     {/* First ball matrix (1-4) - Extraverted first function */}
                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="9.3 8.6 186.4 171.8" width="225" height="208">
+                            <GlossyDefs />
                             {/* Line 1-4 (grey) */}
                             {showLine1_4 && (
                                 <line x1="110.6" y1="96.0" x2="75.5" y2="131.2"
@@ -209,42 +299,22 @@ export default function BoardNewPage() {
                                     stroke="#bbbbbb" strokeWidth="3" strokeLinecap="round" />
                             )}
 
-                            {/* circles 1-4 with type colors */}
+                            {/* Glossy balls 1-4 */}
                             {showBall1 && extravertedStack[0] && (
-                                <>
-                                    <circle cx="143.4" cy="63.0" r="46.5"
-                                        fill={getFunctionColor(extravertedStack[0].code, extravertedStack[0].isSavior)}
-                                        stroke="#333" strokeWidth="2" />
-                                    <text x="143.4" y="63.0" textAnchor="middle" dominantBaseline="central"
-                                        fill="#fff" fontSize="18" fontWeight="bold">{extravertedStack[0].code}</text>
-                                </>
+                                <GlossyBall cx={143.4} cy={63.0} r={46.5}
+                                    code={extravertedStack[0].code} isSavior={extravertedStack[0].isSavior} fontSize={18} />
                             )}
                             {showBall2 && extravertedStack[1] && (
-                                <>
-                                    <circle cx="51.0" cy="79.8" r="33.2"
-                                        fill={getFunctionColor(extravertedStack[1].code, extravertedStack[1].isSavior)}
-                                        stroke="#333" strokeWidth="2" />
-                                    <text x="51.0" y="79.8" textAnchor="middle" dominantBaseline="central"
-                                        fill="#fff" fontSize="14" fontWeight="bold">{extravertedStack[1].code}</text>
-                                </>
+                                <GlossyBall cx={51.0} cy={79.8} r={33.2}
+                                    code={extravertedStack[1].code} isSavior={extravertedStack[1].isSavior} fontSize={14} />
                             )}
                             {showBall3 && extravertedStack[2] && (
-                                <>
-                                    <circle cx="119.4" cy="139.8" r="23.2"
-                                        fill={getFunctionColor(extravertedStack[2].code, extravertedStack[2].isSavior)}
-                                        stroke="#333" strokeWidth="2" />
-                                    <text x="119.4" y="139.8" textAnchor="middle" dominantBaseline="central"
-                                        fill="#fff" fontSize="12" fontWeight="bold">{extravertedStack[2].code}</text>
-                                </>
+                                <GlossyBall cx={119.4} cy={139.8} r={23.2}
+                                    code={extravertedStack[2].code} isSavior={extravertedStack[2].isSavior} fontSize={12} />
                             )}
                             {showBall4 && extravertedStack[3] && (
-                                <>
-                                    <circle cx="63.8" cy="143.0" r="16.6"
-                                        fill={getFunctionColor(extravertedStack[3].code, extravertedStack[3].isSavior)}
-                                        stroke="#333" strokeWidth="2" />
-                                    <text x="63.8" y="143.0" textAnchor="middle" dominantBaseline="central"
-                                        fill="#fff" fontSize="10" fontWeight="bold">{extravertedStack[3].code}</text>
-                                </>
+                                <GlossyBall cx={63.8} cy={143.0} r={16.6}
+                                    code={extravertedStack[3].code} isSavior={extravertedStack[3].isSavior} fontSize={10} />
                             )}
                         </svg>
 
@@ -273,6 +343,7 @@ export default function BoardNewPage() {
                     {/* Second ball matrix (5-8) - Introverted first function */}
                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="9.3 8.1 184.5 161.8" width="223" height="196">
+                            <GlossyDefs />
                             {/* Line 5-8 (grey, two segments) */}
                             {showLine5_8 && (
                                 <>
@@ -293,42 +364,22 @@ export default function BoardNewPage() {
                                 </>
                             )}
 
-                            {/* circles 5-8 with type colors */}
+                            {/* Glossy balls 5-8 */}
                             {showBall5 && introvertedStack[0] && (
-                                <>
-                                    <circle cx="63.0" cy="59.4" r="45.9"
-                                        fill={getFunctionColor(introvertedStack[0].code, introvertedStack[0].isSavior)}
-                                        stroke="#333" strokeWidth="2" />
-                                    <text x="63.0" y="59.4" textAnchor="middle" dominantBaseline="central"
-                                        fill="#fff" fontSize="18" fontWeight="bold">{introvertedStack[0].code}</text>
-                                </>
+                                <GlossyBall cx={63.0} cy={59.4} r={45.9}
+                                    code={introvertedStack[0].code} isSavior={introvertedStack[0].isSavior} fontSize={18} />
                             )}
                             {showBall6 && introvertedStack[1] && (
-                                <>
-                                    <circle cx="153.8" cy="79.8" r="35.2"
-                                        fill={getFunctionColor(introvertedStack[1].code, introvertedStack[1].isSavior)}
-                                        stroke="#333" strokeWidth="2" />
-                                    <text x="153.8" y="79.8" textAnchor="middle" dominantBaseline="central"
-                                        fill="#fff" fontSize="14" fontWeight="bold">{introvertedStack[1].code}</text>
-                                </>
+                                <GlossyBall cx={153.8} cy={79.8} r={35.2}
+                                    code={introvertedStack[1].code} isSavior={introvertedStack[1].isSavior} fontSize={14} />
                             )}
                             {showBall7 && introvertedStack[2] && (
-                                <>
-                                    <circle cx="85.0" cy="137.8" r="22.1"
-                                        fill={getFunctionColor(introvertedStack[2].code, introvertedStack[2].isSavior)}
-                                        stroke="#333" strokeWidth="2" />
-                                    <text x="85.0" y="137.8" textAnchor="middle" dominantBaseline="central"
-                                        fill="#fff" fontSize="12" fontWeight="bold">{introvertedStack[2].code}</text>
-                                </>
+                                <GlossyBall cx={85.0} cy={137.8} r={22.1}
+                                    code={introvertedStack[2].code} isSavior={introvertedStack[2].isSavior} fontSize={12} />
                             )}
                             {showBall8 && introvertedStack[3] && (
-                                <>
-                                    <circle cx="141.8" cy="137.8" r="17.0"
-                                        fill={getFunctionColor(introvertedStack[3].code, introvertedStack[3].isSavior)}
-                                        stroke="#333" strokeWidth="2" />
-                                    <text x="141.8" y="137.8" textAnchor="middle" dominantBaseline="central"
-                                        fill="#fff" fontSize="10" fontWeight="bold">{introvertedStack[3].code}</text>
-                                </>
+                                <GlossyBall cx={141.8} cy={137.8} r={17.0}
+                                    code={introvertedStack[3].code} isSavior={introvertedStack[3].isSavior} fontSize={10} />
                             )}
                         </svg>
 
