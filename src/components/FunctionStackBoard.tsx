@@ -62,7 +62,7 @@ interface Position {
 
 // Compact mode settings
 const A_INSET = 0.6; // 60% of distance toward center (A ball)
-const D_INSET = 0.6; // 60% of distance toward center (D ball)
+const D_INSET = 0.65; // 65% of distance toward center (D ball)
 const MIDDLE_INSET = 0.2; // 20% of distance toward center (B & C)
 const HERO_RADIUS_COMPACT = 40 * 0.8;   // 32
 const INFERIOR_RADIUS_COMPACT = 20 * 0.6; // 12 (40% smaller)
