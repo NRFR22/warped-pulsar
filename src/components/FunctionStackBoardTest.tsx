@@ -62,6 +62,23 @@ const getColor = (code: FuncCode): string => {
     return colors[code[0]] || '#64748b';
 };
 
+// Gradient color definitions for glossy 3D effect
+const FUNCTION_GRADIENTS: Record<string, {
+    base: string;
+    middle: string;
+    highlight: string;
+}> = {
+    'F': { base: '#b91c1c', middle: '#ef4444', highlight: '#fca5a5' },
+    'T': { base: '#1e40af', middle: '#3b82f6', highlight: '#93c5fd' },
+    'S': { base: '#047857', middle: '#10b981', highlight: '#6ee7b7' },
+    'N': { base: '#ca8a04', middle: '#eab308', highlight: '#fde047' },
+};
+
+const getGradient = (code: string) => {
+    const type = code.charAt(0);
+    return FUNCTION_GRADIENTS[type] || FUNCTION_GRADIENTS['F'];
+};
+
 interface Position {
     x: number;
     y: number;
@@ -161,6 +178,70 @@ export function FunctionStackBoardTest({
 
     return (
         <svg viewBox="0 0 300 300" width="100%" height="100%" style={{ maxWidth: '500px', margin: '0 auto', display: 'block' }}>
+            <defs>
+                {/* Radial gradients for each function type */}
+                {Object.entries(FUNCTION_GRADIENTS).map(([type, colors]) => (
+                    <radialGradient key={`gradient-${type}`} id={`gradient-${type}`} cx="35%" cy="35%">
+                        <stop offset="0%" stopColor={colors.highlight} />
+                        <stop offset="30%" stopColor={colors.middle} />
+                        <stop offset="70%" stopColor={colors.base} />
+                        <stop offset="100%" stopColor={colors.base} style={{ stopOpacity: 0.9 }} />
+                    </radialGradient>
+                ))}
+
+                {/* Grey gradient for demon functions */}
+                <radialGradient id="gradient-grey" cx="35%" cy="35%">
+                    <stop offset="0%" stopColor="#d1d5db" />
+                    <stop offset="30%" stopColor="#9ca3af" />
+                    <stop offset="70%" stopColor="#6b7280" />
+                    <stop offset="100%" stopColor="#6b7280" style={{ stopOpacity: 0.9 }} />
+                </radialGradient>
+
+                {/* Glossy shine overlay */}
+                <radialGradient id="shine" cx="30%" cy="30%">
+                    <stop offset="0%" stopColor="#ffffff" stopOpacity="0.8" />
+                    <stop offset="50%" stopColor="#ffffff" stopOpacity="0.3" />
+                    <stop offset="100%" stopColor="#ffffff" stopOpacity="0" />
+                </radialGradient>
+
+                {/* Drop shadow filters */}
+                <filter id="shadow-large" x="-50%" y="-50%" width="200%" height="200%">
+                    <feGaussianBlur in="SourceAlpha" stdDeviation="4"/>
+                    <feOffset dx="0" dy="4" result="offsetblur"/>
+                    <feComponentTransfer>
+                        <feFuncA type="linear" slope="0.25"/>
+                    </feComponentTransfer>
+                    <feMerge>
+                        <feMergeNode/>
+                        <feMergeNode in="SourceGraphic"/>
+                    </feMerge>
+                </filter>
+
+                <filter id="shadow-medium" x="-50%" y="-50%" width="200%" height="200%">
+                    <feGaussianBlur in="SourceAlpha" stdDeviation="2"/>
+                    <feOffset dx="0" dy="2" result="offsetblur"/>
+                    <feComponentTransfer>
+                        <feFuncA type="linear" slope="0.2"/>
+                    </feComponentTransfer>
+                    <feMerge>
+                        <feMergeNode/>
+                        <feMergeNode in="SourceGraphic"/>
+                    </feMerge>
+                </filter>
+
+                <filter id="shadow-small" x="-50%" y="-50%" width="200%" height="200%">
+                    <feGaussianBlur in="SourceAlpha" stdDeviation="1.5"/>
+                    <feOffset dx="0" dy="1" result="offsetblur"/>
+                    <feComponentTransfer>
+                        <feFuncA type="linear" slope="0.15"/>
+                    </feComponentTransfer>
+                    <feMerge>
+                        <feMergeNode/>
+                        <feMergeNode in="SourceGraphic"/>
+                    </feMerge>
+                </filter>
+            </defs>
+
             {/* Main axis: Vertical line from A (north) to D (south) */}
             {showMainAxis && (
                 <line
@@ -192,23 +273,33 @@ export function FunctionStackBoardTest({
             {/* A - Hero function (North) */}
             {showMainAxis && (
                 <>
+                    {/* Main bubble with gradient */}
                     <circle
                         cx={aActivePos.x}
                         cy={aActivePos.y}
                         r={aRadius}
-                        fill={aDisplay.color}
-                        opacity={0.95}
+                        fill={`url(#gradient-${aDisplay.label.charAt(0)})`}
+                        filter="url(#shadow-large)"
                     />
+                    {/* Subtle border for definition */}
                     <circle
                         cx={aActivePos.x}
                         cy={aActivePos.y}
-                        r={aRadius - 2}
+                        r={aRadius - 1}
                         fill="none"
-                        stroke="white"
+                        stroke="rgba(255,255,255,0.2)"
                         strokeWidth={2}
-                        opacity={0.3}
                         pointerEvents="none"
                     />
+                    {/* Glossy shine overlay */}
+                    <circle
+                        cx={aActivePos.x - aRadius * 0.15}
+                        cy={aActivePos.y - aRadius * 0.15}
+                        r={aRadius * 0.35}
+                        fill="url(#shine)"
+                        pointerEvents="none"
+                    />
+                    {/* Function label */}
                     <text
                         x={aActivePos.x}
                         y={aActivePos.y}
@@ -218,6 +309,7 @@ export function FunctionStackBoardTest({
                         fontWeight="700"
                         fill="white"
                         pointerEvents="none"
+                        style={{ textShadow: '0 2px 4px rgba(0,0,0,0.4)', letterSpacing: '0.02em' }}
                     >
                         {aDisplay.label}
                     </text>
@@ -227,23 +319,33 @@ export function FunctionStackBoardTest({
             {/* D - Inferior function (South) */}
             {showMainAxis && (
                 <>
+                    {/* Main bubble with grey gradient */}
                     <circle
                         cx={dActivePos.x}
                         cy={dActivePos.y}
                         r={dRadius}
-                        fill="#6b7280"
-                        opacity={0.95}
+                        fill="url(#gradient-grey)"
+                        filter="url(#shadow-small)"
                     />
+                    {/* Subtle border for definition */}
                     <circle
                         cx={dActivePos.x}
                         cy={dActivePos.y}
-                        r={dRadius - 2}
+                        r={dRadius - 1}
                         fill="none"
-                        stroke="white"
+                        stroke="rgba(255,255,255,0.2)"
                         strokeWidth={1}
-                        opacity={0.3}
                         pointerEvents="none"
                     />
+                    {/* Glossy shine overlay */}
+                    <circle
+                        cx={dActivePos.x - dRadius * 0.15}
+                        cy={dActivePos.y - dRadius * 0.15}
+                        r={dRadius * 0.35}
+                        fill="url(#shine)"
+                        pointerEvents="none"
+                    />
+                    {/* Function label */}
                     <text
                         x={dActivePos.x}
                         y={dActivePos.y}
@@ -253,6 +355,7 @@ export function FunctionStackBoardTest({
                         fontWeight="600"
                         fill="white"
                         pointerEvents="none"
+                        style={{ textShadow: '0 2px 4px rgba(0,0,0,0.4)', letterSpacing: '0.02em' }}
                     >
                         {dDisplay.label}
                     </text>
@@ -262,23 +365,33 @@ export function FunctionStackBoardTest({
             {/* B - Second function (West) */}
             {showMiddleAxis && (
                 <>
+                    {/* Main bubble with gradient */}
                     <circle
                         cx={bActivePos.x}
                         cy={bActivePos.y}
                         r={bRadius}
-                        fill={B.isSavior ? getColor(B.code) : '#6b7280'}
-                        opacity={0.95}
+                        fill={B.isSavior ? `url(#gradient-${B.code.charAt(0)})` : 'url(#gradient-grey)'}
+                        filter="url(#shadow-medium)"
                     />
+                    {/* Subtle border for definition */}
                     <circle
                         cx={bActivePos.x}
                         cy={bActivePos.y}
-                        r={bRadius - 2}
+                        r={bRadius - 1}
                         fill="none"
-                        stroke="white"
+                        stroke="rgba(255,255,255,0.2)"
                         strokeWidth={1.5}
-                        opacity={0.3}
                         pointerEvents="none"
                     />
+                    {/* Glossy shine overlay */}
+                    <circle
+                        cx={bActivePos.x - bRadius * 0.15}
+                        cy={bActivePos.y - bRadius * 0.15}
+                        r={bRadius * 0.35}
+                        fill="url(#shine)"
+                        pointerEvents="none"
+                    />
+                    {/* Function label */}
                     <text
                         x={bActivePos.x}
                         y={bActivePos.y}
@@ -288,6 +401,7 @@ export function FunctionStackBoardTest({
                         fontWeight="600"
                         fill="white"
                         pointerEvents="none"
+                        style={{ textShadow: '0 2px 4px rgba(0,0,0,0.4)', letterSpacing: '0.02em' }}
                     >
                         {B.code}
                     </text>
@@ -297,23 +411,33 @@ export function FunctionStackBoardTest({
             {/* C - Third function (East) */}
             {showMiddleAxis && (
                 <>
+                    {/* Main bubble with gradient */}
                     <circle
                         cx={cActivePos.x}
                         cy={cActivePos.y}
                         r={cRadius}
-                        fill={C.isSavior ? getColor(C.code) : '#6b7280'}
-                        opacity={0.95}
+                        fill={C.isSavior ? `url(#gradient-${C.code.charAt(0)})` : 'url(#gradient-grey)'}
+                        filter="url(#shadow-medium)"
                     />
+                    {/* Subtle border for definition */}
                     <circle
                         cx={cActivePos.x}
                         cy={cActivePos.y}
-                        r={cRadius - 2}
+                        r={cRadius - 1}
                         fill="none"
-                        stroke="white"
+                        stroke="rgba(255,255,255,0.2)"
                         strokeWidth={1.5}
-                        opacity={0.3}
                         pointerEvents="none"
                     />
+                    {/* Glossy shine overlay */}
+                    <circle
+                        cx={cActivePos.x - cRadius * 0.15}
+                        cy={cActivePos.y - cRadius * 0.15}
+                        r={cRadius * 0.35}
+                        fill="url(#shine)"
+                        pointerEvents="none"
+                    />
+                    {/* Function label */}
                     <text
                         x={cActivePos.x}
                         y={cActivePos.y}
@@ -323,6 +447,7 @@ export function FunctionStackBoardTest({
                         fontWeight="600"
                         fill="white"
                         pointerEvents="none"
+                        style={{ textShadow: '0 2px 4px rgba(0,0,0,0.4)', letterSpacing: '0.02em' }}
                     >
                         {C.code}
                     </text>
@@ -349,17 +474,23 @@ export function FunctionStackBoardTest({
                         cx={aSecondaryPos.x}
                         cy={aSecondaryPos.y}
                         r={aRadius}
-                        fill={aSecondaryDisplay.color}
-                        opacity={0.95}
+                        fill={`url(#gradient-${aSecondaryDisplay.label.charAt(0)})`}
+                        filter="url(#shadow-large)"
                     />
                     <circle
                         cx={aSecondaryPos.x}
                         cy={aSecondaryPos.y}
-                        r={aRadius - 2}
+                        r={aRadius - 1}
                         fill="none"
-                        stroke="white"
+                        stroke="rgba(255,255,255,0.2)"
                         strokeWidth={2}
-                        opacity={0.3}
+                        pointerEvents="none"
+                    />
+                    <circle
+                        cx={aSecondaryPos.x - aRadius * 0.15}
+                        cy={aSecondaryPos.y - aRadius * 0.15}
+                        r={aRadius * 0.35}
+                        fill="url(#shine)"
                         pointerEvents="none"
                     />
                     <text
@@ -371,6 +502,7 @@ export function FunctionStackBoardTest({
                         fontWeight="700"
                         fill="white"
                         pointerEvents="none"
+                        style={{ textShadow: '0 2px 4px rgba(0,0,0,0.4)', letterSpacing: '0.02em' }}
                     >
                         {aSecondaryDisplay.label}
                     </text>
@@ -380,17 +512,23 @@ export function FunctionStackBoardTest({
                         cx={dSecondaryPos.x}
                         cy={dSecondaryPos.y}
                         r={dRadius}
-                        fill="#6b7280"
-                        opacity={0.95}
+                        fill="url(#gradient-grey)"
+                        filter="url(#shadow-small)"
                     />
                     <circle
                         cx={dSecondaryPos.x}
                         cy={dSecondaryPos.y}
-                        r={dRadius - 2}
+                        r={dRadius - 1}
                         fill="none"
-                        stroke="white"
+                        stroke="rgba(255,255,255,0.2)"
                         strokeWidth={1}
-                        opacity={0.3}
+                        pointerEvents="none"
+                    />
+                    <circle
+                        cx={dSecondaryPos.x - dRadius * 0.15}
+                        cy={dSecondaryPos.y - dRadius * 0.15}
+                        r={dRadius * 0.35}
+                        fill="url(#shine)"
                         pointerEvents="none"
                     />
                     <text
@@ -402,6 +540,7 @@ export function FunctionStackBoardTest({
                         fontWeight="600"
                         fill="white"
                         pointerEvents="none"
+                        style={{ textShadow: '0 2px 4px rgba(0,0,0,0.4)', letterSpacing: '0.02em' }}
                     >
                         {dSecondaryDisplay.label}
                     </text>
