@@ -111,12 +111,40 @@ function GlossyBall({ cx, cy, r, code, isSavior, fontSize }: GlossyBallProps) {
     );
 }
 
-// Introverted-first ball matrix component (layout 5-8)
-interface IntrovertedBallMatrixProps {
+// Ball matrix props
+interface BallMatrixProps {
     stack: Array<{ code: string; isSavior: boolean }>;
 }
 
-function IntrovertedBallMatrix({ stack }: IntrovertedBallMatrixProps) {
+// Extraverted-first ball matrix component (layout 1-4)
+function ExtravertedBallMatrix({ stack }: BallMatrixProps) {
+    return (
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="-15 -15 230 250" width="260" height="280" style={{ overflow: 'visible' }}>
+            <GlossyDefs />
+            {/* Line 1-4 */}
+            <line x1="110.6" y1="96.0" x2="75.5" y2="131.2" stroke="#bbbbbb" strokeWidth="3" strokeLinecap="round" />
+            {/* Line 2-3 */}
+            <line x1="76.0" y1="101.7" x2="101.9" y2="124.5" stroke="#bbbbbb" strokeWidth="3" strokeLinecap="round" />
+
+            {/* Glossy balls 1-4 */}
+            {stack[0] && (
+                <GlossyBall cx={143.4} cy={63.0} r={46.5} code={stack[0].code} isSavior={stack[0].isSavior} fontSize={18} />
+            )}
+            {stack[1] && (
+                <GlossyBall cx={51.0} cy={79.8} r={33.2} code={stack[1].code} isSavior={stack[1].isSavior} fontSize={14} />
+            )}
+            {stack[2] && (
+                <GlossyBall cx={119.4} cy={139.8} r={23.2} code={stack[2].code} isSavior={stack[2].isSavior} fontSize={12} />
+            )}
+            {stack[3] && (
+                <GlossyBall cx={63.8} cy={143.0} r={16.6} code={stack[3].code} isSavior={stack[3].isSavior} fontSize={10} />
+            )}
+        </svg>
+    );
+}
+
+// Introverted-first ball matrix component (layout 5-8)
+function IntrovertedBallMatrix({ stack }: BallMatrixProps) {
     return (
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="-10 -15 220 230" width="250" height="260" style={{ overflow: 'visible' }}>
             <GlossyDefs />
@@ -142,6 +170,17 @@ function IntrovertedBallMatrix({ stack }: IntrovertedBallMatrixProps) {
             )}
         </svg>
     );
+}
+
+// Unified component that picks the right layout based on first function
+function FunctionBallMatrix({ stack }: BallMatrixProps) {
+    // Check if first function is extraverted (ends with 'e') or introverted (ends with 'i')
+    const firstFunc = stack[0]?.code || '';
+    const isExtraverted = firstFunc.endsWith('e');
+
+    return isExtraverted
+        ? <ExtravertedBallMatrix stack={stack} />
+        : <IntrovertedBallMatrix stack={stack} />;
 }
 
 interface VariantComparisonPageProps {
@@ -263,7 +302,7 @@ export function VariantComparisonPage({ mbtiCode, variants }: VariantComparisonP
 
                         {/* New Glossy Ball Matrix */}
                         <div style={{ display: 'flex', justifyContent: 'center', margin: '1rem 0' }}>
-                            <IntrovertedBallMatrix
+                            <FunctionBallMatrix
                                 stack={(() => {
                                     const funcs = standardContent.functionStack.split('/').map(f => f.trim());
                                     return [
@@ -295,7 +334,7 @@ export function VariantComparisonPage({ mbtiCode, variants }: VariantComparisonP
 
                         {/* New Glossy Ball Matrix */}
                         <div style={{ display: 'flex', justifyContent: 'center', margin: '1rem 0' }}>
-                            <IntrovertedBallMatrix
+                            <FunctionBallMatrix
                                 stack={(() => {
                                     const funcs = jumperContent.functionStack.split('/').map(f => f.trim());
                                     return [
