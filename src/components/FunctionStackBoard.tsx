@@ -190,12 +190,6 @@ export function FunctionStackBoard({
             />
 
             {/* Axis labels */}
-            <text x={150} y={25} textAnchor="middle" fontSize={12} fill="#64748b" fontWeight="600">
-                SAVIOR
-            </text>
-            <text x={150} y={285} textAnchor="middle" fontSize={12} fill="#64748b" fontWeight="600">
-                DEMON
-            </text>
             <text x={15} y={155} textAnchor="middle" fontSize={12} fill="#64748b" fontWeight="600" transform="rotate(-90, 15, 155)">
                 INTROVERTED
             </text>
@@ -376,8 +370,8 @@ export function FunctionStackBoard({
                 cx={bActivePos.x}
                 cy={bActivePos.y}
                 r={getRadius(B.index)}
-                fill={getColor(B.code)}
-                opacity={B.isSavior ? 0.95 : 0.6}
+                fill={B.isSavior ? getColor(B.code) : '#6b7280'}
+                opacity={0.95}
                 onClick={handleMiddleCoinClick}
                 style={{ cursor: interactive ? 'pointer' : 'default' }}
             />
@@ -409,8 +403,8 @@ export function FunctionStackBoard({
                 cx={cActivePos.x}
                 cy={cActivePos.y}
                 r={getRadius(C.index)}
-                fill={getColor(C.code)}
-                opacity={C.isSavior ? 0.95 : 0.6}
+                fill={C.isSavior ? getColor(C.code) : '#6b7280'}
+                opacity={0.95}
                 onClick={handleMiddleCoinClick}
                 style={{ cursor: interactive ? 'pointer' : 'default' }}
             />
@@ -442,8 +436,8 @@ export function FunctionStackBoard({
                 cx={dActivePos.x}
                 cy={dActivePos.y}
                 r={getRadius(D.index)}
-                fill={getColor(D.code)}
-                opacity={0.5}
+                fill="#6b7280"
+                opacity={0.95}
                 onClick={handleOuterCoinClick}
                 style={{ cursor: interactive ? 'pointer' : 'default' }}
             />
