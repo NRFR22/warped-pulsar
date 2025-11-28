@@ -7,10 +7,10 @@ import styles from './board.module.css';
 
 export default function BoardPage() {
     const [selectedType, setSelectedType] = useState('INFP-standard');
-    const [showGhosts, setShowGhosts] = useState(true);
-    const [interactive, setInteractive] = useState(true);
-    const [showBoard, setShowBoard] = useState(true);
-    const [compactEndpoints, setCompactEndpoints] = useState(false);
+    const [showGhosts, setShowGhosts] = useState(false);
+    const [interactive, setInteractive] = useState(false);
+    const [showBoard, setShowBoard] = useState(false);
+    const [compactEndpoints, setCompactEndpoints] = useState(true);
 
     // Get all available types (32 total - 16 types × 2 configs)
     const allTypes = useMemo(() => getAllTypeOptions(), []);
