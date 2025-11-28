@@ -1,5 +1,6 @@
 export interface TypeProfile {
     code: string;
+    mbti: string;
     name: string;
     family: string;
     familyId: string;
@@ -11,6 +12,7 @@ export interface TypeProfile {
 export const typesData: TypeProfile[] = [
     {
         code: "Fe/Ne",
+        mbti: "ESFJ",
         name: "The Illuminator",
         family: "Fe-types",
         familyId: "fe",
@@ -36,6 +38,7 @@ MBTI: ESFJ`
     },
     {
         code: "Fe/Ni",
+        mbti: "ENFJ",
         name: "The Oracle",
         family: "Fe-types",
         familyId: "fe",
@@ -100,6 +103,7 @@ MBTI: ENFJ
     },
     {
         code: "Fe/Se",
+        mbti: "ENFJ",
         name: "The Maverick",
         family: "Fe-types",
         familyId: "fe",
@@ -164,6 +168,7 @@ MBTI: ENFJ
     },
     {
         code: "Fe/Si",
+        mbti: "ESFJ",
         name: "The Guardian",
         family: "Fe-types",
         familyId: "fe",
@@ -228,6 +233,7 @@ MBTI: ESFJ
     },
     {
         code: "Fi/Ne",
+        mbti: "INFP",
         name: "The Dreamweaver",
         family: "Fi-types",
         familyId: "fi",
@@ -292,6 +298,7 @@ MBTI: INFP
     },
     {
         code: "Fi/Ni",
+        mbti: "ISFP",
         name: "The Forcebringer",
         family: "Fi-types",
         familyId: "fi",
@@ -356,6 +363,7 @@ MBTI: ISFP
     },
     {
         code: "Fi/Se",
+        mbti: "ISFP",
         name: "The Shapeshifter",
         family: "Fi-types",
         familyId: "fi",
@@ -422,6 +430,7 @@ MBTI: ISFP
     },
     {
         code: "Fi/Si",
+        mbti: "INFP",
         name: "The Charmist",
         family: "Fi-types",
         familyId: "fi",
@@ -487,6 +496,7 @@ MBTI: INFP`
     },
     {
         code: "Ne/Fe",
+        mbti: "ENTP",
         name: "The Visionary",
         family: "Ne-types",
         familyId: "ne",
@@ -553,6 +563,7 @@ MBTI: ENTP
     },
     {
         code: "Ne/Fi",
+        mbti: "ENFP",
         name: "The Eccentricist",
         family: "Ne-types",
         familyId: "ne",
@@ -619,6 +630,7 @@ MBTI: ENFP
     },
     {
         code: "Ne/Te",
+        mbti: "ENFP",
         name: "The Storykeeper",
         family: "Ne-types",
         familyId: "ne",
@@ -685,6 +697,7 @@ MBTI: ENFP
     },
     {
         code: "Ne/Ti",
+        mbti: "ENTP",
         name: "The Intellector",
         family: "Ne-types",
         familyId: "ne",
@@ -751,6 +764,7 @@ MBTI: ENTP
     },
     {
         code: "Ni/Fe",
+        mbti: "INFJ",
         name: "The Influencer",
         family: "Ni-types",
         familyId: "ni",
@@ -815,6 +829,7 @@ MBTI: INFJ
     },
     {
         code: "Ni/Fi",
+        mbti: "INTJ",
         name: "The Iconoclast",
         family: "Ni-types",
         familyId: "ni",
@@ -885,6 +900,7 @@ MBTI: INTJ
     },
     {
         code: "Ni/Te",
+        mbti: "INTJ",
         name: "The Strategist",
         family: "Ni-types",
         familyId: "ni",
@@ -954,6 +970,7 @@ MBTI: INTJ
     },
     {
         code: "Ni/Ti",
+        mbti: "INFJ",
         name: "The Provocateur",
         family: "Ni-types",
         familyId: "ni",
@@ -1021,6 +1038,7 @@ MBTI: INFJ
     },
     {
         code: "Se/Fe",
+        mbti: "ESTP",
         name: "The Performer",
         family: "Se-types",
         familyId: "se",
@@ -1087,6 +1105,7 @@ MBTI: ESTP
     },
     {
         code: "Se/Fi",
+        mbti: "ESFP",
         name: "The Celebrant",
         family: "Se-types",
         familyId: "se",
@@ -1158,6 +1177,7 @@ MBTI: ESFP
     },
     {
         code: "Se/Te",
+        mbti: "ESFP",
         name: "The Enterpriser",
         family: "Se-types",
         familyId: "se",
@@ -1222,6 +1242,7 @@ MBTI: ESFP
     },
     {
         code: "Se/Ti",
+        mbti: "ESTP",
         name: "The Powerhouse",
         family: "Se-types",
         familyId: "se",
@@ -1294,6 +1315,7 @@ MBTI: ESTP
     },
     {
         code: "Si/Fe",
+        mbti: "ISFJ",
         name: "The Humanitarian",
         family: "Si-types",
         familyId: "si",
@@ -1356,6 +1378,7 @@ MBTI: ISFJ
     },
     {
         code: "Si/Fi",
+        mbti: "ISTJ",
         name: "The Executor",
         family: "Si-types",
         familyId: "si",
@@ -1420,6 +1443,7 @@ MBTI: ISTJ
     },
     {
         code: "Si/Te",
+        mbti: "ISTJ",
         name: "The Guardian",
         family: "Si-types",
         familyId: "si",
@@ -1493,6 +1517,7 @@ MBTI: ISTJ
     },
     {
         code: "Si/Ti",
+        mbti: "ISFJ",
         name: "The Custodian",
         family: "Si-types",
         familyId: "si",
@@ -1547,6 +1572,7 @@ MBTI: ISFJ
     },
     {
         code: "Te/Ne",
+        mbti: "ESTJ",
         name: "The Commander",
         family: "Te-types",
         familyId: "te",
@@ -1605,6 +1631,7 @@ MBTI: ESTJ
     },
     {
         code: "Te/Ni",
+        mbti: "ENTJ",
         name: "The Crusader",
         family: "Te-types",
         familyId: "te",
@@ -1677,6 +1704,7 @@ MBTI: ENTJ
     },
     {
         code: "Te/Se",
+        mbti: "ENTJ",
         name: "The Starmaker",
         family: "Te-types",
         familyId: "te",
@@ -1754,6 +1782,7 @@ MBTI: ENTJ
     },
     {
         code: "Te/Si",
+        mbti: "ESTJ",
         name: "The Authority",
         family: "Te-types",
         familyId: "te",
@@ -1818,6 +1847,7 @@ MBTI: ESTJ
     },
     {
         code: "Ti/Ne",
+        mbti: "INTP",
         name: "The Sage",
         family: "Ti-types",
         familyId: "ti",
@@ -1878,6 +1908,7 @@ MBTI: INTP`
     },
     {
         code: "Ti/Ni",
+        mbti: "ISTP",
         name: "The Master",
         family: "Ti-types",
         familyId: "ti",
@@ -1934,6 +1965,7 @@ MBTI: ISTP`
     },
     {
         code: "Ti/Se",
+        mbti: "ISTP",
         name: "The Titan",
         family: "Ti-types",
         familyId: "ti",
@@ -2004,6 +2036,7 @@ MBTI: ISTP`
     },
     {
         code: "Ti/Si",
+        mbti: "INTP",
         name: "The Innovator",
         family: "Ti-types",
         familyId: "ti",
