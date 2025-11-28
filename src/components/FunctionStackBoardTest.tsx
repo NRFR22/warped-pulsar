@@ -22,6 +22,9 @@ export interface FunctionStackBoardProps {
     showMiddleAxis?: boolean;       // show B-C horizontal axis (teach mode)
     selectedCoin?: string;          // which coin to display (S/N, T/F, DI/DE, OE/OI)
     coinFlipped?: boolean;          // flip the coin positions
+    showSecondaryAxis?: boolean;    // show secondary A-D axis
+    secondaryCoin?: string;         // which coin to display on secondary axis
+    secondaryCoinFlipped?: boolean; // flip the secondary coin positions
 }
 
 // Board anchor points (SVG viewBox 0 0 300 300)
@@ -112,6 +115,9 @@ export function FunctionStackBoardTest({
     showMiddleAxis = true,
     selectedCoin = 'S/N',
     coinFlipped = false,
+    showSecondaryAxis = false,
+    secondaryCoin = 'T/F',
+    secondaryCoinFlipped = false,
 }: FunctionStackBoardProps) {
     // Find functions by ID
     const A = stack.find(f => f.id === 'A')!;
@@ -140,6 +146,15 @@ export function FunctionStackBoardTest({
     // Get coin display for A and D
     const aDisplay = getCoinDisplay(selectedCoin, 'A', coinFlipped);
     const dDisplay = getCoinDisplay(selectedCoin, 'D', coinFlipped);
+
+    // Get coin display for secondary axis
+    const aSecondaryDisplay = getCoinDisplay(secondaryCoin, 'A', secondaryCoinFlipped);
+    const dSecondaryDisplay = getCoinDisplay(secondaryCoin, 'D', secondaryCoinFlipped);
+
+    // Secondary axis positions (offset to the right)
+    const secondaryOffset = 50;
+    const aSecondaryPos: Position = { x: aActivePos.x + secondaryOffset, y: aActivePos.y };
+    const dSecondaryPos: Position = { x: dActivePos.x + secondaryOffset, y: dActivePos.y };
 
     return (
         <svg viewBox="0 0 300 300" width="100%" height="100%" style={{ maxWidth: '500px', margin: '0 auto', display: 'block' }}>
@@ -307,6 +322,85 @@ export function FunctionStackBoardTest({
                         pointerEvents="none"
                     >
                         {C.code}
+                    </text>
+                </>
+            )}
+
+            {/* Secondary axis */}
+            {showSecondaryAxis && (
+                <>
+                    {/* Secondary axis line */}
+                    <line
+                        x1={aSecondaryPos.x}
+                        y1={aSecondaryPos.y}
+                        x2={dSecondaryPos.x}
+                        y2={dSecondaryPos.y}
+                        stroke="#94a3b8"
+                        strokeWidth={2}
+                        strokeDasharray="6,6"
+                        opacity={0.5}
+                    />
+
+                    {/* Secondary A bubble */}
+                    <circle
+                        cx={aSecondaryPos.x}
+                        cy={aSecondaryPos.y}
+                        r={aRadius}
+                        fill={aSecondaryDisplay.color}
+                        opacity={0.95}
+                    />
+                    <circle
+                        cx={aSecondaryPos.x}
+                        cy={aSecondaryPos.y}
+                        r={aRadius - 2}
+                        fill="none"
+                        stroke="white"
+                        strokeWidth={2}
+                        opacity={0.3}
+                        pointerEvents="none"
+                    />
+                    <text
+                        x={aSecondaryPos.x}
+                        y={aSecondaryPos.y}
+                        textAnchor="middle"
+                        dominantBaseline="central"
+                        fontSize={aFontSize}
+                        fontWeight="700"
+                        fill="white"
+                        pointerEvents="none"
+                    >
+                        {aSecondaryDisplay.label}
+                    </text>
+
+                    {/* Secondary D bubble */}
+                    <circle
+                        cx={dSecondaryPos.x}
+                        cy={dSecondaryPos.y}
+                        r={dRadius}
+                        fill={dSecondaryDisplay.color}
+                        opacity={0.95}
+                    />
+                    <circle
+                        cx={dSecondaryPos.x}
+                        cy={dSecondaryPos.y}
+                        r={dRadius - 2}
+                        fill="none"
+                        stroke="white"
+                        strokeWidth={1}
+                        opacity={0.3}
+                        pointerEvents="none"
+                    />
+                    <text
+                        x={dSecondaryPos.x}
+                        y={dSecondaryPos.y}
+                        textAnchor="middle"
+                        dominantBaseline="central"
+                        fontSize={dFontSize}
+                        fontWeight="600"
+                        fill="white"
+                        pointerEvents="none"
+                    >
+                        {dSecondaryDisplay.label}
                     </text>
                 </>
             )}

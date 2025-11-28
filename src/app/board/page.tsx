@@ -20,6 +20,11 @@ export default function BoardPage() {
     const [selectedCoin, setSelectedCoin] = useState('S/N');
     const [coinFlipped, setCoinFlipped] = useState(false);
 
+    // Secondary axis controls
+    const [showSecondaryAxis, setShowSecondaryAxis] = useState(false);
+    const [secondaryCoin, setSecondaryCoin] = useState('T/F');
+    const [secondaryCoinFlipped, setSecondaryCoinFlipped] = useState(false);
+
     // Get all available types (32 total - 16 types × 2 configs)
     const allTypes = useMemo(() => getAllTypeOptions(), []);
 
@@ -81,6 +86,9 @@ export default function BoardPage() {
                                 showMiddleAxis={showMiddleAxis}
                                 selectedCoin={selectedCoin}
                                 coinFlipped={coinFlipped}
+                                showSecondaryAxis={showSecondaryAxis}
+                                secondaryCoin={secondaryCoin}
+                                secondaryCoinFlipped={secondaryCoinFlipped}
                             />
                         )}
                     </div>
@@ -173,6 +181,45 @@ export default function BoardPage() {
                                     Flip Coin
                                 </button>
                             </div>
+
+                            <div className={styles.controlGroup}>
+                                <label className={styles.toggleLabel}>
+                                    <input
+                                        type="checkbox"
+                                        checked={showSecondaryAxis}
+                                        onChange={(e) => setShowSecondaryAxis(e.target.checked)}
+                                        className={styles.checkbox}
+                                    />
+                                    <span>Show secondary axis</span>
+                                </label>
+                            </div>
+
+                            {showSecondaryAxis && (
+                                <>
+                                    <div className={styles.controlGroup}>
+                                        <label className={styles.controlLabel}>Secondary Coin</label>
+                                        <select
+                                            value={secondaryCoin}
+                                            onChange={(e) => setSecondaryCoin(e.target.value)}
+                                            className={styles.select}
+                                        >
+                                            <option value="S/N">S/N coin</option>
+                                            <option value="T/F">T/F coin</option>
+                                            <option value="DI/DE">DI/DE coin</option>
+                                            <option value="OE/OI">OE/OI coin</option>
+                                        </select>
+                                    </div>
+
+                                    <div className={styles.controlGroup}>
+                                        <button
+                                            onClick={() => setSecondaryCoinFlipped(!secondaryCoinFlipped)}
+                                            className={styles.flipButton}
+                                        >
+                                            Flip Secondary Coin
+                                        </button>
+                                    </div>
+                                </>
+                            )}
                         </>
                     )}
 
