@@ -3,6 +3,7 @@
 import React, { useState, useMemo } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import { Button } from '@/components/ui/Button';
 import { TypeFunctionStackBoard } from '@/components/types/TypeFunctionStackBoard';
 import { FunctionStackBoard } from '@/components/FunctionStackBoard';
 import { getAllTypeOptions, getTypeOption } from '@/lib/typeDatabase';
