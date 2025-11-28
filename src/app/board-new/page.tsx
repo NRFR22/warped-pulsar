@@ -73,7 +73,7 @@ function GlossyDefs() {
     );
 }
 
-// Glossy ball component
+// Glossy ball component with hover expansion
 interface GlossyBallProps {
     cx: number;
     cy: number;
@@ -84,12 +84,37 @@ interface GlossyBallProps {
 }
 
 function GlossyBall({ cx, cy, r, code, isSavior, fontSize }: GlossyBallProps) {
+    const [isHovered, setIsHovered] = useState(false);
+
     return (
-        <g filter="url(#shadow)">
+        <g
+            filter="url(#shadow)"
+            style={{
+                cursor: 'pointer',
+                transition: 'transform 0.3s ease',
+                transformOrigin: `${cx}px ${cy}px`,
+                transform: isHovered ? 'scale(1.15)' : 'scale(1)',
+            }}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+        >
+            {/* Outer ring (visible on hover) */}
+            <circle
+                cx={cx}
+                cy={cy}
+                r={r + 4}
+                fill="none"
+                stroke="rgba(255,255,255,0.6)"
+                strokeWidth={2}
+                style={{
+                    opacity: isHovered ? 1 : 0,
+                    transition: 'opacity 0.3s ease',
+                }}
+            />
             {/* Main ball with gradient */}
             <circle cx={cx} cy={cy} r={r} fill={getGradientId(code, isSavior)} />
             {/* Inner edge highlight */}
-            <circle cx={cx} cy={cy} r={r - 1} fill="none" stroke="rgba(255,255,255,0.2)" strokeWidth={2} />
+            <circle cx={cx} cy={cy} r={r - 1} fill="none" stroke="rgba(255,255,255,0.3)" strokeWidth={2} />
             {/* Shine overlay */}
             <circle cx={cx - r * 0.15} cy={cy - r * 0.15} r={r * 0.35} fill="url(#shine)" />
             {/* Label */}
