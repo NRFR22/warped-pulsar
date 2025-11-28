@@ -11,6 +11,139 @@ import { extractEnhancedContent, generateKeyDifferences, getRelatedTypes, type E
 import { type TypeProfile } from '@/data/types';
 import styles from './variant-comparison.module.css';
 
+// Get gradient ID based on function code and savior status
+function getGradientId(code: string, isSavior: boolean): string {
+    if (!isSavior) return 'url(#gradient-grey)';
+    const functionType = code.charAt(0);
+    return `url(#gradient-${functionType})`;
+}
+
+// SVG Defs component for glossy gradients and filters
+function GlossyDefs() {
+    return (
+        <defs>
+            <radialGradient id="gradient-F" cx="35%" cy="35%">
+                <stop offset="0%" stopColor="#fca5a5" />
+                <stop offset="30%" stopColor="#ef4444" />
+                <stop offset="70%" stopColor="#b91c1c" />
+                <stop offset="100%" stopColor="#b91c1c" stopOpacity="0.9" />
+            </radialGradient>
+            <radialGradient id="gradient-T" cx="35%" cy="35%">
+                <stop offset="0%" stopColor="#93c5fd" />
+                <stop offset="30%" stopColor="#3b82f6" />
+                <stop offset="70%" stopColor="#1e40af" />
+                <stop offset="100%" stopColor="#1e40af" stopOpacity="0.9" />
+            </radialGradient>
+            <radialGradient id="gradient-S" cx="35%" cy="35%">
+                <stop offset="0%" stopColor="#6ee7b7" />
+                <stop offset="30%" stopColor="#10b981" />
+                <stop offset="70%" stopColor="#047857" />
+                <stop offset="100%" stopColor="#047857" stopOpacity="0.9" />
+            </radialGradient>
+            <radialGradient id="gradient-N" cx="35%" cy="35%">
+                <stop offset="0%" stopColor="#fde047" />
+                <stop offset="30%" stopColor="#eab308" />
+                <stop offset="70%" stopColor="#ca8a04" />
+                <stop offset="100%" stopColor="#ca8a04" stopOpacity="0.9" />
+            </radialGradient>
+            <radialGradient id="gradient-grey" cx="35%" cy="35%">
+                <stop offset="0%" stopColor="#d1d5db" />
+                <stop offset="30%" stopColor="#9ca3af" />
+                <stop offset="70%" stopColor="#6b7280" />
+                <stop offset="100%" stopColor="#6b7280" stopOpacity="0.9" />
+            </radialGradient>
+            <radialGradient id="shine" cx="30%" cy="30%">
+                <stop offset="0%" stopColor="#ffffff" stopOpacity="0.8" />
+                <stop offset="50%" stopColor="#ffffff" stopOpacity="0.3" />
+                <stop offset="100%" stopColor="#ffffff" stopOpacity="0" />
+            </radialGradient>
+            <filter id="shadow">
+                <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+                <feOffset dx="0" dy="3"/>
+                <feComponentTransfer><feFuncA type="linear" slope="0.3"/></feComponentTransfer>
+                <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+        </defs>
+    );
+}
+
+// Glossy ball component with hover expansion
+interface GlossyBallProps {
+    cx: number;
+    cy: number;
+    r: number;
+    code: string;
+    isSavior: boolean;
+    fontSize: number;
+}
+
+function GlossyBall({ cx, cy, r, code, isSavior, fontSize }: GlossyBallProps) {
+    const [isHovered, setIsHovered] = useState(false);
+
+    return (
+        <g
+            filter="url(#shadow)"
+            style={{
+                cursor: 'pointer',
+                transition: 'transform 0.3s ease',
+                transformOrigin: `${cx}px ${cy}px`,
+                transform: isHovered ? 'scale(1.15)' : 'scale(1)',
+            }}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+        >
+            <circle cx={cx} cy={cy} r={r} fill={getGradientId(code, isSavior)} />
+            <circle cx={cx} cy={cy} r={r - 1} fill="none" stroke="rgba(255,255,255,0.3)" strokeWidth={2} />
+            <circle cx={cx - r * 0.15} cy={cy - r * 0.15} r={r * 0.35} fill="url(#shine)" />
+            <text
+                x={cx}
+                y={cy}
+                textAnchor="middle"
+                dominantBaseline="central"
+                fontSize={fontSize}
+                fontWeight="700"
+                fill="white"
+                style={{ textShadow: '0 2px 4px rgba(0,0,0,0.4)' }}
+            >
+                {code}
+            </text>
+        </g>
+    );
+}
+
+// Introverted-first ball matrix component (layout 5-8)
+interface IntrovertedBallMatrixProps {
+    stack: Array<{ code: string; isSavior: boolean }>;
+}
+
+function IntrovertedBallMatrix({ stack }: IntrovertedBallMatrixProps) {
+    return (
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="-10 -15 220 230" width="250" height="260" style={{ overflow: 'visible' }}>
+            <GlossyDefs />
+            {/* Line 5-8 (grey, two segments) */}
+            <line x1="94.4" y1="93.0" x2="113.3" y2="113.2" stroke="#bbbbbb" strokeWidth="3" strokeLinecap="round" />
+            <line x1="113.3" y1="113.2" x2="130.0" y2="96.0" stroke="#bbbbbb" strokeWidth="3" strokeLinecap="round" />
+            {/* Line 6-7 (two segments) */}
+            <line x1="101.7" y1="123.3" x2="113.3" y2="113.2" stroke="#bbbbbb" strokeWidth="3" strokeLinecap="round" />
+            <line x1="113.3" y1="113.2" x2="129.0" y2="126.7" stroke="#bbbbbb" strokeWidth="3" strokeLinecap="round" />
+
+            {/* Glossy balls 5-8 */}
+            {stack[0] && (
+                <GlossyBall cx={63.0} cy={59.4} r={45.9} code={stack[0].code} isSavior={stack[0].isSavior} fontSize={18} />
+            )}
+            {stack[1] && (
+                <GlossyBall cx={153.8} cy={79.8} r={35.2} code={stack[1].code} isSavior={stack[1].isSavior} fontSize={14} />
+            )}
+            {stack[2] && (
+                <GlossyBall cx={85.0} cy={137.8} r={22.1} code={stack[2].code} isSavior={stack[2].isSavior} fontSize={12} />
+            )}
+            {stack[3] && (
+                <GlossyBall cx={141.8} cy={137.8} r={17.0} code={stack[3].code} isSavior={stack[3].isSavior} fontSize={10} />
+            )}
+        </svg>
+    );
+}
+
 interface VariantComparisonPageProps {
     mbtiCode: string;
     variants: TypeProfile[];
@@ -128,9 +261,19 @@ export function VariantComparisonPage({ mbtiCode, variants }: VariantComparisonP
                             <h3 className={styles.variantName}>{standardContent.name}</h3>
                         </div>
 
-                        {/* Character Placeholder */}
-                        <div className={styles.characterPlaceholder}>
-                            <div className={styles.characterIcon}>👤</div>
+                        {/* New Glossy Ball Matrix */}
+                        <div style={{ display: 'flex', justifyContent: 'center', margin: '1rem 0' }}>
+                            <IntrovertedBallMatrix
+                                stack={(() => {
+                                    const funcs = standardContent.functionStack.split('/').map(f => f.trim());
+                                    return [
+                                        { code: funcs[0] || 'Fi', isSavior: true },
+                                        { code: funcs[1] || 'Ne', isSavior: true },
+                                        { code: funcs[2] || 'Si', isSavior: false },
+                                        { code: funcs[3] || 'Te', isSavior: false },
+                                    ];
+                                })()}
+                            />
                         </div>
 
                         {/* Function Stack Bubbles */}
@@ -150,9 +293,19 @@ export function VariantComparisonPage({ mbtiCode, variants }: VariantComparisonP
                             <h3 className={styles.variantName}>{jumperContent.name}</h3>
                         </div>
 
-                        {/* Character Placeholder */}
-                        <div className={styles.characterPlaceholder}>
-                            <div className={styles.characterIcon}>👤</div>
+                        {/* New Glossy Ball Matrix */}
+                        <div style={{ display: 'flex', justifyContent: 'center', margin: '1rem 0' }}>
+                            <IntrovertedBallMatrix
+                                stack={(() => {
+                                    const funcs = jumperContent.functionStack.split('/').map(f => f.trim());
+                                    return [
+                                        { code: funcs[0] || 'Fi', isSavior: true },
+                                        { code: funcs[1] || 'Ne', isSavior: false },
+                                        { code: funcs[2] || 'Si', isSavior: true },
+                                        { code: funcs[3] || 'Te', isSavior: false },
+                                    ];
+                                })()}
+                            />
                         </div>
 
                         {/* Function Stack Bubbles */}
