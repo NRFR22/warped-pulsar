@@ -10,6 +10,7 @@ export default function BoardPage() {
     const [showGhosts, setShowGhosts] = useState(true);
     const [interactive, setInteractive] = useState(true);
     const [showBoard, setShowBoard] = useState(true);
+    const [compactEndpoints, setCompactEndpoints] = useState(false);
 
     // Get all available types (32 total - 16 types × 2 configs)
     const allTypes = useMemo(() => getAllTypeOptions(), []);
@@ -45,6 +46,7 @@ export default function BoardPage() {
                             showGhosts={showGhosts}
                             interactive={interactive}
                             showBoard={showBoard}
+                            compactEndpoints={compactEndpoints}
                         />
                     </div>
 
@@ -145,6 +147,18 @@ export default function BoardPage() {
                                 className={styles.checkbox}
                             />
                             <span>Show board boxes & labels</span>
+                        </label>
+                    </div>
+
+                    <div className={styles.controlGroup}>
+                        <label className={styles.toggleLabel}>
+                            <input
+                                type="checkbox"
+                                checked={compactEndpoints}
+                                onChange={(e) => setCompactEndpoints(e.target.checked)}
+                                className={styles.checkbox}
+                            />
+                            <span>Compact layout (move endpoints closer)</span>
                         </label>
                     </div>
 

@@ -17,6 +17,7 @@ export interface FunctionStackBoardProps {
     showGhosts?: boolean;           // draw dotted "alternate" positions (default: true)
     interactive?: boolean;          // click to toggle coins (default: true)
     showBoard?: boolean;            // show board boxes and axis labels (default: true)
+    compactEndpoints?: boolean;     // shrink and move hero/inferior closer to center (default: false)
 }
 
 // Board anchor points (SVG viewBox 0 0 300 300)
@@ -59,11 +60,25 @@ interface Position {
     y: number;
 }
 
+// Compact mode settings
+const ENDPOINT_INSET = 0.3; // 30% of distance toward center
+const HERO_RADIUS_COMPACT = 40 * 0.8;   // 32
+const INFERIOR_RADIUS_COMPACT = 20 * 0.9; // 18
+
+// Utility: move a point toward center along the line
+function insetTowardsCenter(p: Position, center: Position, inset: number): Position {
+    return {
+        x: p.x + inset * (center.x - p.x),
+        y: p.y + inset * (center.y - p.y),
+    };
+}
+
 export function FunctionStackBoard({
     stack,
     showGhosts = true,
     interactive = true,
     showBoard = true,
+    compactEndpoints = false,
 }: FunctionStackBoardProps) {
     // Find functions by ID
     const A = stack.find(f => f.id === 'A')!;
@@ -153,6 +168,29 @@ export function FunctionStackBoard({
         }
     }
 
+    // Apply compact mode transformation to A & D if enabled
+    if (compactEndpoints) {
+        // Calculate center of the A-D diagonal
+        const center: Position = {
+            x: (aActivePos.x + dActivePos.x) / 2,
+            y: (aActivePos.y + dActivePos.y) / 2,
+        };
+
+        // Move A and D inward toward center
+        aActivePos = insetTowardsCenter(aActivePos, center, ENDPOINT_INSET);
+        dActivePos = insetTowardsCenter(dActivePos, center, ENDPOINT_INSET);
+
+        // Also transform ghost positions
+        aGhostPos = insetTowardsCenter(aGhostPos, center, ENDPOINT_INSET);
+        dGhostPos = insetTowardsCenter(dGhostPos, center, ENDPOINT_INSET);
+    }
+
+    // Calculate radii (use compact variants when enabled)
+    const aRadius = compactEndpoints ? HERO_RADIUS_COMPACT : getRadius(A.index);
+    const dRadius = compactEndpoints ? INFERIOR_RADIUS_COMPACT : getRadius(D.index);
+    const bRadius = getRadius(B.index);
+    const cRadius = getRadius(C.index);
+
     // Handle clicks
     const handleOuterCoinClick = () => {
         if (interactive) {
@@ -235,7 +273,7 @@ export function FunctionStackBoard({
                     <circle
                         cx={aGhostPos.x}
                         cy={aGhostPos.y}
-                        r={getRadius(A.index)}
+                        r={aRadius}
                         fill="none"
                         stroke={getColor(A.code)}
                         strokeWidth={2}
@@ -261,7 +299,7 @@ export function FunctionStackBoard({
                     <circle
                         cx={dGhostPos.x}
                         cy={dGhostPos.y}
-                        r={getRadius(D.index)}
+                        r={dRadius}
                         fill="none"
                         stroke={getColor(D.code)}
                         strokeWidth={2}
@@ -287,7 +325,7 @@ export function FunctionStackBoard({
                     <circle
                         cx={bGhostPos.x}
                         cy={bGhostPos.y}
-                        r={getRadius(B.index)}
+                        r={bRadius}
                         fill="none"
                         stroke={getColor(B.code)}
                         strokeWidth={2}
@@ -313,7 +351,7 @@ export function FunctionStackBoard({
                     <circle
                         cx={cGhostPos.x}
                         cy={cGhostPos.y}
-                        r={getRadius(C.index)}
+                        r={cRadius}
                         fill="none"
                         stroke={getColor(C.code)}
                         strokeWidth={2}
@@ -342,7 +380,7 @@ export function FunctionStackBoard({
             <circle
                 cx={aActivePos.x}
                 cy={aActivePos.y}
-                r={getRadius(A.index)}
+                r={aRadius}
                 fill={getColor(A.code)}
                 opacity={0.95}
                 onClick={handleOuterCoinClick}
@@ -351,7 +389,7 @@ export function FunctionStackBoard({
             <circle
                 cx={aActivePos.x}
                 cy={aActivePos.y}
-                r={getRadius(A.index) - 2}
+                r={aRadius - 2}
                 fill="none"
                 stroke="white"
                 strokeWidth={2}
@@ -375,7 +413,7 @@ export function FunctionStackBoard({
             <circle
                 cx={bActivePos.x}
                 cy={bActivePos.y}
-                r={getRadius(B.index)}
+                r={bRadius}
                 fill={B.isSavior ? getColor(B.code) : '#6b7280'}
                 opacity={0.95}
                 onClick={handleMiddleCoinClick}
@@ -384,7 +422,7 @@ export function FunctionStackBoard({
             <circle
                 cx={bActivePos.x}
                 cy={bActivePos.y}
-                r={getRadius(B.index) - 2}
+                r={bRadius - 2}
                 fill="none"
                 stroke="white"
                 strokeWidth={1.5}
@@ -408,7 +446,7 @@ export function FunctionStackBoard({
             <circle
                 cx={cActivePos.x}
                 cy={cActivePos.y}
-                r={getRadius(C.index)}
+                r={cRadius}
                 fill={C.isSavior ? getColor(C.code) : '#6b7280'}
                 opacity={0.95}
                 onClick={handleMiddleCoinClick}
@@ -417,7 +455,7 @@ export function FunctionStackBoard({
             <circle
                 cx={cActivePos.x}
                 cy={cActivePos.y}
-                r={getRadius(C.index) - 2}
+                r={cRadius - 2}
                 fill="none"
                 stroke="white"
                 strokeWidth={1.5}
@@ -441,7 +479,7 @@ export function FunctionStackBoard({
             <circle
                 cx={dActivePos.x}
                 cy={dActivePos.y}
-                r={getRadius(D.index)}
+                r={dRadius}
                 fill="#6b7280"
                 opacity={0.95}
                 onClick={handleOuterCoinClick}
@@ -450,7 +488,7 @@ export function FunctionStackBoard({
             <circle
                 cx={dActivePos.x}
                 cy={dActivePos.y}
-                r={getRadius(D.index) - 2}
+                r={dRadius - 2}
                 fill="none"
                 stroke="white"
                 strokeWidth={1}
