@@ -18,6 +18,8 @@ export interface FunctionStackBoardProps {
     interactive?: boolean;          // click to toggle coins (default: true)
     showBoard?: boolean;            // show board boxes and axis labels (default: true)
     compactEndpoints?: boolean;     // shrink and move hero/inferior closer to center (default: false)
+    showMainAxis?: boolean;         // show A-D vertical axis (teach mode)
+    showMiddleAxis?: boolean;       // show B-C horizontal axis (teach mode)
 }
 
 // Board anchor points (SVG viewBox 0 0 300 300)
@@ -81,40 +83,62 @@ function insetTowardsCenter(p: Position, center: Position, inset: number): Posit
 
 export function FunctionStackBoardTest({
     stack,
-    showGhosts = true,
-    interactive = true,
-    showBoard = true,
-    compactEndpoints = false,
+    showMainAxis = true,
+    showMiddleAxis = true,
 }: FunctionStackBoardProps) {
     // Find functions by ID
     const A = stack.find(f => f.id === 'A')!;
+    const B = stack.find(f => f.id === 'B')!;
+    const C = stack.find(f => f.id === 'C')!;
     const D = stack.find(f => f.id === 'D')!;
 
-    // Simple vertical positioning: A at top (north), D at bottom (south)
-    const aActivePos: Position = { x: 150, y: 60 };  // North
-    const dActivePos: Position = { x: 150, y: 240 }; // South
+    // Positioning: A-D vertical (north-south), B-C horizontal (west-east)
+    const aActivePos: Position = { x: 150, y: 60 };   // North
+    const dActivePos: Position = { x: 150, y: 240 };  // South
+    const bActivePos: Position = { x: 90, y: 150 };   // West
+    const cActivePos: Position = { x: 210, y: 150 };  // East
 
     // Calculate radii
-    const aRadius = compactEndpoints ? HERO_RADIUS_COMPACT : getRadius(A.index);
-    const dRadius = compactEndpoints ? INFERIOR_RADIUS_COMPACT : getRadius(D.index);
+    const aRadius = getRadius(A.index);
+    const bRadius = getRadius(B.index);
+    const cRadius = getRadius(C.index);
+    const dRadius = getRadius(D.index);
 
-    // Calculate font sizes
-    const aFontSize = compactEndpoints ? A_FONTSIZE_COMPACT : 20;
-    const dFontSize = compactEndpoints ? D_FONTSIZE_COMPACT : 14;
+    // Font sizes
+    const aFontSize = 20;
+    const bFontSize = 16;
+    const cFontSize = 16;
+    const dFontSize = 14;
 
     return (
         <svg viewBox="0 0 300 300" width="100%" height="100%" style={{ maxWidth: '500px', margin: '0 auto', display: 'block' }}>
-            {/* Vertical axis line from A (north) to D (south) */}
-            <line
-                x1={aActivePos.x}
-                y1={aActivePos.y}
-                x2={dActivePos.x}
-                y2={dActivePos.y}
-                stroke="#94a3b8"
-                strokeWidth={2}
-                strokeDasharray="6,6"
-                opacity={0.5}
-            />
+            {/* Main axis: Vertical line from A (north) to D (south) */}
+            {showMainAxis && (
+                <line
+                    x1={aActivePos.x}
+                    y1={aActivePos.y}
+                    x2={dActivePos.x}
+                    y2={dActivePos.y}
+                    stroke="#94a3b8"
+                    strokeWidth={2}
+                    strokeDasharray="6,6"
+                    opacity={0.5}
+                />
+            )}
+
+            {/* Middle axis: Horizontal line from B (west) to C (east) */}
+            {showMiddleAxis && (
+                <line
+                    x1={bActivePos.x}
+                    y1={bActivePos.y}
+                    x2={cActivePos.x}
+                    y2={cActivePos.y}
+                    stroke="#94a3b8"
+                    strokeWidth={1.5}
+                    strokeDasharray="4,4"
+                    opacity={0.5}
+                />
+            )}
 
             {/* A - Hero function (North) */}
             <circle
@@ -176,6 +200,68 @@ export function FunctionStackBoardTest({
                 pointerEvents="none"
             >
                 {D.code}
+            </text>
+
+            {/* B - Second function (West) */}
+            <circle
+                cx={bActivePos.x}
+                cy={bActivePos.y}
+                r={bRadius}
+                fill={B.isSavior ? getColor(B.code) : '#6b7280'}
+                opacity={0.95}
+            />
+            <circle
+                cx={bActivePos.x}
+                cy={bActivePos.y}
+                r={bRadius - 2}
+                fill="none"
+                stroke="white"
+                strokeWidth={1.5}
+                opacity={0.3}
+                pointerEvents="none"
+            />
+            <text
+                x={bActivePos.x}
+                y={bActivePos.y}
+                textAnchor="middle"
+                dominantBaseline="central"
+                fontSize={bFontSize}
+                fontWeight="600"
+                fill="white"
+                pointerEvents="none"
+            >
+                {B.code}
+            </text>
+
+            {/* C - Third function (East) */}
+            <circle
+                cx={cActivePos.x}
+                cy={cActivePos.y}
+                r={cRadius}
+                fill={C.isSavior ? getColor(C.code) : '#6b7280'}
+                opacity={0.95}
+            />
+            <circle
+                cx={cActivePos.x}
+                cy={cActivePos.y}
+                r={cRadius - 2}
+                fill="none"
+                stroke="white"
+                strokeWidth={1.5}
+                opacity={0.3}
+                pointerEvents="none"
+            />
+            <text
+                x={cActivePos.x}
+                y={cActivePos.y}
+                textAnchor="middle"
+                dominantBaseline="central"
+                fontSize={cFontSize}
+                fontWeight="600"
+                fill="white"
+                pointerEvents="none"
+            >
+                {C.code}
             </text>
         </svg>
     );

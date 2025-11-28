@@ -7,12 +7,16 @@ import { getAllTypeOptions, getTypeOption } from '@/lib/typeDatabase';
 import styles from './board.module.css';
 
 export default function BoardPage() {
-    const [activeTab, setActiveTab] = useState<'main' | 'test'>('main');
+    const [activeTab, setActiveTab] = useState<'main' | 'teach'>('main');
     const [selectedType, setSelectedType] = useState('INFP-standard');
     const [showGhosts, setShowGhosts] = useState(false);
     const [interactive, setInteractive] = useState(false);
     const [showBoard, setShowBoard] = useState(false);
     const [compactEndpoints, setCompactEndpoints] = useState(true);
+
+    // Teach tab specific controls
+    const [showMainAxis, setShowMainAxis] = useState(true);
+    const [showMiddleAxis, setShowMiddleAxis] = useState(true);
 
     // Get all available types (32 total - 16 types × 2 configs)
     const allTypes = useMemo(() => getAllTypeOptions(), []);
@@ -41,10 +45,10 @@ export default function BoardPage() {
                         Main bubbles
                     </button>
                     <button
-                        className={`${styles.tab} ${activeTab === 'test' ? styles.tabActive : ''}`}
-                        onClick={() => setActiveTab('test')}
+                        className={`${styles.tab} ${activeTab === 'teach' ? styles.tabActive : ''}`}
+                        onClick={() => setActiveTab('teach')}
                     >
-                        Test
+                        Teach
                     </button>
                 </div>
             </div>
@@ -71,10 +75,8 @@ export default function BoardPage() {
                             <FunctionStackBoardTest
                                 key={selectedType}
                                 stack={currentType.stack}
-                                showGhosts={showGhosts}
-                                interactive={interactive}
-                                showBoard={showBoard}
-                                compactEndpoints={compactEndpoints}
+                                showMainAxis={showMainAxis}
+                                showMiddleAxis={showMiddleAxis}
                             />
                         )}
                     </div>
@@ -143,53 +145,83 @@ export default function BoardPage() {
                         </select>
                     </div>
 
-                    <div className={styles.controlGroup}>
-                        <label className={styles.toggleLabel}>
-                            <input
-                                type="checkbox"
-                                checked={showGhosts}
-                                onChange={(e) => setShowGhosts(e.target.checked)}
-                                className={styles.checkbox}
-                            />
-                            <span>Show ghost positions</span>
-                        </label>
-                    </div>
+                    {activeTab === 'main' ? (
+                        <>
+                            <div className={styles.controlGroup}>
+                                <label className={styles.toggleLabel}>
+                                    <input
+                                        type="checkbox"
+                                        checked={showGhosts}
+                                        onChange={(e) => setShowGhosts(e.target.checked)}
+                                        className={styles.checkbox}
+                                    />
+                                    <span>Show ghost positions</span>
+                                </label>
+                            </div>
 
-                    <div className={styles.controlGroup}>
-                        <label className={styles.toggleLabel}>
-                            <input
-                                type="checkbox"
-                                checked={interactive}
-                                onChange={(e) => setInteractive(e.target.checked)}
-                                className={styles.checkbox}
-                            />
-                            <span>Enable coin flipping (interactive)</span>
-                        </label>
-                    </div>
+                            <div className={styles.controlGroup}>
+                                <label className={styles.toggleLabel}>
+                                    <input
+                                        type="checkbox"
+                                        checked={interactive}
+                                        onChange={(e) => setInteractive(e.target.checked)}
+                                        className={styles.checkbox}
+                                    />
+                                    <span>Enable coin flipping (interactive)</span>
+                                </label>
+                            </div>
 
-                    <div className={styles.controlGroup}>
-                        <label className={styles.toggleLabel}>
-                            <input
-                                type="checkbox"
-                                checked={showBoard}
-                                onChange={(e) => setShowBoard(e.target.checked)}
-                                className={styles.checkbox}
-                            />
-                            <span>Show board boxes & labels</span>
-                        </label>
-                    </div>
+                            <div className={styles.controlGroup}>
+                                <label className={styles.toggleLabel}>
+                                    <input
+                                        type="checkbox"
+                                        checked={showBoard}
+                                        onChange={(e) => setShowBoard(e.target.checked)}
+                                        className={styles.checkbox}
+                                    />
+                                    <span>Show board boxes & labels</span>
+                                </label>
+                            </div>
 
-                    <div className={styles.controlGroup}>
-                        <label className={styles.toggleLabel}>
-                            <input
-                                type="checkbox"
-                                checked={compactEndpoints}
-                                onChange={(e) => setCompactEndpoints(e.target.checked)}
-                                className={styles.checkbox}
-                            />
-                            <span>Compact layout (move endpoints closer)</span>
-                        </label>
-                    </div>
+                            <div className={styles.controlGroup}>
+                                <label className={styles.toggleLabel}>
+                                    <input
+                                        type="checkbox"
+                                        checked={compactEndpoints}
+                                        onChange={(e) => setCompactEndpoints(e.target.checked)}
+                                        className={styles.checkbox}
+                                    />
+                                    <span>Compact layout (move endpoints closer)</span>
+                                </label>
+                            </div>
+                        </>
+                    ) : (
+                        <>
+                            <div className={styles.controlGroup}>
+                                <label className={styles.toggleLabel}>
+                                    <input
+                                        type="checkbox"
+                                        checked={showMainAxis}
+                                        onChange={(e) => setShowMainAxis(e.target.checked)}
+                                        className={styles.checkbox}
+                                    />
+                                    <span>Show main axis (A-D vertical)</span>
+                                </label>
+                            </div>
+
+                            <div className={styles.controlGroup}>
+                                <label className={styles.toggleLabel}>
+                                    <input
+                                        type="checkbox"
+                                        checked={showMiddleAxis}
+                                        onChange={(e) => setShowMiddleAxis(e.target.checked)}
+                                        className={styles.checkbox}
+                                    />
+                                    <span>Show middle axis (B-C horizontal)</span>
+                                </label>
+                            </div>
+                        </>
+                    )}
 
                     <div className={styles.legend}>
                         <h3 className={styles.legendTitle}>How it works</h3>
