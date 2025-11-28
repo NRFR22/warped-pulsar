@@ -149,9 +149,9 @@ export default function BoardNewPage() {
                     </label>
                 </div>
 
-                <div style={{ display: 'flex', gap: '2rem', justifyContent: 'center' }}>
+                <div style={{ display: 'flex', gap: '2rem', justifyContent: 'center', marginTop: '2rem' }}>
                     {/* First ball matrix (1-4) */}
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 205 189" width="205" height="189">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="9.3 8.6 186.4 171.8" width="225" height="208">
                         {/* Line 1-4 (grey) */}
                         {showLine1_4 && (
                             <line x1="110.6" y1="96.0" x2="75.5" y2="131.2"
@@ -179,7 +179,7 @@ export default function BoardNewPage() {
                     </svg>
 
                     {/* Second ball matrix (5-8) */}
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 203 178" width="203" height="178">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="9.3 8.1 184.5 161.8" width="223" height="196">
                         {/* Line 5-8 (grey, two segments) */}
                         {showLine5_8 && (
                             <>
