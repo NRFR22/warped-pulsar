@@ -1,11 +1,12 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { Button } from '@/components/ui/Button';
 import { TypeFunctionStackBoard } from '@/components/types/TypeFunctionStackBoard';
-import { extractEnhancedContent, generateKeyDifferences, getRelatedTypes, type ExtractedContent, type KeyDifference } from '@/lib/extractVariantContent';
+import { FunctionStackBoard } from '@/components/FunctionStackBoard';
+import { getAllTypeOptions, getTypeOption } from '@/lib/typeDatabase';
+import { extractEnhancedContent, generateKeyDifferences, getRelatedTypes, type ExtractedContent } from '@/lib/extractVariantContent';
 import { type TypeProfile } from '@/data/types';
 import styles from './variant-comparison.module.css';
 
@@ -15,8 +16,14 @@ interface VariantComparisonPageProps {
 }
 
 export function VariantComparisonPage({ mbtiCode, variants }: VariantComparisonPageProps) {
-    const [quizAnswer, setQuizAnswer] = useState<string | null>(null);
-    const [activeTab, setActiveTab] = useState<'standard' | 'jumper'>('standard');
+    // Board section state
+    const [selectedType, setSelectedType] = useState<string | null>(null);
+
+    // Get all available types (32 total - 16 types × 2 configs)
+    const allTypes = useMemo(() => getAllTypeOptions(), []);
+
+    // Get current type configuration - default to mbtiCode-standard
+    const currentType = getTypeOption(selectedType || `${mbtiCode}-standard`);
 
     // Extract content for both variants
     const standardVariant = variants.find(v => {
