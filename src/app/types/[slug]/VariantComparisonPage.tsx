@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/Button';
-import { FunctionStackBubbles } from '@/components/FunctionStackBubbles';
+import { TypeFunctionStackBoard } from '@/components/types/TypeFunctionStackBoard';
 import { extractEnhancedContent, generateKeyDifferences, getRelatedTypes, type ExtractedContent, type KeyDifference } from '@/lib/extractVariantContent';
 import { type TypeProfile } from '@/data/types';
 import styles from './variant-comparison.module.css';
@@ -124,10 +124,9 @@ export function VariantComparisonPage({ mbtiCode, variants }: VariantComparisonP
 
                         {/* Function Stack Bubbles */}
                         <div className={styles.functionStackVisual}>
-                            <FunctionStackBubbles
+                            <TypeFunctionStackBoard
                                 functionStack={standardContent.functionStack}
                                 variant="standard"
-                                showAll={true}
                                 size="large"
                             />
                         </div>
@@ -147,10 +146,9 @@ export function VariantComparisonPage({ mbtiCode, variants }: VariantComparisonP
 
                         {/* Function Stack Bubbles */}
                         <div className={styles.functionStackVisual}>
-                            <FunctionStackBubbles
+                            <TypeFunctionStackBoard
                                 functionStack={jumperContent.functionStack}
                                 variant="jumper"
-                                showAll={true}
                                 size="large"
                             />
                         </div>
