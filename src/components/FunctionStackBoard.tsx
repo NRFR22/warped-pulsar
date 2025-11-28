@@ -61,7 +61,8 @@ interface Position {
 }
 
 // Compact mode settings
-const ENDPOINT_INSET = 0.6; // 60% of distance toward center (A & D)
+const A_INSET = 0.6; // 60% of distance toward center (A ball)
+const D_INSET = 0.6; // 60% of distance toward center (D ball)
 const MIDDLE_INSET = 0.2; // 20% of distance toward center (B & C)
 const HERO_RADIUS_COMPACT = 40 * 0.8;   // 32
 const INFERIOR_RADIUS_COMPACT = 20 * 0.6; // 12 (40% smaller)
@@ -178,13 +179,13 @@ export function FunctionStackBoard({
             y: (aActivePos.y + dActivePos.y) / 2,
         };
 
-        // Move A and D inward toward center
-        aActivePos = insetTowardsCenter(aActivePos, centerAD, ENDPOINT_INSET);
-        dActivePos = insetTowardsCenter(dActivePos, centerAD, ENDPOINT_INSET);
+        // Move A and D inward toward center (independently)
+        aActivePos = insetTowardsCenter(aActivePos, centerAD, A_INSET);
+        dActivePos = insetTowardsCenter(dActivePos, centerAD, D_INSET);
 
         // Also transform ghost positions
-        aGhostPos = insetTowardsCenter(aGhostPos, centerAD, ENDPOINT_INSET);
-        dGhostPos = insetTowardsCenter(dGhostPos, centerAD, ENDPOINT_INSET);
+        aGhostPos = insetTowardsCenter(aGhostPos, centerAD, A_INSET);
+        dGhostPos = insetTowardsCenter(dGhostPos, centerAD, D_INSET);
 
         // Calculate center of the B-C diagonal
         const centerBC: Position = {
