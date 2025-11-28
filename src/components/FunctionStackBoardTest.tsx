@@ -280,6 +280,16 @@ export function FunctionStackBoardTest({
                         r={aRadius}
                         fill={`url(#gradient-${aDisplay.label.charAt(0)})`}
                         filter="url(#shadow-large)"
+                        style={{
+                            cursor: 'default',
+                            transition: 'all 0.3s ease',
+                        }}
+                        onMouseEnter={(e) => {
+                            e.currentTarget.setAttribute('r', String(aRadius * 1.15));
+                        }}
+                        onMouseLeave={(e) => {
+                            e.currentTarget.setAttribute('r', String(aRadius));
+                        }}
                     />
                     {/* Subtle border for definition */}
                     <circle
@@ -326,6 +336,16 @@ export function FunctionStackBoardTest({
                         r={dRadius}
                         fill="url(#gradient-grey)"
                         filter="url(#shadow-small)"
+                        style={{
+                            cursor: 'default',
+                            transition: 'all 0.3s ease',
+                        }}
+                        onMouseEnter={(e) => {
+                            e.currentTarget.setAttribute('r', String(dRadius * 1.15));
+                        }}
+                        onMouseLeave={(e) => {
+                            e.currentTarget.setAttribute('r', String(dRadius));
+                        }}
                     />
                     {/* Subtle border for definition */}
                     <circle
@@ -372,6 +392,16 @@ export function FunctionStackBoardTest({
                         r={bRadius}
                         fill={B.isSavior ? `url(#gradient-${B.code.charAt(0)})` : 'url(#gradient-grey)'}
                         filter="url(#shadow-medium)"
+                        style={{
+                            cursor: 'default',
+                            transition: 'all 0.3s ease',
+                        }}
+                        onMouseEnter={(e) => {
+                            e.currentTarget.setAttribute('r', String(bRadius * 1.15));
+                        }}
+                        onMouseLeave={(e) => {
+                            e.currentTarget.setAttribute('r', String(bRadius));
+                        }}
                     />
                     {/* Subtle border for definition */}
                     <circle
@@ -418,6 +448,16 @@ export function FunctionStackBoardTest({
                         r={cRadius}
                         fill={C.isSavior ? `url(#gradient-${C.code.charAt(0)})` : 'url(#gradient-grey)'}
                         filter="url(#shadow-medium)"
+                        style={{
+                            cursor: 'default',
+                            transition: 'all 0.3s ease',
+                        }}
+                        onMouseEnter={(e) => {
+                            e.currentTarget.setAttribute('r', String(cRadius * 1.15));
+                        }}
+                        onMouseLeave={(e) => {
+                            e.currentTarget.setAttribute('r', String(cRadius));
+                        }}
                     />
                     {/* Subtle border for definition */}
                     <circle
@@ -476,6 +516,16 @@ export function FunctionStackBoardTest({
                         r={aRadius}
                         fill={`url(#gradient-${aSecondaryDisplay.label.charAt(0)})`}
                         filter="url(#shadow-large)"
+                        style={{
+                            cursor: 'default',
+                            transition: 'all 0.3s ease',
+                        }}
+                        onMouseEnter={(e) => {
+                            e.currentTarget.setAttribute('r', String(aRadius * 1.15));
+                        }}
+                        onMouseLeave={(e) => {
+                            e.currentTarget.setAttribute('r', String(aRadius));
+                        }}
                     />
                     <circle
                         cx={aSecondaryPos.x}
@@ -514,6 +564,16 @@ export function FunctionStackBoardTest({
                         r={dRadius}
                         fill="url(#gradient-grey)"
                         filter="url(#shadow-small)"
+                        style={{
+                            cursor: 'default',
+                            transition: 'all 0.3s ease',
+                        }}
+                        onMouseEnter={(e) => {
+                            e.currentTarget.setAttribute('r', String(dRadius * 1.15));
+                        }}
+                        onMouseLeave={(e) => {
+                            e.currentTarget.setAttribute('r', String(dRadius));
+                        }}
                     />
                     <circle
                         cx={dSecondaryPos.x}

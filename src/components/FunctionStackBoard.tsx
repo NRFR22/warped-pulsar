@@ -489,7 +489,16 @@ export function FunctionStackBoard({
                 fill={`url(#gradient-main-${A.code.charAt(0)})`}
                 filter="url(#shadow-main-large)"
                 onClick={handleOuterCoinClick}
-                style={{ cursor: interactive ? 'pointer' : 'default' }}
+                style={{
+                    cursor: interactive ? 'pointer' : 'default',
+                    transition: 'all 0.3s ease',
+                }}
+                onMouseEnter={(e) => {
+                    e.currentTarget.setAttribute('r', String(aRadius * 1.15));
+                }}
+                onMouseLeave={(e) => {
+                    e.currentTarget.setAttribute('r', String(aRadius));
+                }}
             />
             <circle
                 cx={aActivePos.x}
@@ -529,7 +538,16 @@ export function FunctionStackBoard({
                 fill={B.isSavior ? `url(#gradient-main-${B.code.charAt(0)})` : 'url(#gradient-main-grey)'}
                 filter="url(#shadow-main-medium)"
                 onClick={handleMiddleCoinClick}
-                style={{ cursor: interactive ? 'pointer' : 'default' }}
+                style={{
+                    cursor: interactive ? 'pointer' : 'default',
+                    transition: 'all 0.3s ease',
+                }}
+                onMouseEnter={(e) => {
+                    e.currentTarget.setAttribute('r', String(bRadius * 1.15));
+                }}
+                onMouseLeave={(e) => {
+                    e.currentTarget.setAttribute('r', String(bRadius));
+                }}
             />
             <circle
                 cx={bActivePos.x}
@@ -569,7 +587,16 @@ export function FunctionStackBoard({
                 fill={C.isSavior ? `url(#gradient-main-${C.code.charAt(0)})` : 'url(#gradient-main-grey)'}
                 filter="url(#shadow-main-medium)"
                 onClick={handleMiddleCoinClick}
-                style={{ cursor: interactive ? 'pointer' : 'default' }}
+                style={{
+                    cursor: interactive ? 'pointer' : 'default',
+                    transition: 'all 0.3s ease',
+                }}
+                onMouseEnter={(e) => {
+                    e.currentTarget.setAttribute('r', String(cRadius * 1.15));
+                }}
+                onMouseLeave={(e) => {
+                    e.currentTarget.setAttribute('r', String(cRadius));
+                }}
             />
             <circle
                 cx={cActivePos.x}
@@ -609,7 +636,16 @@ export function FunctionStackBoard({
                 fill="url(#gradient-main-grey)"
                 filter="url(#shadow-main-small)"
                 onClick={handleOuterCoinClick}
-                style={{ cursor: interactive ? 'pointer' : 'default' }}
+                style={{
+                    cursor: interactive ? 'pointer' : 'default',
+                    transition: 'all 0.3s ease',
+                }}
+                onMouseEnter={(e) => {
+                    e.currentTarget.setAttribute('r', String(dRadius * 1.15));
+                }}
+                onMouseLeave={(e) => {
+                    e.currentTarget.setAttribute('r', String(dRadius));
+                }}
             />
             <circle
                 cx={dActivePos.x}
