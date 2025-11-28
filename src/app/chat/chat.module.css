@@ -1,31 +1,39 @@
 .container {
     display: flex;
-    height: calc(100vh - 80px);
-    /* Subtract header height */
-    max-width: 1400px;
+    flex-direction: column;
+    min-height: calc(100vh - 80px);
+    max-width: 900px;
     margin: 0 auto;
     overflow: hidden;
+    gap: 1.5rem;
+    padding: 1.5rem 1rem 2rem;
 }
 
-.chatColumn {
+.progressRow {
+    width: 100%;
+    background-color: var(--color-secondary);
+    padding: 1.5rem;
+    border-radius: 1.5rem;
+    box-shadow: 0 25px 60px -40px rgba(0, 0, 0, 0.4);
+}
+
+.chatRow {
     flex: 1;
     display: flex;
     flex-direction: column;
-    border-right: 1px solid var(--color-border);
     background-color: var(--color-background);
-    position: relative;
+    border: 1px solid var(--color-border);
+    border-radius: 1.5rem;
+    overflow: hidden;
 }
 
-.progressColumn {
-    width: 350px;
-    background-color: var(--color-secondary);
-    padding: 1.5rem;
-    overflow-y: auto;
-}
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+        gap: 1rem;
+    }
 
-@media (max-width: 1024px) {
-    .progressColumn {
-        display: none;
-        /* For MVP mobile, hide progress or move it */
+    .progressRow {
+        padding: 1rem;
     }
 }
