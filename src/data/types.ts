@@ -1,6 +1,9 @@
+import { FuncCode } from '@/components/FunctionStackBoard';
+
 export interface TypeProfile {
     code: string;
     mbti: string;
+    functionStack: FuncCode[];  // Pre-computed 4-function stack, e.g., ["Fe", "Ni", "Se", "Ti"]
     name: string;
     family: string;
     familyId: string;
@@ -13,6 +16,7 @@ export const typesData: TypeProfile[] = [
     {
         code: "Fe/Ne",
         mbti: "ESFJ",
+        functionStack: ["Fe", "Si", "Ne", "Ti"],
         name: "The Illuminator",
         family: "Fe-types",
         familyId: "fe",
@@ -39,6 +43,7 @@ MBTI: ESFJ`
     {
         code: "Fe/Ni",
         mbti: "ENFJ",
+        functionStack: ["Fe", "Ni", "Se", "Ti"],
         name: "The Oracle",
         family: "Fe-types",
         familyId: "fe",
@@ -104,6 +109,7 @@ MBTI: ENFJ
     {
         code: "Fe/Se",
         mbti: "ENFJ",
+        functionStack: ["Fe", "Ni", "Se", "Ti"],
         name: "The Maverick",
         family: "Fe-types",
         familyId: "fe",
@@ -169,6 +175,7 @@ MBTI: ENFJ
     {
         code: "Fe/Si",
         mbti: "ESFJ",
+        functionStack: ["Fe", "Si", "Ne", "Ti"],
         name: "The Guardian",
         family: "Fe-types",
         familyId: "fe",
@@ -234,6 +241,7 @@ MBTI: ESFJ
     {
         code: "Fi/Ne",
         mbti: "INFP",
+        functionStack: ["Fi", "Ne", "Si", "Te"],
         name: "The Dreamweaver",
         family: "Fi-types",
         familyId: "fi",
@@ -299,6 +307,7 @@ MBTI: INFP
     {
         code: "Fi/Ni",
         mbti: "ISFP",
+        functionStack: ["Fi", "Se", "Ni", "Te"],
         name: "The Forcebringer",
         family: "Fi-types",
         familyId: "fi",
@@ -364,6 +373,7 @@ MBTI: ISFP
     {
         code: "Fi/Se",
         mbti: "ISFP",
+        functionStack: ["Fi", "Se", "Ni", "Te"],
         name: "The Shapeshifter",
         family: "Fi-types",
         familyId: "fi",
@@ -431,6 +441,7 @@ MBTI: ISFP
     {
         code: "Fi/Si",
         mbti: "INFP",
+        functionStack: ["Fi", "Ne", "Si", "Te"],
         name: "The Charmist",
         family: "Fi-types",
         familyId: "fi",
@@ -497,6 +508,7 @@ MBTI: INFP`
     {
         code: "Ne/Fe",
         mbti: "ENTP",
+        functionStack: ["Ne", "Ti", "Fe", "Si"],
         name: "The Visionary",
         family: "Ne-types",
         familyId: "ne",
@@ -564,6 +576,7 @@ MBTI: ENTP
     {
         code: "Ne/Fi",
         mbti: "ENFP",
+        functionStack: ["Ne", "Fi", "Te", "Si"],
         name: "The Eccentricist",
         family: "Ne-types",
         familyId: "ne",
@@ -631,6 +644,7 @@ MBTI: ENFP
     {
         code: "Ne/Te",
         mbti: "ENFP",
+        functionStack: ["Ne", "Fi", "Te", "Si"],
         name: "The Storykeeper",
         family: "Ne-types",
         familyId: "ne",
@@ -698,6 +712,7 @@ MBTI: ENFP
     {
         code: "Ne/Ti",
         mbti: "ENTP",
+        functionStack: ["Ne", "Ti", "Fe", "Si"],
         name: "The Intellector",
         family: "Ne-types",
         familyId: "ne",
@@ -765,6 +780,7 @@ MBTI: ENTP
     {
         code: "Ni/Fe",
         mbti: "INFJ",
+        functionStack: ["Ni", "Fe", "Ti", "Se"],
         name: "The Influencer",
         family: "Ni-types",
         familyId: "ni",
@@ -830,6 +846,7 @@ MBTI: INFJ
     {
         code: "Ni/Fi",
         mbti: "INTJ",
+        functionStack: ["Ni", "Te", "Fi", "Se"],
         name: "The Iconoclast",
         family: "Ni-types",
         familyId: "ni",
@@ -901,6 +918,7 @@ MBTI: INTJ
     {
         code: "Ni/Te",
         mbti: "INTJ",
+        functionStack: ["Ni", "Te", "Fi", "Se"],
         name: "The Strategist",
         family: "Ni-types",
         familyId: "ni",
@@ -971,6 +989,7 @@ MBTI: INTJ
     {
         code: "Ni/Ti",
         mbti: "INFJ",
+        functionStack: ["Ni", "Fe", "Ti", "Se"],
         name: "The Provocateur",
         family: "Ni-types",
         familyId: "ni",
@@ -1039,6 +1058,7 @@ MBTI: INFJ
     {
         code: "Se/Fe",
         mbti: "ESTP",
+        functionStack: ["Se", "Ti", "Fe", "Ni"],
         name: "The Performer",
         family: "Se-types",
         familyId: "se",
@@ -1106,6 +1126,7 @@ MBTI: ESTP
     {
         code: "Se/Fi",
         mbti: "ESFP",
+        functionStack: ["Se", "Fi", "Te", "Ni"],
         name: "The Celebrant",
         family: "Se-types",
         familyId: "se",
@@ -1178,6 +1199,7 @@ MBTI: ESFP
     {
         code: "Se/Te",
         mbti: "ESFP",
+        functionStack: ["Se", "Fi", "Te", "Ni"],
         name: "The Enterpriser",
         family: "Se-types",
         familyId: "se",
@@ -1243,6 +1265,7 @@ MBTI: ESFP
     {
         code: "Se/Ti",
         mbti: "ESTP",
+        functionStack: ["Se", "Ti", "Fe", "Ni"],
         name: "The Powerhouse",
         family: "Se-types",
         familyId: "se",
@@ -1316,6 +1339,7 @@ MBTI: ESTP
     {
         code: "Si/Fe",
         mbti: "ISFJ",
+        functionStack: ["Si", "Fe", "Ti", "Ne"],
         name: "The Humanitarian",
         family: "Si-types",
         familyId: "si",
@@ -1379,6 +1403,7 @@ MBTI: ISFJ
     {
         code: "Si/Fi",
         mbti: "ISTJ",
+        functionStack: ["Si", "Te", "Fi", "Ne"],
         name: "The Executor",
         family: "Si-types",
         familyId: "si",
@@ -1444,6 +1469,7 @@ MBTI: ISTJ
     {
         code: "Si/Te",
         mbti: "ISTJ",
+        functionStack: ["Si", "Te", "Fi", "Ne"],
         name: "The Guardian",
         family: "Si-types",
         familyId: "si",
@@ -1518,6 +1544,7 @@ MBTI: ISTJ
     {
         code: "Si/Ti",
         mbti: "ISFJ",
+        functionStack: ["Si", "Fe", "Ti", "Ne"],
         name: "The Custodian",
         family: "Si-types",
         familyId: "si",
@@ -1573,6 +1600,7 @@ MBTI: ISFJ
     {
         code: "Te/Ne",
         mbti: "ESTJ",
+        functionStack: ["Te", "Si", "Ne", "Fi"],
         name: "The Commander",
         family: "Te-types",
         familyId: "te",
@@ -1632,6 +1660,7 @@ MBTI: ESTJ
     {
         code: "Te/Ni",
         mbti: "ENTJ",
+        functionStack: ["Te", "Ni", "Se", "Fi"],
         name: "The Crusader",
         family: "Te-types",
         familyId: "te",
@@ -1705,6 +1734,7 @@ MBTI: ENTJ
     {
         code: "Te/Se",
         mbti: "ENTJ",
+        functionStack: ["Te", "Ni", "Se", "Fi"],
         name: "The Starmaker",
         family: "Te-types",
         familyId: "te",
@@ -1783,6 +1813,7 @@ MBTI: ENTJ
     {
         code: "Te/Si",
         mbti: "ESTJ",
+        functionStack: ["Te", "Si", "Ne", "Fi"],
         name: "The Authority",
         family: "Te-types",
         familyId: "te",
@@ -1848,6 +1879,7 @@ MBTI: ESTJ
     {
         code: "Ti/Ne",
         mbti: "INTP",
+        functionStack: ["Ti", "Ne", "Si", "Fe"],
         name: "The Sage",
         family: "Ti-types",
         familyId: "ti",
@@ -1909,6 +1941,7 @@ MBTI: INTP`
     {
         code: "Ti/Ni",
         mbti: "ISTP",
+        functionStack: ["Ti", "Se", "Ni", "Fe"],
         name: "The Master",
         family: "Ti-types",
         familyId: "ti",
@@ -1966,6 +1999,7 @@ MBTI: ISTP`
     {
         code: "Ti/Se",
         mbti: "ISTP",
+        functionStack: ["Ti", "Se", "Ni", "Fe"],
         name: "The Titan",
         family: "Ti-types",
         familyId: "ti",
@@ -2037,6 +2071,7 @@ MBTI: ISTP`
     {
         code: "Ti/Si",
         mbti: "INTP",
+        functionStack: ["Ti", "Ne", "Si", "Fe"],
         name: "The Innovator",
         family: "Ti-types",
         familyId: "ti",
