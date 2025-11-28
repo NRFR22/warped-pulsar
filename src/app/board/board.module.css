@@ -258,6 +258,30 @@
     font-weight: 500;
 }
 
+.flipButton {
+    width: 100%;
+    padding: 0.75rem 1.5rem;
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 2px 4px rgba(99, 102, 241, 0.2);
+}
+
+.flipButton:hover {
+    background: linear-gradient(135deg, #5558e3, #7c4de8);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(99, 102, 241, 0.3);
+}
+
+.flipButton:active {
+    transform: translateY(0);
+}
+
 .legend {
     background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
     border: 2px solid #e2e8f0;

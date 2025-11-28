@@ -20,6 +20,8 @@ export interface FunctionStackBoardProps {
     compactEndpoints?: boolean;     // shrink and move hero/inferior closer to center (default: false)
     showMainAxis?: boolean;         // show A-D vertical axis (teach mode)
     showMiddleAxis?: boolean;       // show B-C horizontal axis (teach mode)
+    selectedCoin?: string;          // which coin to display (S/N, T/F, DI/DE, OE/OI)
+    coinFlipped?: boolean;          // flip the coin positions
 }
 
 // Board anchor points (SVG viewBox 0 0 300 300)
@@ -81,10 +83,35 @@ function insetTowardsCenter(p: Position, center: Position, inset: number): Posit
     };
 }
 
+// Get coin labels and colors based on selection
+function getCoinDisplay(coin: string, position: 'A' | 'D', flipped: boolean): { label: string; color: string } {
+    const coinMap: Record<string, { A: string; D: string; colorA: string; colorD: string }> = {
+        'S/N': { A: 'S', D: 'N', colorA: '#10b981', colorD: '#eab308' }, // green, yellow
+        'T/F': { A: 'T', D: 'F', colorA: '#3b82f6', colorD: '#ef4444' }, // blue, red
+        'DI/DE': { A: 'Di', D: 'De', colorA: '#8b5cf6', colorD: '#ec4899' }, // purple, pink
+        'OE/OI': { A: 'Oe', D: 'Oi', colorA: '#f59e0b', colorD: '#06b6d4' }, // amber, cyan
+    };
+
+    const config = coinMap[coin] || coinMap['S/N'];
+
+    if (flipped) {
+        // Swap A and D
+        return position === 'A'
+            ? { label: config.D, color: config.colorD }
+            : { label: config.A, color: config.colorA };
+    } else {
+        return position === 'A'
+            ? { label: config.A, color: config.colorA }
+            : { label: config.D, color: config.colorD };
+    }
+}
+
 export function FunctionStackBoardTest({
     stack,
     showMainAxis = true,
     showMiddleAxis = true,
+    selectedCoin = 'S/N',
+    coinFlipped = false,
 }: FunctionStackBoardProps) {
     // Find functions by ID
     const A = stack.find(f => f.id === 'A')!;
@@ -109,6 +136,10 @@ export function FunctionStackBoardTest({
     const bFontSize = 16;
     const cFontSize = 16;
     const dFontSize = 14;
+
+    // Get coin display for A and D
+    const aDisplay = getCoinDisplay(selectedCoin, 'A', coinFlipped);
+    const dDisplay = getCoinDisplay(selectedCoin, 'D', coinFlipped);
 
     return (
         <svg viewBox="0 0 300 300" width="100%" height="100%" style={{ maxWidth: '500px', margin: '0 auto', display: 'block' }}>
@@ -147,7 +178,7 @@ export function FunctionStackBoardTest({
                         cx={aActivePos.x}
                         cy={aActivePos.y}
                         r={aRadius}
-                        fill={getColor(A.code)}
+                        fill={aDisplay.color}
                         opacity={0.95}
                     />
                     <circle
@@ -170,7 +201,7 @@ export function FunctionStackBoardTest({
                         fill="white"
                         pointerEvents="none"
                     >
-                        {A.code}
+                        {aDisplay.label}
                     </text>
                 </>
             )}
@@ -182,7 +213,7 @@ export function FunctionStackBoardTest({
                         cx={dActivePos.x}
                         cy={dActivePos.y}
                         r={dRadius}
-                        fill="#6b7280"
+                        fill={dDisplay.color}
                         opacity={0.95}
                     />
                     <circle
@@ -205,7 +236,7 @@ export function FunctionStackBoardTest({
                         fill="white"
                         pointerEvents="none"
                     >
-                        {D.code}
+                        {dDisplay.label}
                     </text>
                 </>
             )}

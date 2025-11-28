@@ -18,6 +18,7 @@ export default function BoardPage() {
     const [showMainAxis, setShowMainAxis] = useState(true);
     const [showMiddleAxis, setShowMiddleAxis] = useState(false);
     const [selectedCoin, setSelectedCoin] = useState('S/N');
+    const [coinFlipped, setCoinFlipped] = useState(false);
 
     // Get all available types (32 total - 16 types × 2 configs)
     const allTypes = useMemo(() => getAllTypeOptions(), []);
@@ -78,6 +79,8 @@ export default function BoardPage() {
                                 stack={currentType.stack}
                                 showMainAxis={showMainAxis}
                                 showMiddleAxis={showMiddleAxis}
+                                selectedCoin={selectedCoin}
+                                coinFlipped={coinFlipped}
                             />
                         )}
                     </div>
@@ -147,19 +150,30 @@ export default function BoardPage() {
                             </select>
                         </div>
                     ) : (
-                        <div className={styles.controlGroup}>
-                            <label className={styles.controlLabel}>Select Coin</label>
-                            <select
-                                value={selectedCoin}
-                                onChange={(e) => setSelectedCoin(e.target.value)}
-                                className={styles.select}
-                            >
-                                <option value="S/N">S/N coin</option>
-                                <option value="T/F">T/F coin</option>
-                                <option value="DI/DE">DI/DE coin</option>
-                                <option value="OE/OI">OE/OI coin</option>
-                            </select>
-                        </div>
+                        <>
+                            <div className={styles.controlGroup}>
+                                <label className={styles.controlLabel}>Select Coin</label>
+                                <select
+                                    value={selectedCoin}
+                                    onChange={(e) => setSelectedCoin(e.target.value)}
+                                    className={styles.select}
+                                >
+                                    <option value="S/N">S/N coin</option>
+                                    <option value="T/F">T/F coin</option>
+                                    <option value="DI/DE">DI/DE coin</option>
+                                    <option value="OE/OI">OE/OI coin</option>
+                                </select>
+                            </div>
+
+                            <div className={styles.controlGroup}>
+                                <button
+                                    onClick={() => setCoinFlipped(!coinFlipped)}
+                                    className={styles.flipButton}
+                                >
+                                    Flip Coin
+                                </button>
+                            </div>
+                        </>
                     )}
 
                     {activeTab === 'main' ? (
