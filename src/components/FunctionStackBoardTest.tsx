@@ -126,8 +126,12 @@ export function FunctionStackBoardTest({
     const D = stack.find(f => f.id === 'D')!;
 
     // Positioning: A-D vertical (north-south), B-C horizontal (west-east)
-    const aActivePos: Position = { x: 150, y: 60 };   // North
-    const dActivePos: Position = { x: 150, y: 240 };  // South
+    // When secondary axis is shown, shift main axis left and secondary right
+    const centerX = 150;
+    const axisOffset = showSecondaryAxis ? 50 : 0;
+
+    const aActivePos: Position = { x: centerX - axisOffset, y: 60 };   // North
+    const dActivePos: Position = { x: centerX - axisOffset, y: 240 };  // South
     const bActivePos: Position = { x: 90, y: 150 };   // West
     const cActivePos: Position = { x: 210, y: 150 };  // East
 
@@ -151,10 +155,9 @@ export function FunctionStackBoardTest({
     const aSecondaryDisplay = getCoinDisplay(secondaryCoin, 'A', secondaryCoinFlipped);
     const dSecondaryDisplay = getCoinDisplay(secondaryCoin, 'D', secondaryCoinFlipped);
 
-    // Secondary axis positions (offset to the right)
-    const secondaryOffset = 50;
-    const aSecondaryPos: Position = { x: aActivePos.x + secondaryOffset, y: aActivePos.y };
-    const dSecondaryPos: Position = { x: dActivePos.x + secondaryOffset, y: dActivePos.y };
+    // Secondary axis positions (offset to the right from center)
+    const aSecondaryPos: Position = { x: centerX + axisOffset, y: 60 };
+    const dSecondaryPos: Position = { x: centerX + axisOffset, y: 240 };
 
     return (
         <svg viewBox="0 0 300 300" width="100%" height="100%" style={{ maxWidth: '500px', margin: '0 auto', display: 'block' }}>
