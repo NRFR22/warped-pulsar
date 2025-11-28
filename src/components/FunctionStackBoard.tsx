@@ -63,7 +63,8 @@ interface Position {
 // Compact mode settings
 const A_INSET = 0.6; // 60% of distance toward center (A ball)
 const D_INSET = 0.65; // 65% of distance toward center (D ball)
-const MIDDLE_INSET = 0.2; // 20% of distance toward center (B & C)
+const B_INSET = 0.2; // 20% of distance toward center (B ball)
+const C_INSET = 0.2; // 20% of distance toward center (C ball)
 const HERO_RADIUS_COMPACT = 40 * 0.8;   // 32
 const INFERIOR_RADIUS_COMPACT = 20 * 0.6; // 12 (40% smaller)
 const MIDDLE_RADIUS_COMPACT = 25 * 0.9; // 22.5
@@ -193,13 +194,13 @@ export function FunctionStackBoard({
             y: (bActivePos.y + cActivePos.y) / 2,
         };
 
-        // Move B and C inward toward center
-        bActivePos = insetTowardsCenter(bActivePos, centerBC, MIDDLE_INSET);
-        cActivePos = insetTowardsCenter(cActivePos, centerBC, MIDDLE_INSET);
+        // Move B and C inward toward center (independently)
+        bActivePos = insetTowardsCenter(bActivePos, centerBC, B_INSET);
+        cActivePos = insetTowardsCenter(cActivePos, centerBC, C_INSET);
 
         // Also transform ghost positions
-        bGhostPos = insetTowardsCenter(bGhostPos, centerBC, MIDDLE_INSET);
-        cGhostPos = insetTowardsCenter(cGhostPos, centerBC, MIDDLE_INSET);
+        bGhostPos = insetTowardsCenter(bGhostPos, centerBC, B_INSET);
+        cGhostPos = insetTowardsCenter(cGhostPos, centerBC, C_INSET);
     }
 
     // Calculate radii (use compact variants when enabled)
