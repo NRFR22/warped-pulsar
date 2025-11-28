@@ -64,7 +64,7 @@ interface Position {
 const ENDPOINT_INSET = 0.6; // 60% of distance toward center (A & D)
 const MIDDLE_INSET = 0.2; // 20% of distance toward center (B & C)
 const HERO_RADIUS_COMPACT = 40 * 0.8;   // 32
-const INFERIOR_RADIUS_COMPACT = 20 * 0.9; // 18
+const INFERIOR_RADIUS_COMPACT = 20 * 0.6; // 12 (40% smaller)
 const MIDDLE_RADIUS_COMPACT = 25 * 0.9; // 22.5
 
 // Utility: move a point toward center along the line
