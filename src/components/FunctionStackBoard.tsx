@@ -482,200 +482,216 @@ export function FunctionStackBoard({
 
             {/* Active circles */}
             {/* A - Hero function */}
-            <circle
-                cx={aActivePos.x}
-                cy={aActivePos.y}
-                r={aRadius}
-                fill={`url(#gradient-main-${A.code.charAt(0)})`}
-                filter="url(#shadow-main-large)"
+            <g
                 onClick={handleOuterCoinClick}
                 style={{
                     cursor: interactive ? 'pointer' : 'default',
-                    transition: 'all 0.3s ease',
+                    transition: 'transform 0.3s ease',
+                    transformOrigin: `${aActivePos.x}px ${aActivePos.y}px`,
                 }}
                 onMouseEnter={(e) => {
-                    e.currentTarget.setAttribute('r', String(aRadius * 1.15));
+                    e.currentTarget.style.transform = 'scale(1.15)';
                 }}
                 onMouseLeave={(e) => {
-                    e.currentTarget.setAttribute('r', String(aRadius));
+                    e.currentTarget.style.transform = 'scale(1)';
                 }}
-            />
-            <circle
-                cx={aActivePos.x}
-                cy={aActivePos.y}
-                r={aRadius - 1}
-                fill="none"
-                stroke="rgba(255,255,255,0.2)"
-                strokeWidth={2}
-                pointerEvents="none"
-            />
-            <circle
-                cx={aActivePos.x - aRadius * 0.15}
-                cy={aActivePos.y - aRadius * 0.15}
-                r={aRadius * 0.35}
-                fill="url(#shine-main)"
-                pointerEvents="none"
-            />
-            <text
-                x={aActivePos.x}
-                y={aActivePos.y}
-                textAnchor="middle"
-                dominantBaseline="central"
-                fontSize={aFontSize}
-                fontWeight="700"
-                fill="white"
-                pointerEvents="none"
-                style={{ textShadow: '0 2px 4px rgba(0,0,0,0.4)', letterSpacing: '0.02em' }}
             >
-                {A.code}
-            </text>
+                <circle
+                    cx={aActivePos.x}
+                    cy={aActivePos.y}
+                    r={aRadius}
+                    fill={`url(#gradient-main-${A.code.charAt(0)})`}
+                    filter="url(#shadow-main-large)"
+                />
+                <circle
+                    cx={aActivePos.x}
+                    cy={aActivePos.y}
+                    r={aRadius - 1}
+                    fill="none"
+                    stroke="rgba(255,255,255,0.2)"
+                    strokeWidth={2}
+                    pointerEvents="none"
+                />
+                <circle
+                    cx={aActivePos.x - aRadius * 0.15}
+                    cy={aActivePos.y - aRadius * 0.15}
+                    r={aRadius * 0.35}
+                    fill="url(#shine-main)"
+                    pointerEvents="none"
+                />
+                <text
+                    x={aActivePos.x}
+                    y={aActivePos.y}
+                    textAnchor="middle"
+                    dominantBaseline="central"
+                    fontSize={aFontSize}
+                    fontWeight="700"
+                    fill="white"
+                    pointerEvents="none"
+                    style={{ textShadow: '0 2px 4px rgba(0,0,0,0.4)', letterSpacing: '0.02em' }}
+                >
+                    {A.code}
+                </text>
+            </g>
 
             {/* B - Second function */}
-            <circle
-                cx={bActivePos.x}
-                cy={bActivePos.y}
-                r={bRadius}
-                fill={B.isSavior ? `url(#gradient-main-${B.code.charAt(0)})` : 'url(#gradient-main-grey)'}
-                filter="url(#shadow-main-medium)"
+            <g
                 onClick={handleMiddleCoinClick}
                 style={{
                     cursor: interactive ? 'pointer' : 'default',
-                    transition: 'all 0.3s ease',
+                    transition: 'transform 0.3s ease',
+                    transformOrigin: `${bActivePos.x}px ${bActivePos.y}px`,
                 }}
                 onMouseEnter={(e) => {
-                    e.currentTarget.setAttribute('r', String(bRadius * 1.15));
+                    e.currentTarget.style.transform = 'scale(1.15)';
                 }}
                 onMouseLeave={(e) => {
-                    e.currentTarget.setAttribute('r', String(bRadius));
+                    e.currentTarget.style.transform = 'scale(1)';
                 }}
-            />
-            <circle
-                cx={bActivePos.x}
-                cy={bActivePos.y}
-                r={bRadius - 1}
-                fill="none"
-                stroke="rgba(255,255,255,0.2)"
-                strokeWidth={1.5}
-                pointerEvents="none"
-            />
-            <circle
-                cx={bActivePos.x - bRadius * 0.15}
-                cy={bActivePos.y - bRadius * 0.15}
-                r={bRadius * 0.35}
-                fill="url(#shine-main)"
-                pointerEvents="none"
-            />
-            <text
-                x={bActivePos.x}
-                y={bActivePos.y}
-                textAnchor="middle"
-                dominantBaseline="central"
-                fontSize={16}
-                fontWeight="600"
-                fill="white"
-                pointerEvents="none"
-                style={{ textShadow: '0 2px 4px rgba(0,0,0,0.4)', letterSpacing: '0.02em' }}
             >
-                {B.code}
-            </text>
+                <circle
+                    cx={bActivePos.x}
+                    cy={bActivePos.y}
+                    r={bRadius}
+                    fill={B.isSavior ? `url(#gradient-main-${B.code.charAt(0)})` : 'url(#gradient-main-grey)'}
+                    filter="url(#shadow-main-medium)"
+                />
+                <circle
+                    cx={bActivePos.x}
+                    cy={bActivePos.y}
+                    r={bRadius - 1}
+                    fill="none"
+                    stroke="rgba(255,255,255,0.2)"
+                    strokeWidth={1.5}
+                    pointerEvents="none"
+                />
+                <circle
+                    cx={bActivePos.x - bRadius * 0.15}
+                    cy={bActivePos.y - bRadius * 0.15}
+                    r={bRadius * 0.35}
+                    fill="url(#shine-main)"
+                    pointerEvents="none"
+                />
+                <text
+                    x={bActivePos.x}
+                    y={bActivePos.y}
+                    textAnchor="middle"
+                    dominantBaseline="central"
+                    fontSize={16}
+                    fontWeight="600"
+                    fill="white"
+                    pointerEvents="none"
+                    style={{ textShadow: '0 2px 4px rgba(0,0,0,0.4)', letterSpacing: '0.02em' }}
+                >
+                    {B.code}
+                </text>
+            </g>
 
             {/* C - Third function */}
-            <circle
-                cx={cActivePos.x}
-                cy={cActivePos.y}
-                r={cRadius}
-                fill={C.isSavior ? `url(#gradient-main-${C.code.charAt(0)})` : 'url(#gradient-main-grey)'}
-                filter="url(#shadow-main-medium)"
+            <g
                 onClick={handleMiddleCoinClick}
                 style={{
                     cursor: interactive ? 'pointer' : 'default',
-                    transition: 'all 0.3s ease',
+                    transition: 'transform 0.3s ease',
+                    transformOrigin: `${cActivePos.x}px ${cActivePos.y}px`,
                 }}
                 onMouseEnter={(e) => {
-                    e.currentTarget.setAttribute('r', String(cRadius * 1.15));
+                    e.currentTarget.style.transform = 'scale(1.15)';
                 }}
                 onMouseLeave={(e) => {
-                    e.currentTarget.setAttribute('r', String(cRadius));
+                    e.currentTarget.style.transform = 'scale(1)';
                 }}
-            />
-            <circle
-                cx={cActivePos.x}
-                cy={cActivePos.y}
-                r={cRadius - 1}
-                fill="none"
-                stroke="rgba(255,255,255,0.2)"
-                strokeWidth={1.5}
-                pointerEvents="none"
-            />
-            <circle
-                cx={cActivePos.x - cRadius * 0.15}
-                cy={cActivePos.y - cRadius * 0.15}
-                r={cRadius * 0.35}
-                fill="url(#shine-main)"
-                pointerEvents="none"
-            />
-            <text
-                x={cActivePos.x}
-                y={cActivePos.y}
-                textAnchor="middle"
-                dominantBaseline="central"
-                fontSize={16}
-                fontWeight="600"
-                fill="white"
-                pointerEvents="none"
-                style={{ textShadow: '0 2px 4px rgba(0,0,0,0.4)', letterSpacing: '0.02em' }}
             >
-                {C.code}
-            </text>
+                <circle
+                    cx={cActivePos.x}
+                    cy={cActivePos.y}
+                    r={cRadius}
+                    fill={C.isSavior ? `url(#gradient-main-${C.code.charAt(0)})` : 'url(#gradient-main-grey)'}
+                    filter="url(#shadow-main-medium)"
+                />
+                <circle
+                    cx={cActivePos.x}
+                    cy={cActivePos.y}
+                    r={cRadius - 1}
+                    fill="none"
+                    stroke="rgba(255,255,255,0.2)"
+                    strokeWidth={1.5}
+                    pointerEvents="none"
+                />
+                <circle
+                    cx={cActivePos.x - cRadius * 0.15}
+                    cy={cActivePos.y - cRadius * 0.15}
+                    r={cRadius * 0.35}
+                    fill="url(#shine-main)"
+                    pointerEvents="none"
+                />
+                <text
+                    x={cActivePos.x}
+                    y={cActivePos.y}
+                    textAnchor="middle"
+                    dominantBaseline="central"
+                    fontSize={16}
+                    fontWeight="600"
+                    fill="white"
+                    pointerEvents="none"
+                    style={{ textShadow: '0 2px 4px rgba(0,0,0,0.4)', letterSpacing: '0.02em' }}
+                >
+                    {C.code}
+                </text>
+            </g>
 
             {/* D - Inferior function */}
-            <circle
-                cx={dActivePos.x}
-                cy={dActivePos.y}
-                r={dRadius}
-                fill="url(#gradient-main-grey)"
-                filter="url(#shadow-main-small)"
+            <g
                 onClick={handleOuterCoinClick}
                 style={{
                     cursor: interactive ? 'pointer' : 'default',
-                    transition: 'all 0.3s ease',
+                    transition: 'transform 0.3s ease',
+                    transformOrigin: `${dActivePos.x}px ${dActivePos.y}px`,
                 }}
                 onMouseEnter={(e) => {
-                    e.currentTarget.setAttribute('r', String(dRadius * 1.15));
+                    e.currentTarget.style.transform = 'scale(1.15)';
                 }}
                 onMouseLeave={(e) => {
-                    e.currentTarget.setAttribute('r', String(dRadius));
+                    e.currentTarget.style.transform = 'scale(1)';
                 }}
-            />
-            <circle
-                cx={dActivePos.x}
-                cy={dActivePos.y}
-                r={dRadius - 1}
-                fill="none"
-                stroke="rgba(255,255,255,0.2)"
-                strokeWidth={1}
-                pointerEvents="none"
-            />
-            <circle
-                cx={dActivePos.x - dRadius * 0.15}
-                cy={dActivePos.y - dRadius * 0.15}
-                r={dRadius * 0.35}
-                fill="url(#shine-main)"
-                pointerEvents="none"
-            />
-            <text
-                x={dActivePos.x}
-                y={dActivePos.y}
-                textAnchor="middle"
-                dominantBaseline="central"
-                fontSize={dFontSize}
-                fontWeight="600"
-                fill="white"
-                pointerEvents="none"
-                style={{ textShadow: '0 2px 4px rgba(0,0,0,0.4)', letterSpacing: '0.02em' }}
             >
-                {D.code}
-            </text>
+                <circle
+                    cx={dActivePos.x}
+                    cy={dActivePos.y}
+                    r={dRadius}
+                    fill="url(#gradient-main-grey)"
+                    filter="url(#shadow-main-small)"
+                />
+                <circle
+                    cx={dActivePos.x}
+                    cy={dActivePos.y}
+                    r={dRadius - 1}
+                    fill="none"
+                    stroke="rgba(255,255,255,0.2)"
+                    strokeWidth={1}
+                    pointerEvents="none"
+                />
+                <circle
+                    cx={dActivePos.x - dRadius * 0.15}
+                    cy={dActivePos.y - dRadius * 0.15}
+                    r={dRadius * 0.35}
+                    fill="url(#shine-main)"
+                    pointerEvents="none"
+                />
+                <text
+                    x={dActivePos.x}
+                    y={dActivePos.y}
+                    textAnchor="middle"
+                    dominantBaseline="central"
+                    fontSize={dFontSize}
+                    fontWeight="600"
+                    fill="white"
+                    pointerEvents="none"
+                    style={{ textShadow: '0 2px 4px rgba(0,0,0,0.4)', letterSpacing: '0.02em' }}
+                >
+                    {D.code}
+                </text>
+            </g>
         </svg>
     );
 }

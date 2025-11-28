@@ -272,7 +272,19 @@ export function FunctionStackBoardTest({
 
             {/* A - Hero function (North) */}
             {showMainAxis && (
-                <>
+                <g
+                    style={{
+                        cursor: 'default',
+                        transition: 'transform 0.3s ease',
+                        transformOrigin: `${aActivePos.x}px ${aActivePos.y}px`,
+                    }}
+                    onMouseEnter={(e) => {
+                        e.currentTarget.style.transform = 'scale(1.15)';
+                    }}
+                    onMouseLeave={(e) => {
+                        e.currentTarget.style.transform = 'scale(1)';
+                    }}
+                >
                     {/* Main bubble with gradient */}
                     <circle
                         cx={aActivePos.x}
@@ -280,16 +292,6 @@ export function FunctionStackBoardTest({
                         r={aRadius}
                         fill={`url(#gradient-${aDisplay.label.charAt(0)})`}
                         filter="url(#shadow-large)"
-                        style={{
-                            cursor: 'default',
-                            transition: 'all 0.3s ease',
-                        }}
-                        onMouseEnter={(e) => {
-                            e.currentTarget.setAttribute('r', String(aRadius * 1.15));
-                        }}
-                        onMouseLeave={(e) => {
-                            e.currentTarget.setAttribute('r', String(aRadius));
-                        }}
                     />
                     {/* Subtle border for definition */}
                     <circle
@@ -323,12 +325,24 @@ export function FunctionStackBoardTest({
                     >
                         {aDisplay.label}
                     </text>
-                </>
+                </g>
             )}
 
             {/* D - Inferior function (South) */}
             {showMainAxis && (
-                <>
+                <g
+                    style={{
+                        cursor: 'default',
+                        transition: 'transform 0.3s ease',
+                        transformOrigin: `${dActivePos.x}px ${dActivePos.y}px`,
+                    }}
+                    onMouseEnter={(e) => {
+                        e.currentTarget.style.transform = 'scale(1.15)';
+                    }}
+                    onMouseLeave={(e) => {
+                        e.currentTarget.style.transform = 'scale(1)';
+                    }}
+                >
                     {/* Main bubble with grey gradient */}
                     <circle
                         cx={dActivePos.x}
@@ -336,16 +350,6 @@ export function FunctionStackBoardTest({
                         r={dRadius}
                         fill="url(#gradient-grey)"
                         filter="url(#shadow-small)"
-                        style={{
-                            cursor: 'default',
-                            transition: 'all 0.3s ease',
-                        }}
-                        onMouseEnter={(e) => {
-                            e.currentTarget.setAttribute('r', String(dRadius * 1.15));
-                        }}
-                        onMouseLeave={(e) => {
-                            e.currentTarget.setAttribute('r', String(dRadius));
-                        }}
                     />
                     {/* Subtle border for definition */}
                     <circle
@@ -379,12 +383,24 @@ export function FunctionStackBoardTest({
                     >
                         {dDisplay.label}
                     </text>
-                </>
+                </g>
             )}
 
             {/* B - Second function (West) */}
             {showMiddleAxis && (
-                <>
+                <g
+                    style={{
+                        cursor: 'default',
+                        transition: 'transform 0.3s ease',
+                        transformOrigin: `${bActivePos.x}px ${bActivePos.y}px`,
+                    }}
+                    onMouseEnter={(e) => {
+                        e.currentTarget.style.transform = 'scale(1.15)';
+                    }}
+                    onMouseLeave={(e) => {
+                        e.currentTarget.style.transform = 'scale(1)';
+                    }}
+                >
                     {/* Main bubble with gradient */}
                     <circle
                         cx={bActivePos.x}
@@ -392,16 +408,6 @@ export function FunctionStackBoardTest({
                         r={bRadius}
                         fill={B.isSavior ? `url(#gradient-${B.code.charAt(0)})` : 'url(#gradient-grey)'}
                         filter="url(#shadow-medium)"
-                        style={{
-                            cursor: 'default',
-                            transition: 'all 0.3s ease',
-                        }}
-                        onMouseEnter={(e) => {
-                            e.currentTarget.setAttribute('r', String(bRadius * 1.15));
-                        }}
-                        onMouseLeave={(e) => {
-                            e.currentTarget.setAttribute('r', String(bRadius));
-                        }}
                     />
                     {/* Subtle border for definition */}
                     <circle
@@ -435,12 +441,24 @@ export function FunctionStackBoardTest({
                     >
                         {B.code}
                     </text>
-                </>
+                </g>
             )}
 
             {/* C - Third function (East) */}
             {showMiddleAxis && (
-                <>
+                <g
+                    style={{
+                        cursor: 'default',
+                        transition: 'transform 0.3s ease',
+                        transformOrigin: `${cActivePos.x}px ${cActivePos.y}px`,
+                    }}
+                    onMouseEnter={(e) => {
+                        e.currentTarget.style.transform = 'scale(1.15)';
+                    }}
+                    onMouseLeave={(e) => {
+                        e.currentTarget.style.transform = 'scale(1)';
+                    }}
+                >
                     {/* Main bubble with gradient */}
                     <circle
                         cx={cActivePos.x}
@@ -448,16 +466,6 @@ export function FunctionStackBoardTest({
                         r={cRadius}
                         fill={C.isSavior ? `url(#gradient-${C.code.charAt(0)})` : 'url(#gradient-grey)'}
                         filter="url(#shadow-medium)"
-                        style={{
-                            cursor: 'default',
-                            transition: 'all 0.3s ease',
-                        }}
-                        onMouseEnter={(e) => {
-                            e.currentTarget.setAttribute('r', String(cRadius * 1.15));
-                        }}
-                        onMouseLeave={(e) => {
-                            e.currentTarget.setAttribute('r', String(cRadius));
-                        }}
                     />
                     {/* Subtle border for definition */}
                     <circle
@@ -491,7 +499,7 @@ export function FunctionStackBoardTest({
                     >
                         {C.code}
                     </text>
-                </>
+                </g>
             )}
 
             {/* Secondary axis */}
@@ -510,100 +518,108 @@ export function FunctionStackBoardTest({
                     />
 
                     {/* Secondary A bubble */}
-                    <circle
-                        cx={aSecondaryPos.x}
-                        cy={aSecondaryPos.y}
-                        r={aRadius}
-                        fill={`url(#gradient-${aSecondaryDisplay.label.charAt(0)})`}
-                        filter="url(#shadow-large)"
+                    <g
                         style={{
                             cursor: 'default',
-                            transition: 'all 0.3s ease',
+                            transition: 'transform 0.3s ease',
+                            transformOrigin: `${aSecondaryPos.x}px ${aSecondaryPos.y}px`,
                         }}
                         onMouseEnter={(e) => {
-                            e.currentTarget.setAttribute('r', String(aRadius * 1.15));
+                            e.currentTarget.style.transform = 'scale(1.15)';
                         }}
                         onMouseLeave={(e) => {
-                            e.currentTarget.setAttribute('r', String(aRadius));
+                            e.currentTarget.style.transform = 'scale(1)';
                         }}
-                    />
-                    <circle
-                        cx={aSecondaryPos.x}
-                        cy={aSecondaryPos.y}
-                        r={aRadius - 1}
-                        fill="none"
-                        stroke="rgba(255,255,255,0.2)"
-                        strokeWidth={2}
-                        pointerEvents="none"
-                    />
-                    <circle
-                        cx={aSecondaryPos.x - aRadius * 0.15}
-                        cy={aSecondaryPos.y - aRadius * 0.15}
-                        r={aRadius * 0.35}
-                        fill="url(#shine)"
-                        pointerEvents="none"
-                    />
-                    <text
-                        x={aSecondaryPos.x}
-                        y={aSecondaryPos.y}
-                        textAnchor="middle"
-                        dominantBaseline="central"
-                        fontSize={aFontSize}
-                        fontWeight="700"
-                        fill="white"
-                        pointerEvents="none"
-                        style={{ textShadow: '0 2px 4px rgba(0,0,0,0.4)', letterSpacing: '0.02em' }}
                     >
-                        {aSecondaryDisplay.label}
-                    </text>
+                        <circle
+                            cx={aSecondaryPos.x}
+                            cy={aSecondaryPos.y}
+                            r={aRadius}
+                            fill={`url(#gradient-${aSecondaryDisplay.label.charAt(0)})`}
+                            filter="url(#shadow-large)"
+                        />
+                        <circle
+                            cx={aSecondaryPos.x}
+                            cy={aSecondaryPos.y}
+                            r={aRadius - 1}
+                            fill="none"
+                            stroke="rgba(255,255,255,0.2)"
+                            strokeWidth={2}
+                            pointerEvents="none"
+                        />
+                        <circle
+                            cx={aSecondaryPos.x - aRadius * 0.15}
+                            cy={aSecondaryPos.y - aRadius * 0.15}
+                            r={aRadius * 0.35}
+                            fill="url(#shine)"
+                            pointerEvents="none"
+                        />
+                        <text
+                            x={aSecondaryPos.x}
+                            y={aSecondaryPos.y}
+                            textAnchor="middle"
+                            dominantBaseline="central"
+                            fontSize={aFontSize}
+                            fontWeight="700"
+                            fill="white"
+                            pointerEvents="none"
+                            style={{ textShadow: '0 2px 4px rgba(0,0,0,0.4)', letterSpacing: '0.02em' }}
+                        >
+                            {aSecondaryDisplay.label}
+                        </text>
+                    </g>
 
                     {/* Secondary D bubble */}
-                    <circle
-                        cx={dSecondaryPos.x}
-                        cy={dSecondaryPos.y}
-                        r={dRadius}
-                        fill="url(#gradient-grey)"
-                        filter="url(#shadow-small)"
+                    <g
                         style={{
                             cursor: 'default',
-                            transition: 'all 0.3s ease',
+                            transition: 'transform 0.3s ease',
+                            transformOrigin: `${dSecondaryPos.x}px ${dSecondaryPos.y}px`,
                         }}
                         onMouseEnter={(e) => {
-                            e.currentTarget.setAttribute('r', String(dRadius * 1.15));
+                            e.currentTarget.style.transform = 'scale(1.15)';
                         }}
                         onMouseLeave={(e) => {
-                            e.currentTarget.setAttribute('r', String(dRadius));
+                            e.currentTarget.style.transform = 'scale(1)';
                         }}
-                    />
-                    <circle
-                        cx={dSecondaryPos.x}
-                        cy={dSecondaryPos.y}
-                        r={dRadius - 1}
-                        fill="none"
-                        stroke="rgba(255,255,255,0.2)"
-                        strokeWidth={1}
-                        pointerEvents="none"
-                    />
-                    <circle
-                        cx={dSecondaryPos.x - dRadius * 0.15}
-                        cy={dSecondaryPos.y - dRadius * 0.15}
-                        r={dRadius * 0.35}
-                        fill="url(#shine)"
-                        pointerEvents="none"
-                    />
-                    <text
-                        x={dSecondaryPos.x}
-                        y={dSecondaryPos.y}
-                        textAnchor="middle"
-                        dominantBaseline="central"
-                        fontSize={dFontSize}
-                        fontWeight="600"
-                        fill="white"
-                        pointerEvents="none"
-                        style={{ textShadow: '0 2px 4px rgba(0,0,0,0.4)', letterSpacing: '0.02em' }}
                     >
-                        {dSecondaryDisplay.label}
-                    </text>
+                        <circle
+                            cx={dSecondaryPos.x}
+                            cy={dSecondaryPos.y}
+                            r={dRadius}
+                            fill="url(#gradient-grey)"
+                            filter="url(#shadow-small)"
+                        />
+                        <circle
+                            cx={dSecondaryPos.x}
+                            cy={dSecondaryPos.y}
+                            r={dRadius - 1}
+                            fill="none"
+                            stroke="rgba(255,255,255,0.2)"
+                            strokeWidth={1}
+                            pointerEvents="none"
+                        />
+                        <circle
+                            cx={dSecondaryPos.x - dRadius * 0.15}
+                            cy={dSecondaryPos.y - dRadius * 0.15}
+                            r={dRadius * 0.35}
+                            fill="url(#shine)"
+                            pointerEvents="none"
+                        />
+                        <text
+                            x={dSecondaryPos.x}
+                            y={dSecondaryPos.y}
+                            textAnchor="middle"
+                            dominantBaseline="central"
+                            fontSize={dFontSize}
+                            fontWeight="600"
+                            fill="white"
+                            pointerEvents="none"
+                            style={{ textShadow: '0 2px 4px rgba(0,0,0,0.4)', letterSpacing: '0.02em' }}
+                        >
+                            {dSecondaryDisplay.label}
+                        </text>
+                    </g>
                 </>
             )}
         </svg>
