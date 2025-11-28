@@ -149,13 +149,9 @@ export default function BoardNewPage() {
                     </label>
                 </div>
 
-                <div style={{
-                    border: '2px solid #e2e8f0',
-                    borderRadius: '12px',
-                    padding: '1.5rem',
-                    background: '#fafafa',
-                }}>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="9.3 8.6 186.4 171.8" width="205" height="189">
+                <div style={{ display: 'flex', gap: '2rem', justifyContent: 'center' }}>
+                    {/* First ball matrix (1-4) */}
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 205 189" width="205" height="189">
                         {/* Line 1-4 (grey) */}
                         {showLine1_4 && (
                             <line x1="110.6" y1="96.0" x2="75.5" y2="131.2"
@@ -167,7 +163,7 @@ export default function BoardNewPage() {
                                 stroke="#000000" strokeWidth="3" strokeLinecap="round" />
                         )}
 
-                        {/* circles */}
+                        {/* circles 1-4 */}
                         {showBall1 && (
                             <circle cx="143.4" cy="63.0" r="46.5" fill="#ffffff" stroke="#cccccc" strokeWidth="2" />
                         )}
@@ -180,7 +176,10 @@ export default function BoardNewPage() {
                         {showBall4 && (
                             <circle cx="63.8" cy="143.0" r="16.6" fill="#ffffff" stroke="#cccccc" strokeWidth="2" />
                         )}
+                    </svg>
 
+                    {/* Second ball matrix (5-8) */}
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 203 178" width="203" height="178">
                         {/* Line 5-8 (grey, two segments) */}
                         {showLine5_8 && (
                             <>
@@ -201,7 +200,7 @@ export default function BoardNewPage() {
                             </>
                         )}
 
-                        {/* Second set - circles (5-8) */}
+                        {/* circles 5-8 */}
                         {showBall5 && (
                             <circle cx="63.0" cy="59.4" r="45.9" fill="#ffffff" stroke="#cccccc" strokeWidth="2" />
                         )}
