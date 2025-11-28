@@ -39,6 +39,7 @@ export default function BoardPage() {
 
                     <div className={styles.previewCard}>
                         <FunctionStackBoard
+                            key={selectedType}
                             stack={currentType.stack}
                             showGhosts={showGhosts}
                             interactive={interactive}
