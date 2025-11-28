@@ -16,7 +16,8 @@ export default function BoardPage() {
 
     // Teach tab specific controls
     const [showMainAxis, setShowMainAxis] = useState(true);
-    const [showMiddleAxis, setShowMiddleAxis] = useState(true);
+    const [showMiddleAxis, setShowMiddleAxis] = useState(false);
+    const [selectedCoin, setSelectedCoin] = useState('S/N');
 
     // Get all available types (32 total - 16 types × 2 configs)
     const allTypes = useMemo(() => getAllTypeOptions(), []);
@@ -117,33 +118,49 @@ export default function BoardPage() {
                         <h2>Controls</h2>
                     </div>
 
-                    <div className={styles.controlGroup}>
-                        <label className={styles.controlLabel}>Personality Type ({allTypes.length} total)</label>
-                        <select
-                            value={selectedType}
-                            onChange={(e) => setSelectedType(e.target.value)}
-                            className={styles.select}
-                        >
-                            <optgroup label="Introverted Types">
-                                {allTypes
-                                    .filter(t => t.value.startsWith('I'))
-                                    .map(type => (
-                                        <option key={type.value} value={type.value}>
-                                            {type.label}
-                                        </option>
-                                    ))}
-                            </optgroup>
-                            <optgroup label="Extraverted Types">
-                                {allTypes
-                                    .filter(t => t.value.startsWith('E'))
-                                    .map(type => (
-                                        <option key={type.value} value={type.value}>
-                                            {type.label}
-                                        </option>
-                                    ))}
-                            </optgroup>
-                        </select>
-                    </div>
+                    {activeTab === 'main' ? (
+                        <div className={styles.controlGroup}>
+                            <label className={styles.controlLabel}>Personality Type ({allTypes.length} total)</label>
+                            <select
+                                value={selectedType}
+                                onChange={(e) => setSelectedType(e.target.value)}
+                                className={styles.select}
+                            >
+                                <optgroup label="Introverted Types">
+                                    {allTypes
+                                        .filter(t => t.value.startsWith('I'))
+                                        .map(type => (
+                                            <option key={type.value} value={type.value}>
+                                                {type.label}
+                                            </option>
+                                        ))}
+                                </optgroup>
+                                <optgroup label="Extraverted Types">
+                                    {allTypes
+                                        .filter(t => t.value.startsWith('E'))
+                                        .map(type => (
+                                            <option key={type.value} value={type.value}>
+                                                {type.label}
+                                            </option>
+                                        ))}
+                                </optgroup>
+                            </select>
+                        </div>
+                    ) : (
+                        <div className={styles.controlGroup}>
+                            <label className={styles.controlLabel}>Select Coin</label>
+                            <select
+                                value={selectedCoin}
+                                onChange={(e) => setSelectedCoin(e.target.value)}
+                                className={styles.select}
+                            >
+                                <option value="S/N">S/N coin</option>
+                                <option value="T/F">T/F coin</option>
+                                <option value="DI/DE">DI/DE coin</option>
+                                <option value="OE/OI">OE/OI coin</option>
+                            </select>
+                        </div>
+                    )}
 
                     {activeTab === 'main' ? (
                         <>
