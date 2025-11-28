@@ -231,7 +231,7 @@ export function FunctionStackBoardTest({
                         cx={dActivePos.x}
                         cy={dActivePos.y}
                         r={dRadius}
-                        fill={dDisplay.color}
+                        fill="#6b7280"
                         opacity={0.95}
                     />
                     <circle
@@ -380,7 +380,7 @@ export function FunctionStackBoardTest({
                         cx={dSecondaryPos.x}
                         cy={dSecondaryPos.y}
                         r={dRadius}
-                        fill={dSecondaryDisplay.color}
+                        fill="#6b7280"
                         opacity={0.95}
                     />
                     <circle
