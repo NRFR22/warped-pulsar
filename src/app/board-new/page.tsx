@@ -298,7 +298,7 @@ export default function BoardNewPage() {
                 <div style={{ display: 'flex', gap: '2rem', justifyContent: 'center', marginTop: '2rem' }}>
                     {/* First ball matrix (1-4) - Extraverted first function */}
                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="-15 -15 230 220" width="260" height="248" style={{ overflow: 'visible' }}>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="-15 -15 230 250" width="260" height="280" style={{ overflow: 'visible' }}>
                             <GlossyDefs />
                             {/* Line 1-4 (grey) */}
                             {showLine1_4 && (
@@ -354,7 +354,7 @@ export default function BoardNewPage() {
 
                     {/* Second ball matrix (5-8) - Introverted first function */}
                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="-10 -15 220 200" width="250" height="228" style={{ overflow: 'visible' }}>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="-10 -15 220 230" width="250" height="260" style={{ overflow: 'visible' }}>
                             <GlossyDefs />
                             {/* Line 5-8 (grey, two segments) */}
                             {showLine5_8 && (
