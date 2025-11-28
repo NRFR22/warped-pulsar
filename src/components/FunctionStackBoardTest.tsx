@@ -72,11 +72,15 @@ const FUNCTION_GRADIENTS: Record<string, {
     'T': { base: '#1e40af', middle: '#3b82f6', highlight: '#93c5fd' },
     'S': { base: '#047857', middle: '#10b981', highlight: '#6ee7b7' },
     'N': { base: '#ca8a04', middle: '#eab308', highlight: '#fde047' },
+    'Di': { base: '#7c3aed', middle: '#8b5cf6', highlight: '#c4b5fd' }, // purple
+    'De': { base: '#db2777', middle: '#ec4899', highlight: '#fbcfe8' }, // pink
+    'Oe': { base: '#d97706', middle: '#f59e0b', highlight: '#fcd34d' }, // amber
+    'Oi': { base: '#0891b2', middle: '#06b6d4', highlight: '#67e8f9' }, // cyan
 };
 
 const getGradient = (code: string) => {
-    const type = code.charAt(0);
-    return FUNCTION_GRADIENTS[type] || FUNCTION_GRADIENTS['F'];
+    // Try full code first (for Di, De, Oe, Oi), then fall back to first character (for S, N, T, F)
+    return FUNCTION_GRADIENTS[code] || FUNCTION_GRADIENTS[code.charAt(0)] || FUNCTION_GRADIENTS['F'];
 };
 
 interface Position {
@@ -290,7 +294,7 @@ export function FunctionStackBoardTest({
                         cx={aActivePos.x}
                         cy={aActivePos.y}
                         r={aRadius}
-                        fill={`url(#gradient-${aDisplay.label.charAt(0)})`}
+                        fill={`url(#gradient-${aDisplay.label})`}
                         filter="url(#shadow-large)"
                     />
                     {/* Subtle border for definition */}
@@ -535,7 +539,7 @@ export function FunctionStackBoardTest({
                             cx={aSecondaryPos.x}
                             cy={aSecondaryPos.y}
                             r={aRadius}
-                            fill={`url(#gradient-${aSecondaryDisplay.label.charAt(0)})`}
+                            fill={`url(#gradient-${aSecondaryDisplay.label})`}
                             filter="url(#shadow-large)"
                         />
                         <circle
