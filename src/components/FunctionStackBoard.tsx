@@ -61,7 +61,7 @@ interface Position {
 }
 
 // Compact mode settings
-const ENDPOINT_INSET = 0.3; // 30% of distance toward center
+const ENDPOINT_INSET = 0.5; // 50% of distance toward center
 const HERO_RADIUS_COMPACT = 40 * 0.8;   // 32
 const INFERIOR_RADIUS_COMPACT = 20 * 0.9; // 18
 
