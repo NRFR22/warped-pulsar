@@ -8,6 +8,10 @@ export default function BoardNewPage() {
     const [showBall2, setShowBall2] = useState(true);
     const [showBall3, setShowBall3] = useState(true);
     const [showBall4, setShowBall4] = useState(true);
+    const [showBall5, setShowBall5] = useState(true);
+    const [showBall6, setShowBall6] = useState(true);
+    const [showBall7, setShowBall7] = useState(true);
+    const [showBall8, setShowBall8] = useState(true);
 
     return (
         <div className={styles.container}>
@@ -64,6 +68,38 @@ export default function BoardNewPage() {
                         />
                         Ball 4 (smallest)
                     </label>
+                    <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}>
+                        <input
+                            type="checkbox"
+                            checked={showBall5}
+                            onChange={(e) => setShowBall5(e.target.checked)}
+                        />
+                        Ball 5
+                    </label>
+                    <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}>
+                        <input
+                            type="checkbox"
+                            checked={showBall6}
+                            onChange={(e) => setShowBall6(e.target.checked)}
+                        />
+                        Ball 6
+                    </label>
+                    <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}>
+                        <input
+                            type="checkbox"
+                            checked={showBall7}
+                            onChange={(e) => setShowBall7(e.target.checked)}
+                        />
+                        Ball 7
+                    </label>
+                    <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}>
+                        <input
+                            type="checkbox"
+                            checked={showBall8}
+                            onChange={(e) => setShowBall8(e.target.checked)}
+                        />
+                        Ball 8
+                    </label>
                 </div>
 
                 <div style={{
@@ -91,6 +127,32 @@ export default function BoardNewPage() {
                         )}
                         {showBall4 && (
                             <circle cx="63.8" cy="143.0" r="16.6" fill="#ffffff" stroke="#cccccc" strokeWidth="2" />
+                        )}
+
+                        {/* Second set - connecting lines (grey) */}
+                        <line x1="94.4" y1="93.0" x2="113.3" y2="113.2"
+                            stroke="#bbbbbb" strokeWidth="3" strokeLinecap="round" />
+                        <line x1="113.3" y1="113.2" x2="126.6" y2="102.2"
+                            stroke="#bbbbbb" strokeWidth="3" strokeLinecap="round" />
+
+                        {/* Second set - connecting lines (black) */}
+                        <line x1="101.7" y1="123.3" x2="113.3" y2="113.2"
+                            stroke="#000000" strokeWidth="3" strokeLinecap="round" />
+                        <line x1="113.3" y1="113.2" x2="129.0" y2="126.7"
+                            stroke="#000000" strokeWidth="3" strokeLinecap="round" />
+
+                        {/* Second set - circles (5-8) */}
+                        {showBall5 && (
+                            <circle cx="63.0" cy="59.4" r="45.9" fill="#ffffff" stroke="#cccccc" strokeWidth="2" />
+                        )}
+                        {showBall6 && (
+                            <circle cx="153.8" cy="79.8" r="35.2" fill="#ffffff" stroke="#cccccc" strokeWidth="2" />
+                        )}
+                        {showBall7 && (
+                            <circle cx="85.0" cy="137.8" r="22.1" fill="#ffffff" stroke="#cccccc" strokeWidth="2" />
+                        )}
+                        {showBall8 && (
+                            <circle cx="141.8" cy="137.8" r="17.0" fill="#ffffff" stroke="#cccccc" strokeWidth="2" />
                         )}
                     </svg>
                 </div>
