@@ -68,8 +68,8 @@ const C_INSET = 0.3; // 30% of distance toward center (C ball)
 const HERO_RADIUS_COMPACT = 40 * 0.8;   // 32
 const INFERIOR_RADIUS_COMPACT = 20 * 0.6; // 12 (40% smaller)
 const MIDDLE_RADIUS_COMPACT = 25 * 0.9; // 22.5
-const A_FONTSIZE_COMPACT = 20 * 1.1; // 22 (10% bigger)
-const D_FONTSIZE_COMPACT = 14 * 0.8; // 11.2 (20% smaller)
+const A_FONTSIZE_COMPACT = 20 * 1.2; // 24 (20% bigger)
+const D_FONTSIZE_COMPACT = 14 * 0.64; // 8.96 (36% smaller)
 
 // Utility: move a point toward center along the line
 function insetTowardsCenter(p: Position, center: Position, inset: number): Position {
