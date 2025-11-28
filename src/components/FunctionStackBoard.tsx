@@ -61,9 +61,11 @@ interface Position {
 }
 
 // Compact mode settings
-const ENDPOINT_INSET = 0.6; // 60% of distance toward center
+const ENDPOINT_INSET = 0.6; // 60% of distance toward center (A & D)
+const MIDDLE_INSET = 0.6; // 60% of distance toward center (B & C)
 const HERO_RADIUS_COMPACT = 40 * 0.8;   // 32
 const INFERIOR_RADIUS_COMPACT = 20 * 0.9; // 18
+const MIDDLE_RADIUS_COMPACT = 25 * 0.9; // 22.5
 
 // Utility: move a point toward center along the line
 function insetTowardsCenter(p: Position, center: Position, inset: number): Position {
@@ -171,25 +173,39 @@ export function FunctionStackBoard({
     // Apply compact mode transformation to A & D if enabled
     if (compactEndpoints) {
         // Calculate center of the A-D diagonal
-        const center: Position = {
+        const centerAD: Position = {
             x: (aActivePos.x + dActivePos.x) / 2,
             y: (aActivePos.y + dActivePos.y) / 2,
         };
 
         // Move A and D inward toward center
-        aActivePos = insetTowardsCenter(aActivePos, center, ENDPOINT_INSET);
-        dActivePos = insetTowardsCenter(dActivePos, center, ENDPOINT_INSET);
+        aActivePos = insetTowardsCenter(aActivePos, centerAD, ENDPOINT_INSET);
+        dActivePos = insetTowardsCenter(dActivePos, centerAD, ENDPOINT_INSET);
 
         // Also transform ghost positions
-        aGhostPos = insetTowardsCenter(aGhostPos, center, ENDPOINT_INSET);
-        dGhostPos = insetTowardsCenter(dGhostPos, center, ENDPOINT_INSET);
+        aGhostPos = insetTowardsCenter(aGhostPos, centerAD, ENDPOINT_INSET);
+        dGhostPos = insetTowardsCenter(dGhostPos, centerAD, ENDPOINT_INSET);
+
+        // Calculate center of the B-C diagonal
+        const centerBC: Position = {
+            x: (bActivePos.x + cActivePos.x) / 2,
+            y: (bActivePos.y + cActivePos.y) / 2,
+        };
+
+        // Move B and C inward toward center
+        bActivePos = insetTowardsCenter(bActivePos, centerBC, MIDDLE_INSET);
+        cActivePos = insetTowardsCenter(cActivePos, centerBC, MIDDLE_INSET);
+
+        // Also transform ghost positions
+        bGhostPos = insetTowardsCenter(bGhostPos, centerBC, MIDDLE_INSET);
+        cGhostPos = insetTowardsCenter(cGhostPos, centerBC, MIDDLE_INSET);
     }
 
     // Calculate radii (use compact variants when enabled)
     const aRadius = compactEndpoints ? HERO_RADIUS_COMPACT : getRadius(A.index);
     const dRadius = compactEndpoints ? INFERIOR_RADIUS_COMPACT : getRadius(D.index);
-    const bRadius = getRadius(B.index);
-    const cRadius = getRadius(C.index);
+    const bRadius = compactEndpoints ? MIDDLE_RADIUS_COMPACT : getRadius(B.index);
+    const cRadius = compactEndpoints ? MIDDLE_RADIUS_COMPACT : getRadius(C.index);
 
     // Handle clicks
     const handleOuterCoinClick = () => {
