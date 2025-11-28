@@ -62,7 +62,7 @@ interface Position {
 
 // Compact mode settings
 const ENDPOINT_INSET = 0.6; // 60% of distance toward center (A & D)
-const MIDDLE_INSET = 0.6; // 60% of distance toward center (B & C)
+const MIDDLE_INSET = 0.2; // 20% of distance toward center (B & C)
 const HERO_RADIUS_COMPACT = 40 * 0.8;   // 32
 const INFERIOR_RADIUS_COMPACT = 20 * 0.9; // 18
 const MIDDLE_RADIUS_COMPACT = 25 * 0.9; // 22.5
