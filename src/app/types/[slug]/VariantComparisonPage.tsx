@@ -195,6 +195,10 @@ export function VariantComparisonPage({ mbtiCode, variants }: VariantComparisonP
     // Board section state
     const [selectedType, setSelectedType] = useState<string | null>(null);
 
+    // Dropdown state for ball matrix testing
+    const [standardSelectedType, setStandardSelectedType] = useState<string>('');
+    const [jumperSelectedType, setJumperSelectedType] = useState<string>('');
+
     // Get all available types (32 total - 16 types × 2 configs)
     const allTypes = useMemo(() => getAllTypeOptions(), []);
 
@@ -300,10 +304,20 @@ export function VariantComparisonPage({ mbtiCode, variants }: VariantComparisonP
                             <h3 className={styles.variantName}>{standardContent.name}</h3>
                         </div>
 
-                        {/* New Glossy Ball Matrix */}
-                        <div style={{ display: 'flex', justifyContent: 'center', margin: '1rem 0' }}>
+                        {/* New Glossy Ball Matrix with Dropdown */}
+                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem', margin: '1rem 0' }}>
                             <FunctionBallMatrix
                                 stack={(() => {
+                                    const selectedTypeData = standardSelectedType
+                                        ? allTypes.find(t => t.value === standardSelectedType)
+                                        : null;
+                                    if (selectedTypeData) {
+                                        return selectedTypeData.stack.map(f => ({
+                                            code: f.code,
+                                            isSavior: f.isSavior,
+                                        }));
+                                    }
+                                    // Fallback to page's standard variant
                                     const funcs = standardContent.functionStack.split('/').map(f => f.trim());
                                     return [
                                         { code: funcs[0] || 'Fi', isSavior: true },
@@ -313,6 +327,26 @@ export function VariantComparisonPage({ mbtiCode, variants }: VariantComparisonP
                                     ];
                                 })()}
                             />
+                            <select
+                                value={standardSelectedType}
+                                onChange={(e) => setStandardSelectedType(e.target.value)}
+                                style={{
+                                    padding: '0.5rem 1rem',
+                                    fontSize: '0.9rem',
+                                    borderRadius: '4px',
+                                    border: '1px solid #ccc',
+                                    background: '#fff',
+                                    cursor: 'pointer',
+                                    minWidth: '200px',
+                                }}
+                            >
+                                <option value="">-- Select Type --</option>
+                                {allTypes.map((type) => (
+                                    <option key={type.value} value={type.value}>
+                                        {type.label}
+                                    </option>
+                                ))}
+                            </select>
                         </div>
 
                         {/* Function Stack Bubbles */}
@@ -332,10 +366,20 @@ export function VariantComparisonPage({ mbtiCode, variants }: VariantComparisonP
                             <h3 className={styles.variantName}>{jumperContent.name}</h3>
                         </div>
 
-                        {/* New Glossy Ball Matrix */}
-                        <div style={{ display: 'flex', justifyContent: 'center', margin: '1rem 0' }}>
+                        {/* New Glossy Ball Matrix with Dropdown */}
+                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem', margin: '1rem 0' }}>
                             <FunctionBallMatrix
                                 stack={(() => {
+                                    const selectedTypeData = jumperSelectedType
+                                        ? allTypes.find(t => t.value === jumperSelectedType)
+                                        : null;
+                                    if (selectedTypeData) {
+                                        return selectedTypeData.stack.map(f => ({
+                                            code: f.code,
+                                            isSavior: f.isSavior,
+                                        }));
+                                    }
+                                    // Fallback to page's jumper variant
                                     const funcs = jumperContent.functionStack.split('/').map(f => f.trim());
                                     return [
                                         { code: funcs[0] || 'Fi', isSavior: true },
@@ -345,6 +389,26 @@ export function VariantComparisonPage({ mbtiCode, variants }: VariantComparisonP
                                     ];
                                 })()}
                             />
+                            <select
+                                value={jumperSelectedType}
+                                onChange={(e) => setJumperSelectedType(e.target.value)}
+                                style={{
+                                    padding: '0.5rem 1rem',
+                                    fontSize: '0.9rem',
+                                    borderRadius: '4px',
+                                    border: '1px solid #ccc',
+                                    background: '#fff',
+                                    cursor: 'pointer',
+                                    minWidth: '200px',
+                                }}
+                            >
+                                <option value="">-- Select Type --</option>
+                                {allTypes.map((type) => (
+                                    <option key={type.value} value={type.value}>
+                                        {type.label}
+                                    </option>
+                                ))}
+                            </select>
                         </div>
 
                         {/* Function Stack Bubbles */}
