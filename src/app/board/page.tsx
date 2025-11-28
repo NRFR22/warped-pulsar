@@ -2,10 +2,12 @@
 
 import React, { useState, useMemo } from 'react';
 import { FunctionStackBoard } from '@/components/FunctionStackBoard';
+import { FunctionStackBoardTest } from '@/components/FunctionStackBoardTest';
 import { getAllTypeOptions, getTypeOption } from '@/lib/typeDatabase';
 import styles from './board.module.css';
 
 export default function BoardPage() {
+    const [activeTab, setActiveTab] = useState<'main' | 'test'>('main');
     const [selectedType, setSelectedType] = useState('INFP-standard');
     const [showGhosts, setShowGhosts] = useState(false);
     const [interactive, setInteractive] = useState(false);
@@ -29,6 +31,22 @@ export default function BoardPage() {
                 <p className={styles.subtitle}>
                     Logic-driven bubble board with coin flipping
                 </p>
+
+                {/* Tab buttons */}
+                <div className={styles.tabs}>
+                    <button
+                        className={`${styles.tab} ${activeTab === 'main' ? styles.tabActive : ''}`}
+                        onClick={() => setActiveTab('main')}
+                    >
+                        Main bubbles
+                    </button>
+                    <button
+                        className={`${styles.tab} ${activeTab === 'test' ? styles.tabActive : ''}`}
+                        onClick={() => setActiveTab('test')}
+                    >
+                        Test
+                    </button>
+                </div>
             </div>
 
             <div className={styles.mainGrid}>
@@ -40,14 +58,25 @@ export default function BoardPage() {
                     </div>
 
                     <div className={styles.previewCard}>
-                        <FunctionStackBoard
-                            key={selectedType}
-                            stack={currentType.stack}
-                            showGhosts={showGhosts}
-                            interactive={interactive}
-                            showBoard={showBoard}
-                            compactEndpoints={compactEndpoints}
-                        />
+                        {activeTab === 'main' ? (
+                            <FunctionStackBoard
+                                key={selectedType}
+                                stack={currentType.stack}
+                                showGhosts={showGhosts}
+                                interactive={interactive}
+                                showBoard={showBoard}
+                                compactEndpoints={compactEndpoints}
+                            />
+                        ) : (
+                            <FunctionStackBoardTest
+                                key={selectedType}
+                                stack={currentType.stack}
+                                showGhosts={showGhosts}
+                                interactive={interactive}
+                                showBoard={showBoard}
+                                compactEndpoints={compactEndpoints}
+                            />
+                        )}
                     </div>
 
                     <div className={styles.info}>

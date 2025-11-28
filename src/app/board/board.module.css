@@ -19,6 +19,41 @@
 .subtitle {
     font-size: 1.125rem;
     color: #64748b;
+    margin-bottom: 1.5rem;
+}
+
+.tabs {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    margin-top: 1.5rem;
+}
+
+.tab {
+    padding: 0.75rem 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #64748b;
+    background: white;
+    border: 2px solid #e2e8f0;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.tab:hover {
+    background: #f8fafc;
+    border-color: #cbd5e1;
+}
+
+.tabActive {
+    color: white;
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    border-color: #6366f1;
+}
+
+.tabActive:hover {
+    background: linear-gradient(135deg, #5558e3, #7c4de8);
 }
 
 .mainGrid {
