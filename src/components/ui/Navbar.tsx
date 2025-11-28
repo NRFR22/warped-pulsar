@@ -89,8 +89,8 @@ export function Navbar() {
                             </Link>
                         </div>
                     </div>
-                    <Link href="/bubbles" className={styles.link}>
-                        Bubbles
+                    <Link href="/board-new" className={styles.link}>
+                        Board New
                     </Link>
                     <Link href="/board" className={styles.link}>
                         Board
