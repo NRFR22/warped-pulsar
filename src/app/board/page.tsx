@@ -3,11 +3,14 @@
 import React, { useState, useMemo } from 'react';
 import { FunctionStackBoard } from '@/components/FunctionStackBoard';
 import { FunctionStackBoardTest } from '@/components/FunctionStackBoardTest';
+import { FunctionStackBoardStyled } from '@/components/FunctionStackBoardStyled';
 import { getAllTypeOptions, getTypeOption } from '@/lib/typeDatabase';
 import styles from './board.module.css';
 
+type StyleType = 'glossy' | 'neon' | 'glass' | 'flat' | 'sketch' | 'neumorphic' | 'metallic' | 'pixel' | 'watercolor';
+
 export default function BoardPage() {
-    const [activeTab, setActiveTab] = useState<'main' | 'teach'>('teach');
+    const [activeTab, setActiveTab] = useState<'main' | 'teach' | 'styles'>('teach');
     const [selectedType, setSelectedType] = useState('INFP-standard');
     const [showGhosts, setShowGhosts] = useState(false);
     const [interactive, setInteractive] = useState(false);
@@ -24,6 +27,9 @@ export default function BoardPage() {
     const [showSecondaryAxis, setShowSecondaryAxis] = useState(false);
     const [secondaryCoin, setSecondaryCoin] = useState('T/F');
     const [secondaryCoinFlipped, setSecondaryCoinFlipped] = useState(false);
+
+    // Styles tab controls
+    const [selectedStyle, setSelectedStyle] = useState<StyleType>('glossy');
 
     // Get all available types (32 total - 16 types × 2 configs)
     const allTypes = useMemo(() => getAllTypeOptions(), []);
@@ -57,6 +63,12 @@ export default function BoardPage() {
                     >
                         Teach
                     </button>
+                    <button
+                        className={`${styles.tab} ${activeTab === 'styles' ? styles.tabActive : ''}`}
+                        onClick={() => setActiveTab('styles')}
+                    >
+                        Styles
+                    </button>
                 </div>
             </div>
 
@@ -78,7 +90,7 @@ export default function BoardPage() {
                                 showBoard={showBoard}
                                 compactEndpoints={compactEndpoints}
                             />
-                        ) : (
+                        ) : activeTab === 'teach' ? (
                             <FunctionStackBoardTest
                                 key={selectedType}
                                 stack={currentType.stack}
@@ -89,6 +101,16 @@ export default function BoardPage() {
                                 showSecondaryAxis={showSecondaryAxis}
                                 secondaryCoin={secondaryCoin}
                                 secondaryCoinFlipped={secondaryCoinFlipped}
+                            />
+                        ) : (
+                            <FunctionStackBoardStyled
+                                key={selectedType}
+                                stack={currentType.stack}
+                                styleType={selectedStyle}
+                                showGhosts={false}
+                                interactive={false}
+                                showBoard={false}
+                                compactEndpoints={true}
                             />
                         )}
                     </div>
@@ -157,7 +179,7 @@ export default function BoardPage() {
                                 </optgroup>
                             </select>
                         </div>
-                    ) : (
+                    ) : activeTab === 'teach' ? (
                         <>
                             <div className={styles.controlGroup}>
                                 <label className={styles.controlLabel}>Select Coin</label>
@@ -221,6 +243,25 @@ export default function BoardPage() {
                                 </>
                             )}
                         </>
+                    ) : (
+                        <div className={styles.controlGroup}>
+                            <label className={styles.controlLabel}>Visual Style</label>
+                            <select
+                                value={selectedStyle}
+                                onChange={(e) => setSelectedStyle(e.target.value as StyleType)}
+                                className={styles.select}
+                            >
+                                <option value="glossy">Glossy 3D</option>
+                                <option value="neon">Neon Glow</option>
+                                <option value="glass">Glassmorphism</option>
+                                <option value="flat">Flat Material</option>
+                                <option value="sketch">Hand-drawn</option>
+                                <option value="neumorphic">Soft UI</option>
+                                <option value="metallic">Metallic Chrome</option>
+                                <option value="pixel">Pixel Art</option>
+                                <option value="watercolor">Watercolor</option>
+                            </select>
+                        </div>
                     )}
 
                     {activeTab === 'main' ? (
@@ -273,7 +314,7 @@ export default function BoardPage() {
                                 </label>
                             </div>
                         </>
-                    ) : (
+                    ) : activeTab === 'teach' ? (
                         <>
                             <div className={styles.controlGroup}>
                                 <label className={styles.toggleLabel}>
@@ -299,7 +340,7 @@ export default function BoardPage() {
                                 </label>
                             </div>
                         </>
-                    )}
+                    ) : null}
 
                     <div className={styles.legend}>
                         <h3 className={styles.legendTitle}>How it works</h3>
