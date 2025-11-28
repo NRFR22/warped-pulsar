@@ -63,14 +63,17 @@ export function FunctionStackBoard({
     showGhosts = true,
     interactive = true,
 }: FunctionStackBoardProps) {
-    const [outerCoinFlipped, setOuterCoinFlipped] = useState(false);
-    const [middleCoinFlipped, setMiddleCoinFlipped] = useState(false);
-
     // Find functions by ID
     const A = stack.find(f => f.id === 'A')!;
     const B = stack.find(f => f.id === 'B')!;
     const C = stack.find(f => f.id === 'C')!;
     const D = stack.find(f => f.id === 'D')!;
+
+    // Jumper types have C as savior instead of B, so middle coin should be flipped by default
+    const isJumper = C.isSavior === true;
+
+    const [outerCoinFlipped, setOuterCoinFlipped] = useState(false);
+    const [middleCoinFlipped, setMiddleCoinFlipped] = useState(isJumper);
 
     // Calculate positions for A & D (outer coin)
     const aIsIntroverted = getAttitude(A.code) === 'I';
