@@ -1,5 +1,4 @@
 import { ChatInterface } from '@/components/chat/ChatInterface';
-import { ProgressPanel } from '@/components/chat/ProgressPanel';
 import { CoinProgress } from '@/components/chat/CoinProgress';
 import styles from './chat.module.css';
 
@@ -37,22 +36,17 @@ export default function ChatPage() {
 
     return (
         <main className={styles.container}>
-            <div className={styles.progressRow}>
-                <div className={styles.coinSection}>
-                    <div className={styles.coinHeader}>
-                        <div>
-                            <p className={styles.kicker}>Talk to your inner OS</p>
-                            <h2>Live coin diagnostics</h2>
-                            <p className={styles.coinDescription}>
-                                I’m testing each cognitive coin in real time while you speak.
-                            </p>
-                        </div>
+            <div className={styles.coinSection}>
+                <div className={styles.coinHeader}>
+                    <div>
+                        <p className={styles.kicker}>Talk to your inner OS</p>
+                        <h2>Live coin diagnostics</h2>
+                        <p className={styles.coinDescription}>
+                            I'm testing each cognitive coin in real time while you speak.
+                        </p>
                     </div>
-                    <CoinProgress coins={coinProgressData} />
                 </div>
-                <div className={styles.panelWrapper}>
-                    <ProgressPanel />
-                </div>
+                <CoinProgress coins={coinProgressData} />
             </div>
             <div className={styles.chatRow}>
                 <ChatInterface />
