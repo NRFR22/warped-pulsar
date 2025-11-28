@@ -157,10 +157,10 @@ export default function BoardNewPage() {
                             <line x1="110.6" y1="96.0" x2="75.5" y2="131.2"
                                 stroke="#bbbbbb" strokeWidth="3" strokeLinecap="round" />
                         )}
-                        {/* Line 2-3 (black) */}
+                        {/* Line 2-3 */}
                         {showLine2_3 && (
                             <line x1="76.0" y1="101.7" x2="101.9" y2="124.5"
-                                stroke="#000000" strokeWidth="3" strokeLinecap="round" />
+                                stroke="#bbbbbb" strokeWidth="3" strokeLinecap="round" />
                         )}
 
                         {/* circles 1-4 */}
@@ -190,13 +190,13 @@ export default function BoardNewPage() {
                             </>
                         )}
 
-                        {/* Line 6-7 (black, two segments) */}
+                        {/* Line 6-7 (two segments) */}
                         {showLine6_7 && (
                             <>
                                 <line x1="101.7" y1="123.3" x2="113.3" y2="113.2"
-                                    stroke="#000000" strokeWidth="3" strokeLinecap="round" />
+                                    stroke="#bbbbbb" strokeWidth="3" strokeLinecap="round" />
                                 <line x1="113.3" y1="113.2" x2="129.0" y2="126.7"
-                                    stroke="#000000" strokeWidth="3" strokeLinecap="round" />
+                                    stroke="#bbbbbb" strokeWidth="3" strokeLinecap="round" />
                             </>
                         )}
 
