@@ -9,6 +9,7 @@ export default function BoardPage() {
     const [selectedType, setSelectedType] = useState('INFP-standard');
     const [showGhosts, setShowGhosts] = useState(true);
     const [interactive, setInteractive] = useState(true);
+    const [showBoard, setShowBoard] = useState(true);
 
     // Get all available types (32 total - 16 types × 2 configs)
     const allTypes = useMemo(() => getAllTypeOptions(), []);
@@ -43,6 +44,7 @@ export default function BoardPage() {
                             stack={currentType.stack}
                             showGhosts={showGhosts}
                             interactive={interactive}
+                            showBoard={showBoard}
                         />
                     </div>
 
@@ -131,6 +133,18 @@ export default function BoardPage() {
                                 className={styles.checkbox}
                             />
                             <span>Enable coin flipping (interactive)</span>
+                        </label>
+                    </div>
+
+                    <div className={styles.controlGroup}>
+                        <label className={styles.toggleLabel}>
+                            <input
+                                type="checkbox"
+                                checked={showBoard}
+                                onChange={(e) => setShowBoard(e.target.checked)}
+                                className={styles.checkbox}
+                            />
+                            <span>Show board boxes & labels</span>
                         </label>
                     </div>
 

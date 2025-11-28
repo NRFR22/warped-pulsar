@@ -5,11 +5,11 @@ import styles from './chat.module.css';
 export default function ChatPage() {
     return (
         <main className={styles.container}>
-            <div className={styles.chatColumn}>
-                <ChatInterface />
-            </div>
-            <div className={styles.progressColumn}>
+            <div className={styles.progressRow}>
                 <ProgressPanel />
+            </div>
+            <div className={styles.chatRow}>
+                <ChatInterface />
             </div>
         </main>
     );

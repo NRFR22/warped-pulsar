@@ -16,6 +16,7 @@ export interface FunctionStackBoardProps {
     stack: StackFunction[];         // length 4, sorted by index ascending
     showGhosts?: boolean;           // draw dotted "alternate" positions (default: true)
     interactive?: boolean;          // click to toggle coins (default: true)
+    showBoard?: boolean;            // show board boxes and axis labels (default: true)
 }
 
 // Board anchor points (SVG viewBox 0 0 300 300)
@@ -62,6 +63,7 @@ export function FunctionStackBoard({
     stack,
     showGhosts = true,
     interactive = true,
+    showBoard = true,
 }: FunctionStackBoardProps) {
     // Find functions by ID
     const A = stack.find(f => f.id === 'A')!;
@@ -167,35 +169,39 @@ export function FunctionStackBoard({
     return (
         <svg viewBox="0 0 300 300" width="100%" height="100%" style={{ maxWidth: '500px', margin: '0 auto', display: 'block' }}>
             {/* Board lines - outer square */}
-            <rect
-                x={40}
-                y={40}
-                width={220}
-                height={220}
-                fill="none"
-                stroke="#cbd5e1"
-                strokeWidth={2}
-            />
+            {showBoard && (
+                <>
+                    <rect
+                        x={40}
+                        y={40}
+                        width={220}
+                        height={220}
+                        fill="none"
+                        stroke="#cbd5e1"
+                        strokeWidth={2}
+                    />
 
-            {/* Inner square */}
-            <rect
-                x={110}
-                y={110}
-                width={80}
-                height={80}
-                fill="none"
-                stroke="#cbd5e1"
-                strokeWidth={1}
-                strokeDasharray="4,4"
-            />
+                    {/* Inner square */}
+                    <rect
+                        x={110}
+                        y={110}
+                        width={80}
+                        height={80}
+                        fill="none"
+                        stroke="#cbd5e1"
+                        strokeWidth={1}
+                        strokeDasharray="4,4"
+                    />
 
-            {/* Axis labels */}
-            <text x={15} y={155} textAnchor="middle" fontSize={12} fill="#64748b" fontWeight="600" transform="rotate(-90, 15, 155)">
-                INTROVERTED
-            </text>
-            <text x={285} y={155} textAnchor="middle" fontSize={12} fill="#64748b" fontWeight="600" transform="rotate(90, 285, 155)">
-                EXTRAVERTED
-            </text>
+                    {/* Axis labels */}
+                    <text x={15} y={155} textAnchor="middle" fontSize={12} fill="#64748b" fontWeight="600" transform="rotate(-90, 15, 155)">
+                        INTROVERTED
+                    </text>
+                    <text x={285} y={155} textAnchor="middle" fontSize={12} fill="#64748b" fontWeight="600" transform="rotate(90, 285, 155)">
+                        EXTRAVERTED
+                    </text>
+                </>
+            )}
 
             {/* Coin diagonal lines */}
             {/* Outer coin (A to D) */}
