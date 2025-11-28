@@ -98,19 +98,6 @@ function GlossyBall({ cx, cy, r, code, isSavior, fontSize }: GlossyBallProps) {
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
         >
-            {/* Outer ring (visible on hover) */}
-            <circle
-                cx={cx}
-                cy={cy}
-                r={r + 4}
-                fill="none"
-                stroke="rgba(255,255,255,0.6)"
-                strokeWidth={2}
-                style={{
-                    opacity: isHovered ? 1 : 0,
-                    transition: 'opacity 0.3s ease',
-                }}
-            />
             {/* Main ball with gradient */}
             <circle cx={cx} cy={cy} r={r} fill={getGradientId(code, isSavior)} />
             {/* Inner edge highlight */}
@@ -311,7 +298,7 @@ export default function BoardNewPage() {
                 <div style={{ display: 'flex', gap: '2rem', justifyContent: 'center', marginTop: '2rem' }}>
                     {/* First ball matrix (1-4) - Extraverted first function */}
                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="9.3 8.6 186.4 171.8" width="225" height="208">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="-15 -15 230 220" width="260" height="248" style={{ overflow: 'visible' }}>
                             <GlossyDefs />
                             {/* Line 1-4 (grey) */}
                             {showLine1_4 && (
@@ -367,7 +354,7 @@ export default function BoardNewPage() {
 
                     {/* Second ball matrix (5-8) - Introverted first function */}
                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="9.3 8.1 184.5 161.8" width="223" height="196">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="-10 -15 220 200" width="250" height="228" style={{ overflow: 'visible' }}>
                             <GlossyDefs />
                             {/* Line 5-8 (grey, two segments) */}
                             {showLine5_8 && (
