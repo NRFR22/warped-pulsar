@@ -68,6 +68,8 @@ const C_INSET = 0.3; // 30% of distance toward center (C ball)
 const HERO_RADIUS_COMPACT = 40 * 0.8;   // 32
 const INFERIOR_RADIUS_COMPACT = 20 * 0.6; // 12 (40% smaller)
 const MIDDLE_RADIUS_COMPACT = 25 * 0.9; // 22.5
+const A_FONTSIZE_COMPACT = 20 * 1.1; // 22 (10% bigger)
+const D_FONTSIZE_COMPACT = 14 * 0.8; // 11.2 (20% smaller)
 
 // Utility: move a point toward center along the line
 function insetTowardsCenter(p: Position, center: Position, inset: number): Position {
@@ -209,6 +211,10 @@ export function FunctionStackBoard({
     const bRadius = compactEndpoints ? MIDDLE_RADIUS_COMPACT : getRadius(B.index);
     const cRadius = compactEndpoints ? MIDDLE_RADIUS_COMPACT : getRadius(C.index);
 
+    // Calculate font sizes (use compact variants when enabled)
+    const aFontSize = compactEndpoints ? A_FONTSIZE_COMPACT : 20;
+    const dFontSize = compactEndpoints ? D_FONTSIZE_COMPACT : 14;
+
     // Handle clicks
     const handleOuterCoinClick = () => {
         if (interactive) {
@@ -305,7 +311,7 @@ export function FunctionStackBoard({
                         y={aGhostPos.y}
                         textAnchor="middle"
                         dominantBaseline="central"
-                        fontSize={14}
+                        fontSize={aFontSize * 0.7}
                         fill="#94a3b8"
                         opacity={0.4}
                         pointerEvents="none"
@@ -331,7 +337,7 @@ export function FunctionStackBoard({
                         y={dGhostPos.y}
                         textAnchor="middle"
                         dominantBaseline="central"
-                        fontSize={12}
+                        fontSize={dFontSize * 0.86}
                         fill="#94a3b8"
                         opacity={0.4}
                         pointerEvents="none"
@@ -419,7 +425,7 @@ export function FunctionStackBoard({
                 y={aActivePos.y}
                 textAnchor="middle"
                 dominantBaseline="central"
-                fontSize={20}
+                fontSize={aFontSize}
                 fontWeight="700"
                 fill="white"
                 pointerEvents="none"
@@ -518,7 +524,7 @@ export function FunctionStackBoard({
                 y={dActivePos.y}
                 textAnchor="middle"
                 dominantBaseline="central"
-                fontSize={14}
+                fontSize={dFontSize}
                 fontWeight="600"
                 fill="white"
                 pointerEvents="none"
