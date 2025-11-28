@@ -141,128 +141,144 @@ export function FunctionStackBoardTest({
             )}
 
             {/* A - Hero function (North) */}
-            <circle
-                cx={aActivePos.x}
-                cy={aActivePos.y}
-                r={aRadius}
-                fill={getColor(A.code)}
-                opacity={0.95}
-            />
-            <circle
-                cx={aActivePos.x}
-                cy={aActivePos.y}
-                r={aRadius - 2}
-                fill="none"
-                stroke="white"
-                strokeWidth={2}
-                opacity={0.3}
-                pointerEvents="none"
-            />
-            <text
-                x={aActivePos.x}
-                y={aActivePos.y}
-                textAnchor="middle"
-                dominantBaseline="central"
-                fontSize={aFontSize}
-                fontWeight="700"
-                fill="white"
-                pointerEvents="none"
-            >
-                {A.code}
-            </text>
+            {showMainAxis && (
+                <>
+                    <circle
+                        cx={aActivePos.x}
+                        cy={aActivePos.y}
+                        r={aRadius}
+                        fill={getColor(A.code)}
+                        opacity={0.95}
+                    />
+                    <circle
+                        cx={aActivePos.x}
+                        cy={aActivePos.y}
+                        r={aRadius - 2}
+                        fill="none"
+                        stroke="white"
+                        strokeWidth={2}
+                        opacity={0.3}
+                        pointerEvents="none"
+                    />
+                    <text
+                        x={aActivePos.x}
+                        y={aActivePos.y}
+                        textAnchor="middle"
+                        dominantBaseline="central"
+                        fontSize={aFontSize}
+                        fontWeight="700"
+                        fill="white"
+                        pointerEvents="none"
+                    >
+                        {A.code}
+                    </text>
+                </>
+            )}
 
             {/* D - Inferior function (South) */}
-            <circle
-                cx={dActivePos.x}
-                cy={dActivePos.y}
-                r={dRadius}
-                fill="#6b7280"
-                opacity={0.95}
-            />
-            <circle
-                cx={dActivePos.x}
-                cy={dActivePos.y}
-                r={dRadius - 2}
-                fill="none"
-                stroke="white"
-                strokeWidth={1}
-                opacity={0.3}
-                pointerEvents="none"
-            />
-            <text
-                x={dActivePos.x}
-                y={dActivePos.y}
-                textAnchor="middle"
-                dominantBaseline="central"
-                fontSize={dFontSize}
-                fontWeight="600"
-                fill="white"
-                pointerEvents="none"
-            >
-                {D.code}
-            </text>
+            {showMainAxis && (
+                <>
+                    <circle
+                        cx={dActivePos.x}
+                        cy={dActivePos.y}
+                        r={dRadius}
+                        fill="#6b7280"
+                        opacity={0.95}
+                    />
+                    <circle
+                        cx={dActivePos.x}
+                        cy={dActivePos.y}
+                        r={dRadius - 2}
+                        fill="none"
+                        stroke="white"
+                        strokeWidth={1}
+                        opacity={0.3}
+                        pointerEvents="none"
+                    />
+                    <text
+                        x={dActivePos.x}
+                        y={dActivePos.y}
+                        textAnchor="middle"
+                        dominantBaseline="central"
+                        fontSize={dFontSize}
+                        fontWeight="600"
+                        fill="white"
+                        pointerEvents="none"
+                    >
+                        {D.code}
+                    </text>
+                </>
+            )}
 
             {/* B - Second function (West) */}
-            <circle
-                cx={bActivePos.x}
-                cy={bActivePos.y}
-                r={bRadius}
-                fill={B.isSavior ? getColor(B.code) : '#6b7280'}
-                opacity={0.95}
-            />
-            <circle
-                cx={bActivePos.x}
-                cy={bActivePos.y}
-                r={bRadius - 2}
-                fill="none"
-                stroke="white"
-                strokeWidth={1.5}
-                opacity={0.3}
-                pointerEvents="none"
-            />
-            <text
-                x={bActivePos.x}
-                y={bActivePos.y}
-                textAnchor="middle"
-                dominantBaseline="central"
-                fontSize={bFontSize}
-                fontWeight="600"
-                fill="white"
-                pointerEvents="none"
-            >
-                {B.code}
-            </text>
+            {showMiddleAxis && (
+                <>
+                    <circle
+                        cx={bActivePos.x}
+                        cy={bActivePos.y}
+                        r={bRadius}
+                        fill={B.isSavior ? getColor(B.code) : '#6b7280'}
+                        opacity={0.95}
+                    />
+                    <circle
+                        cx={bActivePos.x}
+                        cy={bActivePos.y}
+                        r={bRadius - 2}
+                        fill="none"
+                        stroke="white"
+                        strokeWidth={1.5}
+                        opacity={0.3}
+                        pointerEvents="none"
+                    />
+                    <text
+                        x={bActivePos.x}
+                        y={bActivePos.y}
+                        textAnchor="middle"
+                        dominantBaseline="central"
+                        fontSize={bFontSize}
+                        fontWeight="600"
+                        fill="white"
+                        pointerEvents="none"
+                    >
+                        {B.code}
+                    </text>
+                </>
+            )}
 
             {/* C - Third function (East) */}
-            <circle
-                cx={cActivePos.x}
-                cy={cActivePos.y}
-                r={cRadius}
-                fill={C.isSavior ? getColor(C.code) : '#6b7280'}
-                opacity={0.95}
-            />
-            <circle
-                cx={cActivePos.x}
-                cy={cActivePos.y}
-                r={cRadius - 2}
-                fill="none"
-                stroke="white"
-                strokeWidth={1.5}
-                opacity={0.3}
-                pointerEvents="none"
-            />
-            <text
-                x={cActivePos.x}
-                y={cActivePos.y}
-                textAnchor="middle"
-                dominantBaseline="central"
-                fontSize={cFontSize}
-                fontWeight="600"
-                fill="white"
-                pointerEvents="none"
-            >
-                {C.code}
-            </text>
+            {showMiddleAxis && (
+                <>
+                    <circle
+                        cx={cActivePos.x}
+                        cy={cActivePos.y}
+                        r={cRadius}
+                        fill={C.isSavior ? getColor(C.code) : '#6b7280'}
+                        opacity={0.95}
+                    />
+                    <circle
+                        cx={cActivePos.x}
+                        cy={cActivePos.y}
+                        r={cRadius - 2}
+                        fill="none"
+                        stroke="white"
+                        strokeWidth={1.5}
+                        opacity={0.3}
+                        pointerEvents="none"
+                    />
+                    <text
+                        x={cActivePos.x}
+                        y={cActivePos.y}
+                        textAnchor="middle"
+                        dominantBaseline="central"
+                        fontSize={cFontSize}
+                        fontWeight="600"
+                        fill="white"
+                        pointerEvents="none"
+                    >
+                        {C.code}
+                    </text>
+                </>
+            )}
         </svg>
     );
 }

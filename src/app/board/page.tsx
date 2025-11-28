@@ -7,7 +7,7 @@ import { getAllTypeOptions, getTypeOption } from '@/lib/typeDatabase';
 import styles from './board.module.css';
 
 export default function BoardPage() {
-    const [activeTab, setActiveTab] = useState<'main' | 'teach'>('main');
+    const [activeTab, setActiveTab] = useState<'main' | 'teach'>('teach');
     const [selectedType, setSelectedType] = useState('INFP-standard');
     const [showGhosts, setShowGhosts] = useState(false);
     const [interactive, setInteractive] = useState(false);
