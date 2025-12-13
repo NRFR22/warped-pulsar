@@ -36,3 +36,43 @@
     font-size: 0.875rem;
     opacity: 0.7;
 }
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .footer {
+        padding: 1.5rem 1rem;
+    }
+
+    .content {
+        gap: 1rem;
+    }
+
+    .links {
+        gap: 1rem;
+    }
+
+    .link {
+        font-size: 0.8rem;
+    }
+
+    .disclaimer {
+        font-size: 0.75rem;
+    }
+}
+
+/* Very small screens / in-app browsers */
+@media (max-width: 480px) {
+    .footer {
+        padding: 1rem 0.75rem;
+    }
+
+    .content {
+        gap: 0.75rem;
+    }
+
+    .links {
+        gap: 0.75rem;
+        flex-direction: column;
+        align-items: center;
+    }
+}

@@ -126,3 +126,67 @@
         overflow-y: auto;
     }
 }
+
+/* Tablet responsiveness */
+@media (max-width: 768px) {
+    .header {
+        padding: 0.75rem 1rem;
+    }
+
+    .logoImage {
+        height: 32px;
+    }
+
+    .navLinks {
+        gap: 1rem;
+    }
+
+    .link {
+        font-size: 0.85rem;
+    }
+
+    .cta {
+        margin-left: 0.5rem;
+    }
+}
+
+/* Mobile responsiveness - hide most nav elements */
+@media (max-width: 600px) {
+    .header {
+        padding: 0.5rem 0.75rem;
+    }
+
+    .logoImage {
+        height: 28px;
+    }
+
+    .navLinks {
+        display: none;
+    }
+
+    .nav {
+        gap: 0.5rem;
+    }
+
+    .cta {
+        margin-left: 0;
+        font-size: 0.85rem;
+        padding: 0.5rem 1rem;
+    }
+}
+
+/* Very small screens / in-app browsers */
+@media (max-width: 400px) {
+    .header {
+        padding: 0.375rem 0.5rem;
+    }
+
+    .logoImage {
+        height: 24px;
+    }
+
+    .cta {
+        font-size: 0.75rem;
+        padding: 0.4rem 0.75rem;
+    }
+}

@@ -912,3 +912,243 @@
         display: none;
     }
 }
+
+/* Mobile - smaller screens */
+@media (max-width: 600px) {
+    .codeEntry {
+        padding: 1rem;
+    }
+
+    .alphaNotice {
+        padding: 1rem;
+        margin-bottom: 1.25rem;
+    }
+
+    .alphaHeadline {
+        font-size: 1rem;
+    }
+
+    .alphaBody {
+        font-size: 0.8125rem;
+    }
+
+    .codeTitle {
+        font-size: 1.25rem;
+    }
+
+    .codeDescription {
+        font-size: 0.875rem;
+        margin-bottom: 1rem;
+    }
+
+    .nameInput,
+    .codeInput {
+        padding: 0.75rem;
+        font-size: 0.875rem;
+    }
+
+    .startButton {
+        padding: 0.75rem 1rem;
+        font-size: 0.875rem;
+    }
+
+    .footerNote {
+        font-size: 0.6875rem;
+        margin-top: 1rem;
+    }
+
+    .messages {
+        padding: 1rem;
+    }
+
+    .message {
+        font-size: 0.875rem;
+        padding: 0.75rem 1rem;
+    }
+
+    .controls {
+        padding: 0.75rem;
+    }
+
+    .resultsScreen {
+        padding: 1rem;
+        gap: 1rem;
+    }
+
+    .resultsTitle {
+        font-size: 1.25rem;
+    }
+
+    .topTypeCard {
+        padding: 1rem;
+    }
+
+    .topTypeValue {
+        font-size: 1.25rem;
+    }
+
+    .shareSection,
+    .feedbackSection {
+        padding: 1rem;
+    }
+}
+
+/* Very small screens / in-app browsers (Messenger, Instagram, etc) */
+@media (max-width: 400px) {
+    .codeEntry {
+        padding: 0.75rem;
+    }
+
+    .alphaNotice {
+        padding: 0.75rem;
+        margin-bottom: 1rem;
+    }
+
+    .alphaTag {
+        font-size: 0.6rem;
+        padding: 0.25rem 0.5rem;
+    }
+
+    .alphaHeadline {
+        font-size: 0.9375rem;
+        margin-bottom: 0.375rem;
+    }
+
+    .alphaBody {
+        font-size: 0.75rem;
+    }
+
+    .formFields {
+        gap: 0.75rem;
+        margin-top: 1rem;
+    }
+
+    .inputLabel {
+        font-size: 0.75rem;
+    }
+
+    .codeTitle {
+        font-size: 1.125rem;
+    }
+
+    .codeDescription {
+        font-size: 0.8125rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .nameInput,
+    .codeInput {
+        padding: 0.625rem 0.75rem;
+        font-size: 0.8125rem;
+    }
+
+    .startButton {
+        padding: 0.625rem 0.875rem;
+        font-size: 0.8125rem;
+    }
+
+    .footerNote {
+        font-size: 0.625rem;
+        margin-top: 0.75rem;
+    }
+
+    .questionProgress {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.75rem;
+    }
+
+    .messages {
+        padding: 0.75rem;
+        gap: 0.75rem;
+    }
+
+    .message {
+        font-size: 0.8125rem;
+        padding: 0.625rem 0.875rem;
+        max-width: 90%;
+    }
+
+    .controls {
+        padding: 0.5rem;
+    }
+
+    .inputWrapper {
+        padding: 0.375rem 0.375rem 0.375rem 0.75rem;
+        border-radius: 1.25rem;
+    }
+
+    .textInput {
+        font-size: 0.875rem;
+    }
+
+    .micButton,
+    .sendButton {
+        width: 2rem;
+        height: 2rem;
+    }
+
+    .resultsScreen {
+        padding: 0.75rem;
+        gap: 0.75rem;
+    }
+
+    .resultsTitle {
+        font-size: 1.125rem;
+        margin-bottom: 0.25rem;
+    }
+
+    .topTypeCard {
+        padding: 0.75rem;
+        gap: 0.75rem;
+    }
+
+    .trophyIcon {
+        width: 28px;
+        height: 28px;
+    }
+
+    .topTypeLabel {
+        font-size: 0.6875rem;
+    }
+
+    .topTypeValue {
+        font-size: 1.125rem;
+    }
+
+    .topTypeScore {
+        font-size: 0.75rem;
+    }
+
+    .runnerUpItem {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.8125rem;
+    }
+
+    .infoBox {
+        padding: 0.75rem 1rem;
+        font-size: 0.8125rem;
+    }
+
+    .shareSection,
+    .feedbackSection {
+        padding: 0.75rem;
+        margin-top: 0.75rem;
+    }
+
+    .shareText {
+        font-size: 0.8125rem;
+    }
+
+    .shareCodeValue {
+        font-size: 1.5rem;
+    }
+
+    .feedbackTitle {
+        font-size: 0.9375rem;
+    }
+
+    .feedbackTextarea {
+        font-size: 0.875rem;
+        min-height: 80px;
+    }
+}
