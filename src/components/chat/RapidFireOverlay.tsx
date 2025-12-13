@@ -110,23 +110,28 @@ export function RapidFireOverlay({ sessionId, isActive, onClose }: Props) {
 
                 <p className={styles.question}>{question.text}</p>
 
-                <div className={styles.scaleLabels}>
-                    <span className={styles.leftLabel}>{question.option_1}</span>
-                    <span className={styles.rightLabel}>{question.option_5}</span>
-                </div>
-
-                <div className={styles.scale}>
-                    {[1, 2, 3, 4, 5].map((value) => (
-                        <button
-                            key={value}
-                            className={`${styles.scaleButton} ${selectedValue === value ? styles.selected : ''}`}
-                            onClick={() => handleAnswer(value)}
-                            disabled={isLoading}
-                            aria-label={`Rate ${value} out of 5`}
-                        >
-                            {value}
-                        </button>
-                    ))}
+                <div className={styles.buttons}>
+                    <button
+                        className={`${styles.optionButton} ${styles.leftOption} ${selectedValue === 1 ? styles.selected : ''}`}
+                        onClick={() => handleAnswer(1)}
+                        disabled={isLoading}
+                    >
+                        {question.option_1}
+                    </button>
+                    <button
+                        className={`${styles.optionButton} ${styles.middleOption} ${selectedValue === 3 ? styles.selected : ''}`}
+                        onClick={() => handleAnswer(3)}
+                        disabled={isLoading}
+                    >
+                        Either / Both
+                    </button>
+                    <button
+                        className={`${styles.optionButton} ${styles.rightOption} ${selectedValue === 5 ? styles.selected : ''}`}
+                        onClick={() => handleAnswer(5)}
+                        disabled={isLoading}
+                    >
+                        {question.option_5}
+                    </button>
                 </div>
 
                 {showFeedback && (
@@ -134,10 +139,6 @@ export function RapidFireOverlay({ sessionId, isActive, onClose }: Props) {
                         +{showFeedback}
                     </div>
                 )}
-
-                <p className={styles.hint}>
-                    Answer while we prepare your next main question
-                </p>
             </div>
         </div>
     );
