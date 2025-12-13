@@ -9,6 +9,9 @@ import { RapidFireOverlay } from './RapidFireOverlay';
 const API_BASE = "https://question-pipeline-production.up.railway.app";
 const SESSION_STORAGE_KEY = "typing_session";
 
+// Feature flags
+const RAPID_FIRE_ENABLED = false; // Set to true to enable rapid fire questions
+
 interface Message {
     id: string;
     role: 'bot' | 'user' | 'system';
@@ -331,8 +334,7 @@ export function ChatInterface() {
         setStatus('processing');
 
         // Start rapid fire if in Phase 2 (overlay will handle if no questions available)
-        console.log('Submit - phase:', phase, 'rapidFireAvailable:', rapidFireAvailable);
-        if (phase === 2) {
+        if (RAPID_FIRE_ENABLED && phase === 2) {
             console.log('Activating rapid fire');
             setRapidFireActive(true);
         }
@@ -722,28 +724,30 @@ export function ChatInterface() {
                                 >
                                     [DEBUG] Results
                                 </button>
-                                <button
-                                    onClick={() => {
-                                        setSessionId('debug-session');
-                                        setRapidFireAvailable(26);
-                                        setRapidFireActive(true);
-                                    }}
-                                    style={{
-                                        padding: '0.5rem 1rem',
-                                        fontSize: '0.75rem',
-                                        background: '#8b5cf6',
-                                        color: 'white',
-                                        border: 'none',
-                                        borderRadius: '0.25rem',
-                                        cursor: 'pointer',
-                                    }}
-                                >
-                                    [DEBUG] Rapid Fire
-                                </button>
+                                {RAPID_FIRE_ENABLED && (
+                                    <button
+                                        onClick={() => {
+                                            setSessionId('debug-session');
+                                            setRapidFireAvailable(26);
+                                            setRapidFireActive(true);
+                                        }}
+                                        style={{
+                                            padding: '0.5rem 1rem',
+                                            fontSize: '0.75rem',
+                                            background: '#8b5cf6',
+                                            color: 'white',
+                                            border: 'none',
+                                            borderRadius: '0.25rem',
+                                            cursor: 'pointer',
+                                        }}
+                                    >
+                                        [DEBUG] Rapid Fire
+                                    </button>
+                                )}
                             </div>
 
                             {/* Rapid Fire Overlay for debug */}
-                            {sessionId && (
+                            {RAPID_FIRE_ENABLED && sessionId && (
                                 <RapidFireOverlay
                                     sessionId={sessionId}
                                     isActive={rapidFireActive}
@@ -944,7 +948,7 @@ export function ChatInterface() {
                 </div>
 
                 {/* Rapid Fire Overlay */}
-                {sessionId && (
+                {RAPID_FIRE_ENABLED && sessionId && (
                     <RapidFireOverlay
                         sessionId={sessionId}
                         isActive={rapidFireActive}
