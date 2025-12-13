@@ -97,6 +97,11 @@ export function ChatInterface() {
     const [feedbackSubmitted, setFeedbackSubmitted] = useState(false);
     const [feedbackSubmitting, setFeedbackSubmitting] = useState(false);
 
+    // Voice recording state
+    const [isRecording, setIsRecording] = useState(false);
+    const [mediaRecorder, setMediaRecorder] = useState<MediaRecorder | null>(null);
+    const audioChunksRef = useRef<Blob[]>([]);
+
     const messagesContainerRef = useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLTextAreaElement>(null);
     const codeInputRef = useRef<HTMLInputElement>(null);
@@ -456,11 +461,92 @@ export function ChatInterface() {
         }
     };
 
-    const handleMicClick = () => {
-        if (status === 'idle') {
-            setStatus('listening');
-        } else if (status === 'listening') {
+    const transcribeAudio = async (audioBlob: Blob) => {
+        try {
+            const formData = new FormData();
+            formData.append('audio', audioBlob, 'recording.webm');
+
+            const response = await fetch(`${API_BASE}/api/transcribe`, {
+                method: 'POST',
+                body: formData,
+            });
+
+            if (!response.ok) {
+                const err = await response.json();
+                throw new Error(err.detail || 'Transcription failed');
+            }
+
+            const data = await response.json();
+
+            // Insert transcript into input field
+            setInputText(prev => prev + (prev ? ' ' : '') + data.transcript);
             setStatus('idle');
+
+            // Focus the input
+            if (inputRef.current) {
+                inputRef.current.focus();
+            }
+
+        } catch (error: any) {
+            console.error('Transcription failed:', error);
+            setError(error.message || 'Failed to transcribe audio');
+            setStatus('idle');
+        }
+    };
+
+    const startRecording = async () => {
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+
+            const recorder = new MediaRecorder(stream, {
+                mimeType: 'audio/webm;codecs=opus'
+            });
+
+            audioChunksRef.current = [];
+
+            recorder.ondataavailable = (event) => {
+                if (event.data.size > 0) {
+                    audioChunksRef.current.push(event.data);
+                }
+            };
+
+            recorder.onstop = async () => {
+                // Stop all tracks to release microphone
+                stream.getTracks().forEach(track => track.stop());
+
+                // Create blob from chunks
+                const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/webm' });
+
+                // Send to backend for transcription
+                await transcribeAudio(audioBlob);
+            };
+
+            recorder.start();
+            setMediaRecorder(recorder);
+            setIsRecording(true);
+            setStatus('listening');
+
+        } catch (error) {
+            console.error('Failed to start recording:', error);
+            setError('Microphone access denied. Please allow microphone access to use voice input.');
+        }
+    };
+
+    const stopRecording = () => {
+        if (mediaRecorder && mediaRecorder.state !== 'inactive') {
+            mediaRecorder.stop();
+            setIsRecording(false);
+            setStatus('processing');
+        }
+    };
+
+    const handleMicClick = () => {
+        if (status === 'processing') return;
+
+        if (isRecording) {
+            stopRecording();
+        } else {
+            startRecording();
         }
     };
 
@@ -833,27 +919,35 @@ export function ChatInterface() {
                 )}
 
                 <div className={styles.controls}>
-                    <div className={cn(styles.inputWrapper, status === 'listening' && styles.inputListening)}>
+                    <div className={cn(styles.inputWrapper, isRecording && styles.inputListening)}>
                         <textarea
                             ref={inputRef}
                             className={styles.textInput}
-                            placeholder={sessionState === 'awaiting_known_type' ? "Enter your OPS type or anything..." : (status === 'listening' ? "Listening..." : "Type your answer...")}
+                            placeholder={sessionState === 'awaiting_known_type' ? "Enter your OPS type or anything..." : (isRecording ? "Listening..." : "Type your answer...")}
                             value={inputText}
                             onChange={(e) => setInputText(e.target.value)}
                             onKeyDown={handleKeyDown}
-                            disabled={status === 'processing' || status === 'listening'}
+                            disabled={status === 'processing' || isRecording}
                             rows={1}
                         />
                         <div className={styles.inputButtons}>
                             <button
-                                className={cn(styles.micButton, styles[status])}
+                                className={cn(
+                                    styles.micButton,
+                                    isRecording && styles.recording,
+                                    status === 'processing' && styles.processing
+                                )}
                                 onClick={handleMicClick}
                                 disabled={status === 'processing'}
-                                title={status === 'listening' ? 'Stop recording' : 'Start recording'}
+                                title={isRecording ? 'Stop recording' : 'Start recording'}
                             >
-                                {status === 'idle' && <Mic size={18} />}
-                                {status === 'listening' && <Square size={14} fill="currentColor" />}
-                                {status === 'processing' && <Loader2 size={18} className={styles.spinning} />}
+                                {status === 'processing' ? (
+                                    <Loader2 size={18} className={styles.spinning} />
+                                ) : isRecording ? (
+                                    <Square size={14} fill="currentColor" />
+                                ) : (
+                                    <Mic size={18} />
+                                )}
                             </button>
                             <button
                                 className={cn(styles.sendButton, inputText.trim() && status === 'idle' && styles.sendActive)}

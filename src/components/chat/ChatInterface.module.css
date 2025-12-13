@@ -535,7 +535,8 @@
     color: var(--color-foreground);
 }
 
-.micButton.listening {
+.micButton.listening,
+.micButton.recording {
     background-color: var(--color-f);
     color: white;
     animation: pulse 1.5s infinite;
