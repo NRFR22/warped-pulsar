@@ -156,66 +156,10 @@ export function ChatInterface() {
     }, []);
 
     // Check for existing session on mount
+    // Session persistence disabled for now - always start fresh
     useEffect(() => {
-        const checkSavedSession = async () => {
-            const saved = localStorage.getItem(SESSION_STORAGE_KEY);
-            if (!saved) {
-                setSessionState('code_entry');
-                return;
-            }
-
-            try {
-                const sessionData: SavedSession = JSON.parse(saved);
-
-                // Verify session is still valid with API
-                const res = await fetch(`${API_BASE}/api/session/${sessionData.sessionId}/status`);
-
-                if (!res.ok) {
-                    // Session expired or invalid
-                    clearSession();
-                    setSessionState('code_entry');
-                    return;
-                }
-
-                const statusData = await res.json();
-
-                if (statusData.status === 'completed') {
-                    // Session already completed
-                    clearSession();
-                    setSessionState('code_entry');
-                    return;
-                }
-
-                // Restore session
-                setSessionId(sessionData.sessionId);
-                setMessages(sessionData.messages);
-                setQuestionNumber(sessionData.questionNumber);
-                setPhase(sessionData.phase);
-                setSignals(sessionData.signals);
-                prevPhaseRef.current = sessionData.phase;
-
-                // Add the current question if we have it
-                if (statusData.current_question) {
-                    // Check if the last message is already this question
-                    const lastBotMessage = sessionData.messages.filter(m => m.role === 'bot').pop();
-                    if (!lastBotMessage || lastBotMessage.text !== statusData.current_question) {
-                        setMessages(prev => [...prev, {
-                            id: `restored-${Date.now()}`,
-                            role: 'bot',
-                            text: statusData.current_question
-                        }]);
-                    }
-                }
-
-                setSessionState('conversation');
-            } catch (e) {
-                console.error('Failed to restore session', e);
-                clearSession();
-                setSessionState('code_entry');
-            }
-        };
-
-        checkSavedSession();
+        clearSession();
+        setSessionState('code_entry');
     }, [clearSession]);
 
     // Save session whenever it changes
