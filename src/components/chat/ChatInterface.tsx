@@ -283,7 +283,7 @@ export function ChatInterface() {
             const res = await fetch(`${API_BASE}/api/session/start`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ access_code: accessCode.trim().toUpperCase() }),
+                body: JSON.stringify({ access_code: accessCode.trim().toUpperCase(), user_name: userName.trim() }),
             });
 
             if (!res.ok) {
