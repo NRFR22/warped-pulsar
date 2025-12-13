@@ -6,11 +6,18 @@ export default function ChatLayout({
   return (
     <div className="chat-layout">
       <style>{`
+        html, body {
+          overflow-x: hidden !important;
+          max-width: 100vw !important;
+        }
         .chat-layout {
           display: flex;
           flex-direction: column;
-          min-height: 100vh;
-          min-height: 100dvh;
+          height: 100vh;
+          height: 100dvh;
+          width: 100%;
+          max-width: 100vw;
+          overflow: hidden;
         }
         /* Hide navbar and footer on chat page */
         body > header,
