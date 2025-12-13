@@ -330,8 +330,10 @@ export function ChatInterface() {
         // Normal conversation flow
         setStatus('processing');
 
-        // Start rapid fire if in Phase 2 and questions are available
-        if (phase === 2 && rapidFireAvailable > 0) {
+        // Start rapid fire if in Phase 2 (overlay will handle if no questions available)
+        console.log('Submit - phase:', phase, 'rapidFireAvailable:', rapidFireAvailable);
+        if (phase === 2) {
+            console.log('Activating rapid fire');
             setRapidFireActive(true);
         }
 
@@ -364,6 +366,7 @@ export function ChatInterface() {
             setQuestionNumber(data.question_number);
 
             // Track rapid fire availability from response
+            console.log('Response - data.phase:', data.phase, 'data.rapid_fire_available:', data.rapid_fire_available);
             if (data.rapid_fire_available !== undefined) {
                 setRapidFireAvailable(data.rapid_fire_available);
             }
