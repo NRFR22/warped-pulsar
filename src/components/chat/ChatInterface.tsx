@@ -462,14 +462,25 @@ export function ChatInterface() {
     };
 
     const transcribeAudio = async (audioBlob: Blob) => {
+        console.log('Transcribing audio, size:', audioBlob.size);
+
+        if (audioBlob.size < 1000) {
+            console.log('Audio too short, skipping transcription');
+            setStatus('idle');
+            return;
+        }
+
         try {
             const formData = new FormData();
             formData.append('audio', audioBlob, 'recording.webm');
 
+            console.log('Sending to API...');
             const response = await fetch(`${API_BASE}/api/transcribe`, {
                 method: 'POST',
                 body: formData,
             });
+
+            console.log('Response status:', response.status);
 
             if (!response.ok) {
                 const err = await response.json();
@@ -477,9 +488,12 @@ export function ChatInterface() {
             }
 
             const data = await response.json();
+            console.log('Transcript received:', data);
 
             // Insert transcript into input field
-            setInputText(prev => prev + (prev ? ' ' : '') + data.transcript);
+            if (data.transcript) {
+                setInputText(prev => prev + (prev ? ' ' : '') + data.transcript);
+            }
             setStatus('idle');
 
             // Focus the input
@@ -489,7 +503,7 @@ export function ChatInterface() {
 
         } catch (error: any) {
             console.error('Transcription failed:', error);
-            setError(error.message || 'Failed to transcribe audio');
+            addMessage('system', `Voice transcription failed: ${error.message || 'Unknown error'}`);
             setStatus('idle');
         }
     };
@@ -498,37 +512,54 @@ export function ChatInterface() {
         try {
             const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
 
-            const recorder = new MediaRecorder(stream, {
-                mimeType: 'audio/webm;codecs=opus'
-            });
+            // Check for supported mime types
+            let mimeType = 'audio/webm;codecs=opus';
+            if (!MediaRecorder.isTypeSupported(mimeType)) {
+                mimeType = 'audio/webm';
+                if (!MediaRecorder.isTypeSupported(mimeType)) {
+                    mimeType = 'audio/mp4';
+                    if (!MediaRecorder.isTypeSupported(mimeType)) {
+                        mimeType = ''; // Let browser choose
+                    }
+                }
+            }
+            console.log('Using mimeType:', mimeType || 'default');
+
+            const recorder = new MediaRecorder(stream, mimeType ? { mimeType } : undefined);
 
             audioChunksRef.current = [];
 
             recorder.ondataavailable = (event) => {
+                console.log('Data available, size:', event.data.size);
                 if (event.data.size > 0) {
                     audioChunksRef.current.push(event.data);
                 }
             };
 
             recorder.onstop = async () => {
+                console.log('Recording stopped, chunks:', audioChunksRef.current.length);
                 // Stop all tracks to release microphone
                 stream.getTracks().forEach(track => track.stop());
 
                 // Create blob from chunks
-                const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/webm' });
+                const audioBlob = new Blob(audioChunksRef.current, { type: recorder.mimeType || 'audio/webm' });
+                console.log('Created blob, size:', audioBlob.size, 'type:', audioBlob.type);
 
                 // Send to backend for transcription
+                setStatus('processing');
                 await transcribeAudio(audioBlob);
             };
 
-            recorder.start();
+            // Start recording and request data every second
+            recorder.start(1000);
             setMediaRecorder(recorder);
             setIsRecording(true);
             setStatus('listening');
+            console.log('Recording started');
 
         } catch (error) {
             console.error('Failed to start recording:', error);
-            setError('Microphone access denied. Please allow microphone access to use voice input.');
+            addMessage('system', 'Microphone access denied. Please allow microphone access to use voice input.');
         }
     };
 
