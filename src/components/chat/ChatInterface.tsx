@@ -63,6 +63,7 @@ export function ChatInterface() {
     const [sessionState, setSessionState] = useState<SessionState>('loading');
     const [sessionId, setSessionId] = useState<string | null>(null);
     const [accessCode, setAccessCode] = useState('');
+    const [userName, setUserName] = useState('');
     const [messages, setMessages] = useState<Message[]>([]);
     const [questionNumber, setQuestionNumber] = useState(0);
     const [status, setStatus] = useState<'idle' | 'listening' | 'processing'>('idle');
@@ -223,7 +224,7 @@ export function ChatInterface() {
     const oiOeProgress = Math.min(((signals.oi_count + signals.oe_count) / 15) * 100, 100);
 
     const handleCodeSubmit = async () => {
-        if (!accessCode.trim()) return;
+        if (!accessCode.trim() || !userName.trim()) return;
 
         setStatus('processing');
         setError(null);
@@ -406,35 +407,53 @@ export function ChatInterface() {
                 <div className={styles.chatContainer}>
                     <div className={styles.codeEntry}>
                         <div className={styles.codeContent}>
-                            <h2 className={styles.codeTitle}>Enter your access code</h2>
+                            <div className={styles.alphaNotice}>
+                                <span className={styles.alphaTag}>Alpha Test</span>
+                                <p>Thank you for participating. It is greatly appreciated.</p>
+                            </div>
+
+                            <h2 className={styles.codeTitle}>Get Started</h2>
                             <p className={styles.codeDescription}>
-                                Enter the code you received to start your personality assessment.
+                                Enter your name and access code to begin your personality assessment.
                             </p>
 
-                            <div className={styles.codeInputWrapper}>
+                            <div className={styles.formFields}>
                                 <input
-                                    ref={codeInputRef}
                                     type="text"
-                                    className={styles.codeInput}
-                                    placeholder="E.g. E61282A4"
-                                    value={accessCode}
-                                    onChange={(e) => setAccessCode(e.target.value.toUpperCase())}
+                                    className={styles.nameInput}
+                                    placeholder="Your name"
+                                    value={userName}
+                                    onChange={(e) => setUserName(e.target.value)}
                                     onKeyDown={handleCodeKeyDown}
                                     disabled={status === 'processing'}
-                                    maxLength={8}
                                     autoComplete="off"
                                 />
-                                <button
-                                    className={styles.codeButton}
-                                    onClick={handleCodeSubmit}
-                                    disabled={!accessCode.trim() || status === 'processing'}
-                                >
-                                    {status === 'processing' ? (
-                                        <Loader2 size={20} className={styles.spinning} />
-                                    ) : (
-                                        <ArrowRight size={20} />
-                                    )}
-                                </button>
+
+                                <div className={styles.codeInputWrapper}>
+                                    <input
+                                        ref={codeInputRef}
+                                        type="text"
+                                        className={styles.codeInput}
+                                        placeholder="Access code (e.g. E61282A4)"
+                                        value={accessCode}
+                                        onChange={(e) => setAccessCode(e.target.value.toUpperCase())}
+                                        onKeyDown={handleCodeKeyDown}
+                                        disabled={status === 'processing'}
+                                        maxLength={8}
+                                        autoComplete="off"
+                                    />
+                                    <button
+                                        className={styles.codeButton}
+                                        onClick={handleCodeSubmit}
+                                        disabled={!accessCode.trim() || !userName.trim() || status === 'processing'}
+                                    >
+                                        {status === 'processing' ? (
+                                            <Loader2 size={20} className={styles.spinning} />
+                                        ) : (
+                                            <ArrowRight size={20} />
+                                        )}
+                                    </button>
+                                </div>
                             </div>
 
                             {error && (
