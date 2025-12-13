@@ -600,9 +600,7 @@ export function ChatInterface() {
                                 <span className={styles.typingDot}></span>
                                 <span className={styles.typingDot}></span>
                             </div>
-                            <p className={styles.processingHint}>
-                                This might take 1-2 min for a specially tailored follow up question
-                            </p>
+                            <p className={styles.processingHint}>Thinking...</p>
                         </div>
                     )}
                 </div>
