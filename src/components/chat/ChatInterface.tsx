@@ -562,6 +562,14 @@ export function ChatInterface() {
                             ))}
                         </div>
 
+                        <div className={styles.infoBox}>
+                            <p>
+                                Not familiar with this personality system? Don't worry — we're building this website
+                                to be the perfect educational platform for understanding your type. Even if the results
+                                don't mean much to you yet, they will soon!
+                            </p>
+                        </div>
+
                         <div className={styles.shareSection}>
                             <p className={styles.shareText}>Got any friends in OPS? Have them do this test!</p>
                             {shareCode ? (
