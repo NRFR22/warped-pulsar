@@ -284,10 +284,11 @@ export function ChatInterface() {
             inputRef.current.style.height = 'auto';
         }
 
-        // If we're awaiting known type, submit it and show results
+        // If we're awaiting known type, submit it and get results from /api/session/complete
         if (sessionState === 'awaiting_known_type') {
+            setStatus('processing');
             try {
-                await fetch(`${API_BASE}/api/session/complete`, {
+                const res = await fetch(`${API_BASE}/api/session/complete`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
@@ -295,10 +296,23 @@ export function ChatInterface() {
                         user_known_type: text,
                     }),
                 });
+
+                if (!res.ok) {
+                    throw new Error('Failed to complete session');
+                }
+
+                const data = await res.json();
+                // Use the results from /api/session/complete
+                if (data.pipeline_result) {
+                    setResult(data.pipeline_result);
+                }
+                setSessionState('results');
             } catch (e) {
-                console.error('Failed to save known type', e);
+                console.error('Failed to complete session', e);
+                addMessage('system', "There was an error completing your session. Please try again.");
+            } finally {
+                setStatus('idle');
             }
-            setSessionState('results');
             return;
         }
 
@@ -346,8 +360,8 @@ export function ChatInterface() {
             }
 
             if (data.is_complete) {
-                setResult(data.result);
-                addMessage('system', "The analysis is complete! Before you see your results, if you have officially been typed in the OPS system, please enter your type below for reference. If not, just type anything and press Enter.");
+                // Don't store result here - we'll get it from /api/session/complete
+                addMessage('system', "Your results are ready! Before I show you, if you've been officially typed before, please enter your type (e.g., 'Ne-Fi'). If you haven't been typed, just say 'not typed' or 'unknown'.");
                 setSessionState('awaiting_known_type');
             } else {
                 addMessage('bot', data.next_question);
