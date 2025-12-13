@@ -189,7 +189,7 @@ export function ChatInterface() {
                     const lastBotMessage = sessionData.messages.filter(m => m.role === 'bot').pop();
                     if (!lastBotMessage || lastBotMessage.text !== statusData.current_question) {
                         setMessages(prev => [...prev, {
-                            id: Date.now().toString(),
+                            id: `restored-${Date.now()}`,
                             role: 'bot',
                             text: statusData.current_question
                         }]);
@@ -250,8 +250,10 @@ export function ChatInterface() {
         }
     }, [sessionState]);
 
+    const messageIdRef = useRef(0);
     const addMessage = (role: 'bot' | 'user' | 'system', text: string) => {
-        setMessages(prev => [...prev, { id: Date.now().toString(), role, text }]);
+        messageIdRef.current += 1;
+        setMessages(prev => [...prev, { id: `msg-${messageIdRef.current}-${Date.now()}`, role, text }]);
     };
 
     const snProgress = Math.min(((signals.seni_count + signals.nesi_count) / 20) * 100, 100);
@@ -285,7 +287,7 @@ export function ChatInterface() {
             addMessage('system', "Hi! I'll be asking you questions to figure out your Personality Type. At first I'll be asking general questions to get to know you, then I'll get into more directed questions once I've got a baseline. Enjoy!");
 
             setTimeout(() => {
-                setMessages(prev => [...prev, { id: (Date.now() + 1).toString(), role: 'bot', text: data.first_question }]);
+                setMessages(prev => [...prev, { id: `first-q-${Date.now()}`, role: 'bot', text: data.first_question }]);
             }, 100);
 
             setSessionState('conversation');
