@@ -28,15 +28,15 @@ const buildMbtiCards = (types: TypeSummary[], order?: string[]): MbtiCard[] => {
 
     const orderedCodes = order && order.length ? order : Object.keys(grouped);
 
-    return orderedCodes
-        .map((code) => {
-            const matches = grouped[code];
-            if (!matches || matches.length === 0) return null;
-            const standard = matches.find((t) => t.variant === 'standard') || matches[0];
-            const jumper = matches.find((t) => t.variant === 'jumper') || matches.find((t) => t.id !== standard?.id);
-            return { mbti: code, standard, jumper };
-        })
-        .filter((card): card is MbtiCard => Boolean(card));
+    const cards: MbtiCard[] = [];
+    orderedCodes.forEach((code) => {
+        const matches = grouped[code];
+        if (!matches || matches.length === 0) return;
+        const standard = matches.find((t) => t.variant === 'standard') || matches[0];
+        const jumper = matches.find((t) => t.variant === 'jumper') || matches.find((t) => t.id !== standard?.id);
+        cards.push({ mbti: code, standard, jumper });
+    });
+    return cards;
 };
 
 export function ExploreTypesMenu({ onTypeSelect = (id) => console.log('Select type', id), onRequestClose }: ExploreTypesMenuProps) {

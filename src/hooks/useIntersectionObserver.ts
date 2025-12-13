@@ -10,7 +10,7 @@ export function useIntersectionObserver({
   threshold = 0,
   rootMargin = '0px',
   freezeOnceVisible = false,
-}: UseIntersectionObserverProps = {}): [React.RefObject<HTMLDivElement>, boolean] {
+}: UseIntersectionObserverProps = {}): [React.RefObject<HTMLDivElement | null>, boolean] {
   const [isIntersecting, setIntersecting] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 

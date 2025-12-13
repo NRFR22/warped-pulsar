@@ -316,7 +316,7 @@ export function FunctionStackBubbles({
                         const leftBottomX = topCenterX - offsetX;
                         const rightBottomX = topCenterX + offsetX;
 
-                        const positions: Record<string, { x: number; y: number } | null> = {
+                        const positions: Record<string, { x: number; y: number; func: string; index: number; isSavior: boolean } | null> = {
                             leftTop: null,
                             leftBottom: null,
                             rightTop: null,
