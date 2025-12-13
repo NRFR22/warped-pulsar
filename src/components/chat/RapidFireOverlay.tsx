@@ -147,10 +147,7 @@ export function RapidFireOverlay({ sessionId, isActive, onClose }: Props) {
         <div className={styles.overlay}>
             <div className={styles.card}>
                 <div className={styles.header}>
-                    <span className={styles.badge}>Quick Question</span>
-                    <span className={styles.remaining}>
-                        {question.questions_remaining} left
-                    </span>
+                    <span className={styles.badge}>🔥 Rapid Fire 🔥</span>
                 </div>
 
                 <p className={styles.question}>{question.text}</p>
