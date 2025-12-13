@@ -1,4 +1,5 @@
 import { ChatInterface } from '@/components/chat/ChatInterface';
+import { InAppBrowserBanner } from '@/components/ui/InAppBrowserBanner';
 import styles from './chat.module.css';
 
 export default function ChatPage() {
@@ -7,6 +8,7 @@ export default function ChatPage() {
             <div className={styles.chatRow}>
                 <ChatInterface />
             </div>
+            <InAppBrowserBanner />
         </main>
     );
 }
