@@ -92,6 +92,11 @@ export function ChatInterface() {
     const [rapidFireActive, setRapidFireActive] = useState(false);
     const [rapidFireAvailable, setRapidFireAvailable] = useState(0);
 
+    // Feedback state
+    const [feedback, setFeedback] = useState('');
+    const [feedbackSubmitted, setFeedbackSubmitted] = useState(false);
+    const [feedbackSubmitting, setFeedbackSubmitting] = useState(false);
+
     const messagesContainerRef = useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLTextAreaElement>(null);
     const codeInputRef = useRef<HTMLInputElement>(null);
@@ -422,6 +427,28 @@ export function ChatInterface() {
         }
     };
 
+    const handleFeedbackSubmit = async () => {
+        if (!feedback.trim() || !sessionId) return;
+
+        setFeedbackSubmitting(true);
+
+        try {
+            await fetch(`${API_BASE}/api/session/feedback`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    session_id: sessionId,
+                    feedback: feedback.trim(),
+                }),
+            });
+            setFeedbackSubmitted(true);
+        } catch (e) {
+            console.error('Failed to submit feedback', e);
+        } finally {
+            setFeedbackSubmitting(false);
+        }
+    };
+
     const handleKeyDown = (e: React.KeyboardEvent) => {
         if (e.key === 'Enter' && !e.shiftKey) {
             e.preventDefault();
@@ -684,6 +711,40 @@ export function ChatInterface() {
                                         'Get Access Code'
                                     )}
                                 </button>
+                            )}
+                        </div>
+
+                        <div className={styles.feedbackSection}>
+                            <h3 className={styles.feedbackTitle}>Share Your Thoughts</h3>
+
+                            {feedbackSubmitted ? (
+                                <p className={styles.feedbackThanks}>Thank you for your feedback!</p>
+                            ) : (
+                                <>
+                                    <textarea
+                                        className={styles.feedbackTextarea}
+                                        placeholder="Share your thoughts about the test, your results, or anything else..."
+                                        value={feedback}
+                                        onChange={(e) => setFeedback(e.target.value)}
+                                        rows={4}
+                                        disabled={feedbackSubmitting}
+                                    />
+
+                                    <button
+                                        className={styles.feedbackSubmit}
+                                        onClick={handleFeedbackSubmit}
+                                        disabled={!feedback.trim() || feedbackSubmitting}
+                                    >
+                                        {feedbackSubmitting ? (
+                                            <>
+                                                <Loader2 size={16} className={styles.spinning} />
+                                                Submitting...
+                                            </>
+                                        ) : (
+                                            'Submit Feedback'
+                                        )}
+                                    </button>
+                                </>
                             )}
                         </div>
                     </div>
