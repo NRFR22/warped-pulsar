@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Mic, Square, Loader2, Send, ArrowRight, Trophy, RefreshCw, Copy, Check } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import styles from './ChatInterface.module.css';
+import { RapidFireOverlay } from './RapidFireOverlay';
 
 const API_BASE = "https://question-pipeline-production.up.railway.app";
 const SESSION_STORAGE_KEY = "typing_session";
@@ -86,6 +87,10 @@ export function ChatInterface() {
     const [shareCode, setShareCode] = useState<string | null>(null);
     const [shareCodeLoading, setShareCodeLoading] = useState(false);
     const [shareCodeCopied, setShareCodeCopied] = useState(false);
+
+    // Rapid fire state
+    const [rapidFireActive, setRapidFireActive] = useState(false);
+    const [rapidFireAvailable, setRapidFireAvailable] = useState(0);
 
     const messagesContainerRef = useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLTextAreaElement>(null);
@@ -315,6 +320,11 @@ export function ChatInterface() {
         // Normal conversation flow
         setStatus('processing');
 
+        // Start rapid fire if in Phase 2 and questions are available
+        if (phase === 2 && rapidFireAvailable > 0) {
+            setRapidFireActive(true);
+        }
+
         try {
             const res = await fetch(`${API_BASE}/api/session/answer`, {
                 method: 'POST',
@@ -342,6 +352,11 @@ export function ChatInterface() {
 
             const data = await res.json();
             setQuestionNumber(data.question_number);
+
+            // Track rapid fire availability from response
+            if (data.rapid_fire_available !== undefined) {
+                setRapidFireAvailable(data.rapid_fire_available);
+            }
 
             if (data.signals_summary) {
                 setSignals(data.signals_summary);
@@ -371,6 +386,7 @@ export function ChatInterface() {
             }
         } finally {
             setStatus('idle');
+            setRapidFireActive(false); // Dismiss rapid fire when main question arrives
         }
     };
 
@@ -717,6 +733,15 @@ export function ChatInterface() {
                         </div>
                     )}
                 </div>
+
+                {/* Rapid Fire Overlay */}
+                {sessionId && (
+                    <RapidFireOverlay
+                        sessionId={sessionId}
+                        isActive={rapidFireActive}
+                        onClose={() => setRapidFireActive(false)}
+                    />
+                )}
 
                 <div className={styles.controls}>
                     <div className={cn(styles.inputWrapper, status === 'listening' && styles.inputListening)}>

@@ -1,0 +1,197 @@
+/* Overlay - appears above the chat */
+.overlay {
+    position: absolute;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 2rem);
+    max-width: 400px;
+    z-index: 100;
+    animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+/* Card container */
+.card {
+    background: var(--color-background);
+    border: 1px solid var(--color-border);
+    border-radius: 1rem;
+    padding: 1.25rem;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+/* Header with badge and count */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #8b5cf6, #a78bfa);
+    color: white;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 0.3rem 0.625rem;
+    border-radius: 2rem;
+}
+
+.remaining {
+    font-size: 0.75rem;
+    color: var(--color-muted-foreground);
+}
+
+/* Question text */
+.question {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--color-foreground);
+    line-height: 1.5;
+    margin: 0 0 1rem 0;
+    text-align: center;
+}
+
+/* Scale labels */
+.scaleLabels {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    padding: 0 0.25rem;
+}
+
+.leftLabel,
+.rightLabel {
+    font-size: 0.75rem;
+    color: var(--color-muted-foreground);
+    max-width: 45%;
+    line-height: 1.3;
+}
+
+.leftLabel {
+    text-align: left;
+}
+
+.rightLabel {
+    text-align: right;
+}
+
+/* Scale buttons */
+.scale {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.scaleButton {
+    flex: 1;
+    aspect-ratio: 1;
+    max-width: 56px;
+    border: 2px solid var(--color-border);
+    border-radius: 0.75rem;
+    background: var(--color-secondary);
+    color: var(--color-foreground);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.scaleButton:hover:not(:disabled) {
+    border-color: var(--color-primary);
+    background: rgba(var(--color-primary-rgb, 99, 102, 241), 0.1);
+    transform: translateY(-2px);
+}
+
+.scaleButton:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.scaleButton.selected {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: white;
+    transform: scale(1.05);
+}
+
+.scaleButton:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Feedback flash */
+.feedback {
+    text-align: center;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: #8b5cf6;
+    animation: feedbackPop 0.5s ease-out;
+    margin-bottom: 0.5rem;
+}
+
+@keyframes feedbackPop {
+    0% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.1);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(1);
+    }
+}
+
+/* Hint text */
+.hint {
+    font-size: 0.6875rem;
+    color: var(--color-muted-foreground);
+    text-align: center;
+    margin: 0;
+    opacity: 0.7;
+}
+
+/* Mobile adjustments */
+@media (max-width: 500px) {
+    .overlay {
+        width: calc(100% - 1rem);
+        bottom: 70px;
+    }
+
+    .card {
+        padding: 1rem;
+    }
+
+    .question {
+        font-size: 0.9375rem;
+    }
+
+    .scaleButton {
+        max-width: 48px;
+        font-size: 0.9375rem;
+    }
+
+    .leftLabel,
+    .rightLabel {
+        font-size: 0.6875rem;
+    }
+}
