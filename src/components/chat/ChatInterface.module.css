@@ -1,109 +1,606 @@
+/* Page wrapper - full width with sidebars */
+.pageWrapper {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    gap: 2rem;
+    height: 100%;
+    width: 100%;
+    padding: 0 1rem;
+}
+
+/* Progress Sidebars - in the margins */
+.progressSidebar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    width: 120px;
+    flex-shrink: 0;
+}
+
+.progressItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.progressRing {
+    width: 80px;
+    height: 80px;
+    transform: rotate(-90deg);
+}
+
+.progressRingBg {
+    fill: none;
+    stroke: var(--color-border);
+    stroke-width: 8;
+}
+
+.progressRingFill {
+    fill: none;
+    stroke-width: 8;
+    stroke-linecap: round;
+    transition: stroke-dasharray 0.5s ease-out;
+}
+
+.progressLabel {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-muted-foreground);
+}
+
+/* Chat Container */
 .chatContainer {
     display: flex;
     flex-direction: column;
     height: 100%;
+    min-height: 0;
+    flex: 1;
+    max-width: 700px;
+    background-color: var(--color-background);
+    border: 1px solid var(--color-border);
+    border-radius: 1rem;
+    overflow: hidden;
 }
 
-.header {
-    padding: 1rem 2rem;
-    border-bottom: 1px solid var(--color-border);
+/* Code Entry Screen */
+.codeEntry {
+    flex: 1;
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: center;
+    padding: 2rem;
 }
 
-.status {
+.codeContent {
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+}
+
+.codeTitle {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.codeDescription {
+    color: var(--color-muted-foreground);
+    margin-bottom: 1.5rem;
+    font-size: 0.9375rem;
+}
+
+.codeInputWrapper {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.codeInput {
+    flex: 1;
+    padding: 0.875rem 1rem;
+    font-size: 1.125rem;
+    font-family: monospace;
+    letter-spacing: 0.1em;
+    text-align: center;
+    border: 1px solid var(--color-border);
+    border-radius: 0.75rem;
+    background-color: var(--color-background);
+    transition: border-color 0.2s ease;
+}
+
+.codeInput:focus {
+    outline: none;
+    border-color: var(--color-primary);
+}
+
+.codeInput::placeholder {
+    color: var(--color-muted-foreground);
+    letter-spacing: normal;
+    font-family: inherit;
+}
+
+.codeInput:disabled {
+    opacity: 0.6;
+}
+
+.codeButton {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 0.75rem;
+    background-color: var(--color-primary);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    flex-shrink: 0;
+}
+
+.codeButton:hover:not(:disabled) {
+    transform: scale(1.05);
+}
+
+.codeButton:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.codeError {
+    color: var(--color-f);
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+}
+
+.errorWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+}
+
+.retryButton {
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    padding: 0.5rem 1rem;
     font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-foreground);
+    background-color: var(--color-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.retryButton:hover {
+    background-color: var(--color-muted);
+    border-color: var(--color-muted-foreground);
+}
+
+/* Loading Screen */
+.loadingScreen {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
     color: var(--color-muted-foreground);
 }
 
+/* Question Progress - Sticky */
+.questionProgress {
+    padding: 0.75rem 1rem;
+    text-align: center;
+    font-size: 0.8125rem;
+    color: var(--color-muted-foreground);
+    background-color: var(--color-background);
+    border-bottom: 1px solid var(--color-border);
+    flex-shrink: 0;
+}
+
+/* Messages */
 .messages {
     flex: 1;
     overflow-y: auto;
-    padding: 2rem;
+    padding: 1.5rem;
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1rem;
+    scroll-behavior: smooth;
 }
 
 .message {
-    max-width: 80%;
-    padding: 1rem 1.5rem;
-    border-radius: var(--radius-lg);
-    line-height: 1.6;
+    max-width: 85%;
+    padding: 0.875rem 1.125rem;
+    border-radius: 1.25rem;
+    line-height: 1.5;
+    font-size: 0.9375rem;
+    animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .botMessage {
     align-self: flex-start;
-    background-color: var(--color-background);
-    border: 1px solid var(--color-border);
-    border-bottom-left-radius: 0;
+    background-color: var(--color-secondary);
+    border-bottom-left-radius: 0.25rem;
 }
 
 .userMessage {
     align-self: flex-end;
     background-color: var(--color-primary);
     color: var(--color-primary-foreground);
-    border-bottom-right-radius: 0;
+    border-bottom-right-radius: 0.25rem;
+}
+
+.systemMessage {
+    align-self: center;
+    max-width: 90%;
+    background: rgba(253, 224, 71, 0.2);
+    border: 1px solid rgba(234, 179, 8, 0.3);
+    color: var(--color-foreground);
+    text-align: center;
+    font-size: 0.875rem;
+    border-radius: 1rem;
+}
+
+.typing {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 1rem 1.25rem;
+}
+
+.typingDot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--color-muted-foreground);
+    border-radius: 50%;
+    animation: typingBounce 1.4s infinite ease-in-out both;
+}
+
+.typingDot:nth-child(1) {
+    animation-delay: -0.32s;
+}
+
+.typingDot:nth-child(2) {
+    animation-delay: -0.16s;
+}
+
+@keyframes typingBounce {
+    0%, 80%, 100% {
+        transform: scale(0.6);
+        opacity: 0.4;
+    }
+    40% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.processingWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+}
+
+.processingHint {
+    font-size: 0.75rem;
+    color: var(--color-muted-foreground);
+    padding-left: 0.5rem;
+    font-style: italic;
 }
 
 .controls {
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
+    padding: 1rem;
     border-top: 1px solid var(--color-border);
-    background-color: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(10px);
+    background-color: var(--color-background);
+    flex-shrink: 0;
 }
 
-.micButton {
-    width: 4rem;
-    height: 4rem;
+.inputWrapper {
+    display: flex;
+    align-items: flex-end;
+    width: 100%;
+    background-color: var(--color-secondary);
+    border: 1px solid transparent;
+    border-radius: 1.5rem;
+    padding: 0.5rem 0.5rem 0.5rem 1rem;
+    gap: 0.5rem;
+    transition: all 0.2s ease;
+}
+
+.inputWrapper:focus-within {
+    border-color: var(--color-primary);
+    background-color: var(--color-background);
+}
+
+.inputListening {
+    border-color: var(--color-f);
+    background-color: rgba(239, 68, 68, 0.05);
+}
+
+.textInput {
+    flex: 1;
+    border: none;
+    background: transparent;
+    font-size: 0.9375rem;
+    line-height: 1.5;
+    resize: none;
+    min-height: 24px;
+    max-height: 120px;
+    padding: 0.25rem 0;
+    font-family: inherit;
+    color: inherit;
+}
+
+.textInput:focus {
+    outline: none;
+}
+
+.textInput::placeholder {
+    color: var(--color-muted-foreground);
+}
+
+.textInput:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.inputButtons {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+}
+
+.micButton,
+.sendButton {
+    width: 2.25rem;
+    height: 2.25rem;
     border-radius: 50%;
-    background-color: var(--color-primary);
-    color: white;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.2s ease;
-    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+    transition: all 0.15s ease;
+    flex-shrink: 0;
+    border: none;
+    cursor: pointer;
 }
 
-.micButton:hover {
-    transform: scale(1.05);
+.micButton {
+    background-color: transparent;
+    color: var(--color-muted-foreground);
+}
+
+.micButton:hover:not(:disabled) {
+    background-color: var(--color-muted);
+    color: var(--color-foreground);
 }
 
 .micButton.listening {
     background-color: var(--color-f);
-    /* Red for recording */
+    color: white;
     animation: pulse 1.5s infinite;
 }
 
 .micButton.processing {
+    background-color: transparent;
+    color: var(--color-muted-foreground);
+    cursor: wait;
+}
+
+.micButton:disabled {
+    cursor: not-allowed;
+}
+
+.sendButton {
     background-color: var(--color-muted);
     color: var(--color-muted-foreground);
+}
+
+.sendButton:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.sendButton.sendActive {
+    background-color: var(--color-primary);
+    color: white;
+}
+
+.sendButton.sendActive:hover {
+    transform: scale(1.05);
 }
 
 @keyframes pulse {
     0% {
         box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4);
     }
-
     70% {
-        box-shadow: 0 0 0 15px rgba(239, 68, 68, 0);
+        box-shadow: 0 0 0 10px rgba(239, 68, 68, 0);
     }
-
     100% {
         box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
     }
 }
 
-.hint {
+.spinning {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Scrollbar styling */
+.messages::-webkit-scrollbar {
+    width: 6px;
+}
+
+.messages::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.messages::-webkit-scrollbar-thumb {
+    background-color: var(--color-border);
+    border-radius: 3px;
+}
+
+.messages::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-muted-foreground);
+}
+
+/* Results Screen */
+.resultsScreen {
+    flex: 1;
+    padding: 2rem;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.resultsTitle {
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+
+.topTypeCard {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, rgba(234, 179, 8, 0.1), rgba(245, 158, 11, 0.1));
+    border: 1px solid rgba(234, 179, 8, 0.3);
+    border-radius: 1rem;
+}
+
+.trophyIcon {
+    color: #eab308;
+    flex-shrink: 0;
+}
+
+.topTypeInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.topTypeLabel {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-muted-foreground);
+}
+
+.topTypeValue {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-foreground);
+}
+
+.topTypeScore {
     font-size: 0.875rem;
     color: var(--color-muted-foreground);
+}
+
+.runnerUps {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.runnerUpsTitle {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-muted-foreground);
+    margin-bottom: 0.25rem;
+}
+
+.runnerUpItem {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    background-color: var(--color-secondary);
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+}
+
+.runnerUpRank {
+    font-weight: 600;
+    color: var(--color-muted-foreground);
+    width: 2rem;
+}
+
+.runnerUpType {
+    font-weight: 600;
+    flex: 1;
+}
+
+.runnerUpScore {
+    color: var(--color-muted-foreground);
+}
+
+.runnerUpNotes {
+    font-size: 0.75rem;
+    color: var(--color-muted-foreground);
+    font-style: italic;
+}
+
+/* Mobile responsiveness - hide sidebars on small screens */
+@media (max-width: 900px) {
+    .progressSidebar {
+        display: none;
+    }
+
+    .pageWrapper {
+        padding: 0;
+    }
+
+    .chatContainer {
+        border-radius: 0;
+        border-left: none;
+        border-right: none;
+    }
+
+    .resultsScreen {
+        padding: 1.5rem;
+    }
+
+    .topTypeValue {
+        font-size: 1.5rem;
+    }
+
+    .runnerUpNotes {
+        display: none;
+    }
 }
