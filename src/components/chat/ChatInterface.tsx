@@ -444,7 +444,7 @@ export function ChatInterface() {
                                                 ref={codeInputRef}
                                                 type="text"
                                                 className={styles.codeInput}
-                                                placeholder="e.g. A1B2"
+                                                placeholder="e.g. 1234"
                                                 value={accessCode}
                                                 onChange={(e) => setAccessCode(e.target.value.toUpperCase())}
                                                 onKeyDown={handleCodeKeyDown}
