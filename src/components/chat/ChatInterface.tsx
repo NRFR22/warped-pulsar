@@ -361,7 +361,7 @@ export function ChatInterface() {
 
             if (data.is_complete) {
                 // Don't store result here - we'll get it from /api/session/complete
-                addMessage('system', "Your results are ready! Before I show you, if you've been officially typed before, please enter your type (e.g., 'Ne-Fi'). If you haven't been typed, just say 'not typed' or 'unknown'.");
+                addMessage('system', "Your results are ready! Before I show you, if you've been officially typed before, please enter your full type (e.g., 'MF Ne-Fi CP/S(B) #1'). If you haven't been typed, just say 'not typed' or 'unknown'.");
                 setSessionState('awaiting_known_type');
             } else {
                 addMessage('bot', data.next_question);
