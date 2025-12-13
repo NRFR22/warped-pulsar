@@ -559,22 +559,50 @@ export function ChatInterface() {
                                 Your responses will be used to improve our typing algorithms.
                             </p>
 
-                            {/* DEBUG BUTTON - Remove before production */}
-                            <button
-                                onClick={showDummyResults}
-                                style={{
-                                    marginTop: '1rem',
-                                    padding: '0.5rem 1rem',
-                                    fontSize: '0.75rem',
-                                    background: '#ef4444',
-                                    color: 'white',
-                                    border: 'none',
-                                    borderRadius: '0.25rem',
-                                    cursor: 'pointer',
-                                }}
-                            >
-                                [DEBUG] Show Results Page
-                            </button>
+                            {/* DEBUG BUTTONS - Remove before production */}
+                            <div style={{ display: 'flex', gap: '0.5rem', marginTop: '1rem' }}>
+                                <button
+                                    onClick={showDummyResults}
+                                    style={{
+                                        padding: '0.5rem 1rem',
+                                        fontSize: '0.75rem',
+                                        background: '#ef4444',
+                                        color: 'white',
+                                        border: 'none',
+                                        borderRadius: '0.25rem',
+                                        cursor: 'pointer',
+                                    }}
+                                >
+                                    [DEBUG] Results
+                                </button>
+                                <button
+                                    onClick={() => {
+                                        setSessionId('debug-session');
+                                        setRapidFireAvailable(26);
+                                        setRapidFireActive(true);
+                                    }}
+                                    style={{
+                                        padding: '0.5rem 1rem',
+                                        fontSize: '0.75rem',
+                                        background: '#8b5cf6',
+                                        color: 'white',
+                                        border: 'none',
+                                        borderRadius: '0.25rem',
+                                        cursor: 'pointer',
+                                    }}
+                                >
+                                    [DEBUG] Rapid Fire
+                                </button>
+                            </div>
+
+                            {/* Rapid Fire Overlay for debug */}
+                            {sessionId && (
+                                <RapidFireOverlay
+                                    sessionId={sessionId}
+                                    isActive={rapidFireActive}
+                                    onClose={() => setRapidFireActive(false)}
+                                />
+                            )}
                         </div>
                     </div>
                 </div>
