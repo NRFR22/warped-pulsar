@@ -1,9 +1,18 @@
 .container {
     display: flex;
-    height: 100vh;
-    height: 100dvh; /* Dynamic viewport height - better for in-app browsers */
+    /* Desktop: account for navbar height */
+    height: calc(100vh - 80px);
     width: 100%;
-    padding: 0;
+    padding: 1rem 0;
+}
+
+/* Mobile: full height since navbar is hidden */
+@media (max-width: 600px) {
+    .container {
+        height: 100vh;
+        height: 100dvh;
+        padding: 0;
+    }
 }
 
 .progressRow {

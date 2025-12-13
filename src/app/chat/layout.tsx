@@ -13,16 +13,21 @@ export default function ChatLayout({
         .chat-layout {
           display: flex;
           flex-direction: column;
-          height: 100vh;
-          height: 100dvh;
           width: 100%;
           max-width: 100vw;
-          overflow: hidden;
+          overflow-x: hidden;
         }
-        /* Hide navbar and footer on chat page */
-        body > header,
-        body > footer {
-          display: none !important;
+        /* Only hide navbar and footer on MOBILE */
+        @media (max-width: 600px) {
+          body > header,
+          body > footer {
+            display: none !important;
+          }
+          .chat-layout {
+            height: 100vh;
+            height: 100dvh;
+            overflow: hidden;
+          }
         }
       `}</style>
       {children}
