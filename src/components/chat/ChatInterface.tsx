@@ -598,9 +598,12 @@ export function ChatInterface() {
                                     This is taking longer than usual. We're doing deeper analysis. We're probably going into Phase 2...
                                 </p>
                             ) : (
-                                <p className={styles.processingHint} key={thinkingIndex}>
-                                    {thinkingPhrases[thinkingIndex]}...
-                                </p>
+                                <div className={styles.processingHints}>
+                                    <p className={styles.processingHint} key={thinkingIndex}>
+                                        {thinkingPhrases[thinkingIndex]}...
+                                    </p>
+                                    <p className={styles.processingTimer}>~20 seconds</p>
+                                </div>
                             )}
                         </div>
                     )}
