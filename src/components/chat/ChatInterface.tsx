@@ -89,6 +89,42 @@ export function ChatInterface() {
     const codeInputRef = useRef<HTMLInputElement>(null);
     const prevPhaseRef = useRef(1);
 
+    const thinkingPhrases = [
+        "Sizing you up",
+        "Getting the vibe",
+        "Reading the room",
+        "Connecting the dots",
+        "Picking up signals",
+        "Tuning in",
+        "Taking notes",
+        "Spotting patterns",
+        "Cross-checking traits",
+        "Testing hypotheses",
+        "Weighing tendencies",
+        "Aligning signals",
+        "Refining the read",
+        "Narrowing it down",
+        "Personality sleuthing",
+        "Trait juggling",
+        "Vibe triangulation",
+        "Temperament sniffing",
+        "Putting it together",
+        "Hmm-ing quietly",
+        "Ahh, interesting…",
+    ];
+
+    const [thinkingIndex, setThinkingIndex] = useState(0);
+
+    useEffect(() => {
+        if (status !== 'processing') return;
+
+        const interval = setInterval(() => {
+            setThinkingIndex(prev => (prev + 1) % thinkingPhrases.length);
+        }, 3000);
+
+        return () => clearInterval(interval);
+    }, [status, thinkingPhrases.length]);
+
     // Save session to localStorage
     const saveSession = useCallback(() => {
         if (sessionId && messages.length > 0) {
@@ -600,7 +636,9 @@ export function ChatInterface() {
                                 <span className={styles.typingDot}></span>
                                 <span className={styles.typingDot}></span>
                             </div>
-                            <p className={styles.processingHint}>Thinking...</p>
+                            <p className={styles.processingHint} key={thinkingIndex}>
+                                {thinkingPhrases[thinkingIndex]}...
+                            </p>
                         </div>
                     )}
                 </div>
