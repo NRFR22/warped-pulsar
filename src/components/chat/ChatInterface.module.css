@@ -78,57 +78,83 @@
 }
 
 .codeContent {
-    max-width: 400px;
+    max-width: 440px;
     width: 100%;
-    text-align: center;
 }
 
 .alphaNotice {
-    background: rgba(234, 179, 8, 0.1);
-    border: 1px solid rgba(234, 179, 8, 0.3);
-    border-radius: 0.75rem;
-    padding: 1rem;
-    margin-bottom: 1.5rem;
-}
-
-.alphaNotice p {
-    color: var(--color-muted-foreground);
-    font-size: 0.875rem;
-    margin: 0;
+    background: linear-gradient(135deg, rgba(234, 179, 8, 0.08), rgba(245, 158, 11, 0.05));
+    border: 1px solid rgba(234, 179, 8, 0.2);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
 }
 
 .alphaTag {
     display: inline-block;
-    background: rgba(234, 179, 8, 0.2);
-    color: #ca8a04;
-    font-size: 0.75rem;
-    font-weight: 600;
+    background: linear-gradient(135deg, #eab308, #f59e0b);
+    color: white;
+    font-size: 0.6875rem;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
-    padding: 0.25rem 0.5rem;
-    border-radius: 0.25rem;
-    margin-bottom: 0.5rem;
+    letter-spacing: 0.1em;
+    padding: 0.375rem 0.75rem;
+    border-radius: 2rem;
+    margin-bottom: 1rem;
+}
+
+.alphaHeadline {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-foreground);
+    margin: 0 0 0.5rem 0;
+}
+
+.alphaBody {
+    font-size: 0.875rem;
+    color: var(--color-muted-foreground);
+    line-height: 1.6;
+    margin: 0;
+}
+
+.formSection {
+    text-align: left;
 }
 
 .formFields {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.inputGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.inputLabel {
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--color-foreground);
 }
 
 .nameInput {
     width: 100%;
     padding: 0.875rem 1rem;
-    font-size: 1rem;
+    font-size: 0.9375rem;
     border: 1px solid var(--color-border);
-    border-radius: 0.75rem;
+    border-radius: 0.625rem;
     background-color: var(--color-background);
-    transition: border-color 0.2s ease;
+    transition: all 0.2s ease;
 }
 
 .nameInput:focus {
     outline: none;
     border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(var(--color-primary-rgb, 0, 0, 0), 0.1);
 }
 
 .nameInput::placeholder {
@@ -137,6 +163,46 @@
 
 .nameInput:disabled {
     opacity: 0.6;
+}
+
+.startButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 0.875rem 1.5rem;
+    margin-top: 0.5rem;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: white;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary));
+    border: none;
+    border-radius: 0.625rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.startButton:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.startButton:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.startButton:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.footerNote {
+    font-size: 0.75rem;
+    color: var(--color-muted-foreground);
+    text-align: center;
+    margin-top: 2rem;
+    line-height: 1.5;
 }
 
 .codeTitle {
@@ -160,53 +226,31 @@
 .codeInput {
     flex: 1;
     padding: 0.875rem 1rem;
-    font-size: 1.125rem;
+    font-size: 0.9375rem;
     font-family: monospace;
-    letter-spacing: 0.1em;
-    text-align: center;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
     border: 1px solid var(--color-border);
-    border-radius: 0.75rem;
+    border-radius: 0.625rem;
     background-color: var(--color-background);
-    transition: border-color 0.2s ease;
+    transition: all 0.2s ease;
 }
 
 .codeInput:focus {
     outline: none;
     border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(var(--color-primary-rgb, 0, 0, 0), 0.1);
 }
 
 .codeInput::placeholder {
     color: var(--color-muted-foreground);
     letter-spacing: normal;
     font-family: inherit;
+    text-transform: none;
 }
 
 .codeInput:disabled {
     opacity: 0.6;
-}
-
-.codeButton {
-    width: 3rem;
-    height: 3rem;
-    border-radius: 0.75rem;
-    background-color: var(--color-primary);
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: none;
-    cursor: pointer;
-    transition: all 0.15s ease;
-    flex-shrink: 0;
-}
-
-.codeButton:hover:not(:disabled) {
-    transform: scale(1.05);
-}
-
-.codeButton:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
 }
 
 .codeError {

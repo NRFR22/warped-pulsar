@@ -408,65 +408,89 @@ export function ChatInterface() {
                     <div className={styles.codeEntry}>
                         <div className={styles.codeContent}>
                             <div className={styles.alphaNotice}>
-                                <span className={styles.alphaTag}>Alpha Test</span>
-                                <p>Thank you for participating. It is greatly appreciated.</p>
+                                <span className={styles.alphaTag}>Alpha Release</span>
+                                <p className={styles.alphaHeadline}>Welcome to the InnerOS Typing Assessment</p>
+                                <p className={styles.alphaBody}>
+                                    You've been invited to participate in our alpha program. Your feedback during this phase
+                                    is invaluable in shaping the future of personality typing technology.
+                                </p>
                             </div>
 
-                            <h2 className={styles.codeTitle}>Get Started</h2>
-                            <p className={styles.codeDescription}>
-                                Enter your name and access code to begin your personality assessment.
-                            </p>
+                            <div className={styles.formSection}>
+                                <h2 className={styles.codeTitle}>Begin Your Assessment</h2>
+                                <p className={styles.codeDescription}>
+                                    Enter your details below to start. The assessment typically takes 15-25 minutes to complete.
+                                </p>
 
-                            <div className={styles.formFields}>
-                                <input
-                                    type="text"
-                                    className={styles.nameInput}
-                                    placeholder="Your name"
-                                    value={userName}
-                                    onChange={(e) => setUserName(e.target.value)}
-                                    onKeyDown={handleCodeKeyDown}
-                                    disabled={status === 'processing'}
-                                    autoComplete="off"
-                                />
+                                <div className={styles.formFields}>
+                                    <div className={styles.inputGroup}>
+                                        <label className={styles.inputLabel}>Your Name</label>
+                                        <input
+                                            type="text"
+                                            className={styles.nameInput}
+                                            placeholder="Enter your name"
+                                            value={userName}
+                                            onChange={(e) => setUserName(e.target.value)}
+                                            onKeyDown={handleCodeKeyDown}
+                                            disabled={status === 'processing'}
+                                            autoComplete="off"
+                                        />
+                                    </div>
 
-                                <div className={styles.codeInputWrapper}>
-                                    <input
-                                        ref={codeInputRef}
-                                        type="text"
-                                        className={styles.codeInput}
-                                        placeholder="Access code (e.g. E61282A4)"
-                                        value={accessCode}
-                                        onChange={(e) => setAccessCode(e.target.value.toUpperCase())}
-                                        onKeyDown={handleCodeKeyDown}
-                                        disabled={status === 'processing'}
-                                        maxLength={8}
-                                        autoComplete="off"
-                                    />
+                                    <div className={styles.inputGroup}>
+                                        <label className={styles.inputLabel}>Access Code</label>
+                                        <div className={styles.codeInputWrapper}>
+                                            <input
+                                                ref={codeInputRef}
+                                                type="text"
+                                                className={styles.codeInput}
+                                                placeholder="e.g. E61282A4"
+                                                value={accessCode}
+                                                onChange={(e) => setAccessCode(e.target.value.toUpperCase())}
+                                                onKeyDown={handleCodeKeyDown}
+                                                disabled={status === 'processing'}
+                                                maxLength={8}
+                                                autoComplete="off"
+                                            />
+                                        </div>
+                                    </div>
+
                                     <button
-                                        className={styles.codeButton}
+                                        className={styles.startButton}
                                         onClick={handleCodeSubmit}
                                         disabled={!accessCode.trim() || !userName.trim() || status === 'processing'}
                                     >
                                         {status === 'processing' ? (
-                                            <Loader2 size={20} className={styles.spinning} />
+                                            <>
+                                                <Loader2 size={18} className={styles.spinning} />
+                                                Connecting...
+                                            </>
                                         ) : (
-                                            <ArrowRight size={20} />
+                                            <>
+                                                Start Assessment
+                                                <ArrowRight size={18} />
+                                            </>
                                         )}
                                     </button>
                                 </div>
+
+                                {error && (
+                                    <div className={styles.errorWrapper}>
+                                        <p className={styles.codeError}>{error}</p>
+                                        {networkError && (
+                                            <button className={styles.retryButton} onClick={handleRetry}>
+                                                <RefreshCw size={16} />
+                                                Retry
+                                            </button>
+                                        )}
+                                    </div>
+                                )}
                             </div>
 
-                            {error && (
-                                <div className={styles.errorWrapper}>
-                                    <p className={styles.codeError}>{error}</p>
-                                    {networkError && (
-                                        <button className={styles.retryButton} onClick={handleRetry}>
-                                            <RefreshCw size={16} />
-                                            Retry
-                                        </button>
-                                    )}
-                                </div>
-                            )}
+                            <p className={styles.footerNote}>
+                                By continuing, you agree to participate in this alpha program.
+                                Your responses will be used to improve our typing algorithms.
+                            </p>
                         </div>
                     </div>
                 </div>
