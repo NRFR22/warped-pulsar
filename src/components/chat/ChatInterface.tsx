@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { Mic, Square, Loader2, Send, ArrowRight, Trophy, RefreshCw } from 'lucide-react';
+import { Mic, Square, Loader2, Send, ArrowRight, Trophy, RefreshCw, Copy, Check } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import styles from './ChatInterface.module.css';
 
@@ -83,6 +83,9 @@ export function ChatInterface() {
     });
     const [result, setResult] = useState<Result | null>(null);
     const [networkError, setNetworkError] = useState(false);
+    const [shareCode, setShareCode] = useState<string | null>(null);
+    const [shareCodeLoading, setShareCodeLoading] = useState(false);
+    const [shareCodeCopied, setShareCodeCopied] = useState(false);
 
     const messagesContainerRef = useRef<HTMLDivElement>(null);
     const inputRef = useRef<HTMLTextAreaElement>(null);
@@ -378,6 +381,31 @@ export function ChatInterface() {
         }
     };
 
+    const handleGenerateShareCode = async () => {
+        setShareCodeLoading(true);
+        try {
+            const res = await fetch(`${API_BASE}/api/generate-code`, {
+                method: 'POST',
+            });
+            if (res.ok) {
+                const data = await res.json();
+                setShareCode(data.code);
+            }
+        } catch (e) {
+            console.error('Failed to generate share code', e);
+        } finally {
+            setShareCodeLoading(false);
+        }
+    };
+
+    const handleCopyShareCode = async () => {
+        if (shareCode) {
+            await navigator.clipboard.writeText(shareCode);
+            setShareCodeCopied(true);
+            setTimeout(() => setShareCodeCopied(false), 2000);
+        }
+    };
+
     const handleKeyDown = (e: React.KeyboardEvent) => {
         if (e.key === 'Enter' && !e.shiftKey) {
             e.preventDefault();
@@ -532,6 +560,46 @@ export function ChatInterface() {
                                     <span className={styles.runnerUpNotes}>{ru.notes}</span>
                                 </div>
                             ))}
+                        </div>
+
+                        <div className={styles.shareSection}>
+                            <p className={styles.shareText}>Got any friends in OPS? Have them do this test!</p>
+                            {shareCode ? (
+                                <div className={styles.shareCodeDisplay}>
+                                    <span className={styles.shareCodeValue}>{shareCode}</span>
+                                    <button
+                                        className={styles.copyButton}
+                                        onClick={handleCopyShareCode}
+                                    >
+                                        {shareCodeCopied ? (
+                                            <>
+                                                <Check size={16} />
+                                                Copied!
+                                            </>
+                                        ) : (
+                                            <>
+                                                <Copy size={16} />
+                                                Copy
+                                            </>
+                                        )}
+                                    </button>
+                                </div>
+                            ) : (
+                                <button
+                                    className={styles.shareButton}
+                                    onClick={handleGenerateShareCode}
+                                    disabled={shareCodeLoading}
+                                >
+                                    {shareCodeLoading ? (
+                                        <>
+                                            <Loader2 size={16} className={styles.spinning} />
+                                            Generating...
+                                        </>
+                                    ) : (
+                                        'Get Access Code'
+                                    )}
+                                </button>
+                            )}
                         </div>
                     </div>
                 </div>
