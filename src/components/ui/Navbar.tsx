@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
@@ -11,6 +11,7 @@ import styles from './Navbar.module.css';
 export function Navbar() {
     const [showTypesDropdown, setShowTypesDropdown] = useState(false);
     const [showLessonsDropdown, setShowLessonsDropdown] = useState(false);
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const typesTimeout = useRef<NodeJS.Timeout | null>(null);
     const lessonsTimeout = useRef<NodeJS.Timeout | null>(null);
 
@@ -22,6 +23,29 @@ export function Navbar() {
         { title: 'Observer vs Decider', summary: 'Savior focus and common stress behaviors.' },
         { title: 'Introvert vs Extrovert', summary: 'Energy flow and how it shows up in conversation.' },
     ];
+
+    // Close mobile menu on resize to desktop
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth > 600) {
+                setMobileMenuOpen(false);
+            }
+        };
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    // Prevent body scroll when mobile menu is open
+    useEffect(() => {
+        if (mobileMenuOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
+        return () => {
+            document.body.style.overflow = '';
+        };
+    }, [mobileMenuOpen]);
 
     return (
         <header className={styles.header}>
@@ -35,6 +59,48 @@ export function Navbar() {
                     priority
                 />
             </Link>
+
+            {/* Hamburger button for mobile */}
+            <button
+                className={styles.hamburger}
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                aria-label="Toggle menu"
+                aria-expanded={mobileMenuOpen}
+            >
+                <span className={cn(styles.hamburgerLine, mobileMenuOpen && styles.hamburgerOpen)} />
+                <span className={cn(styles.hamburgerLine, mobileMenuOpen && styles.hamburgerOpen)} />
+                <span className={cn(styles.hamburgerLine, mobileMenuOpen && styles.hamburgerOpen)} />
+            </button>
+
+            {/* Mobile menu overlay */}
+            {mobileMenuOpen && (
+                <div className={styles.mobileMenuOverlay} onClick={() => setMobileMenuOpen(false)} />
+            )}
+
+            {/* Mobile slide-out menu */}
+            <div className={cn(styles.mobileMenu, mobileMenuOpen && styles.mobileMenuOpen)}>
+                <Link href="/" className={styles.mobileLink} onClick={() => setMobileMenuOpen(false)}>
+                    Home
+                </Link>
+                <Link href="/types" className={styles.mobileLink} onClick={() => setMobileMenuOpen(false)}>
+                    Explore types
+                </Link>
+                <Link href="/lessons" className={styles.mobileLink} onClick={() => setMobileMenuOpen(false)}>
+                    Lessons
+                </Link>
+                <Link href="/board-new" className={styles.mobileLink} onClick={() => setMobileMenuOpen(false)}>
+                    Board New
+                </Link>
+                <Link href="/board" className={styles.mobileLink} onClick={() => setMobileMenuOpen(false)}>
+                    Board
+                </Link>
+                <Link href="/about" className={styles.mobileLink} onClick={() => setMobileMenuOpen(false)}>
+                    About the system
+                </Link>
+                <Link href="/chat" className={styles.mobileCta} onClick={() => setMobileMenuOpen(false)}>
+                    Talk to your Personality
+                </Link>
+            </div>
 
             <nav className={styles.nav}>
                 <div className={styles.navLinks}>

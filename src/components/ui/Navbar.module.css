@@ -190,3 +190,121 @@
         padding: 0.4rem 0.75rem;
     }
 }
+
+/* Hamburger menu button - hidden on desktop */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 32px;
+    height: 32px;
+    padding: 4px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 60;
+}
+
+.hamburgerLine {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: var(--color-foreground);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+.hamburgerLine.hamburgerOpen:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburgerLine.hamburgerOpen:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburgerLine.hamburgerOpen:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* Mobile menu overlay */
+.mobileMenuOverlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 55;
+}
+
+/* Mobile slide-out menu */
+.mobileMenu {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: -280px;
+    width: 280px;
+    height: 100vh;
+    height: 100dvh;
+    background: var(--color-background);
+    padding: 4rem 1.5rem 2rem;
+    flex-direction: column;
+    gap: 0.5rem;
+    z-index: 58;
+    transition: right 0.3s ease;
+    box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+}
+
+.mobileMenuOpen {
+    right: 0;
+}
+
+.mobileLink {
+    display: block;
+    padding: 0.875rem 1rem;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--color-foreground);
+    border-radius: 0.5rem;
+    transition: background 0.15s ease;
+}
+
+.mobileLink:hover {
+    background: var(--color-secondary);
+}
+
+.mobileCta {
+    display: block;
+    margin-top: 1rem;
+    padding: 0.875rem 1rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: white;
+    background: var(--color-primary);
+    border-radius: 0.5rem;
+    text-align: center;
+    transition: all 0.15s ease;
+}
+
+.mobileCta:hover {
+    opacity: 0.9;
+}
+
+/* Show hamburger and mobile menu on mobile */
+@media (max-width: 600px) {
+    .hamburger {
+        display: flex;
+    }
+
+    .mobileMenuOverlay {
+        display: block;
+    }
+
+    .mobileMenu {
+        display: flex;
+    }
+
+    .nav {
+        display: none;
+    }
+}
