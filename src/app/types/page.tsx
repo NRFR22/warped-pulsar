@@ -17,11 +17,11 @@ export default function TypesPage() {
             <section className={styles.ctaPanel}>
                 <div>
                     <h2>Ready to confirm your type?</h2>
-                    <p>Talk out loud for a few minutes and let inner OS compare notes with your self-read.</p>
+                    <p>Talk out loud for a few minutes and let us compare notes with your self-read.</p>
                 </div>
                 <div className={styles.ctaButtons}>
                     <Link href="/chat">
-                        <Button>Talk to your inner OS</Button>
+                        <Button>Talk to your Personality</Button>
                     </Link>
                     <Link href="/result">
                         <Button variant="secondary">See a sample result</Button>

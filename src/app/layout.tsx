@@ -7,8 +7,8 @@ import { Footer } from '@/components/ui/Footer';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'inner OS',
-  description: 'Meet your inner operating system.',
+  title: 'Personality',
+  description: 'Discover your personality type.',
 };
 
 export default function RootLayout({

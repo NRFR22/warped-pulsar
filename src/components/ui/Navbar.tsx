@@ -28,7 +28,7 @@ export function Navbar() {
             <Link href="/" className={styles.logo}>
                 <Image
                     src="/LOGO_.png"
-                    alt="inner OS logo"
+                    alt="Personality logo"
                     width={160}
                     height={48}
                     className={styles.logoImage}
@@ -100,7 +100,7 @@ export function Navbar() {
                     </Link>
                 </div>
                 <Link href="/chat">
-                    <Button className={styles.cta}>Talk to your inner OS</Button>
+                    <Button className={styles.cta}>Talk to your Personality</Button>
                 </Link>
             </nav>
         </header>

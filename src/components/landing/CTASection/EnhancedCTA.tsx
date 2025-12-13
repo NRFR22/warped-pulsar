@@ -40,7 +40,7 @@ export function EnhancedCTA() {
           <h2 className={styles.title}>Ready to discover your type?</h2>
 
           <p className={styles.text}>
-            Join 12,847+ people who've discovered their inner OS.
+            Join 12,847+ people who've discovered their personality type.
             <br />
             No signup. No email. Just 5 minutes of conversation.
           </p>

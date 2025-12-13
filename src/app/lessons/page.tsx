@@ -20,7 +20,7 @@ export default function LessonsPage() {
         <main className={styles.container}>
             <header className={styles.hero}>
                 <p className={styles.kicker}>Lessons</p>
-                <h1>Learn the inner OS system</h1>
+                <h1>Learn the Personality system</h1>
                 <p>Short, practical lessons that help you understand the 32 archetypes and read the signals in real conversations.</p>
             </header>
 

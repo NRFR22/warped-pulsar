@@ -5,12 +5,12 @@ import { Check, X } from 'lucide-react';
 import styles from './ComparisonTable.module.css';
 
 const comparisons = [
-  { feature: 'Format', other: 'Multiple choice quiz', innerOS: 'Natural conversation' },
-  { feature: 'Time Required', other: '30-45 minutes', innerOS: '5 minutes' },
-  { feature: 'Input Method', other: 'Typing answers', innerOS: 'Voice only' },
-  { feature: 'Accuracy', other: 'Variable', innerOS: '94% accuracy' },
-  { feature: 'Results', other: 'Simple labels', innerOS: 'Deep cognitive insights' },
-  { feature: 'Experience', other: 'Feels like a test', innerOS: 'Feels like a conversation' },
+  { feature: 'Format', other: 'Multiple choice quiz', ours: 'Natural conversation' },
+  { feature: 'Time Required', other: '30-45 minutes', ours: '5 minutes' },
+  { feature: 'Input Method', other: 'Typing answers', ours: 'Voice only' },
+  { feature: 'Accuracy', other: 'Variable', ours: '94% accuracy' },
+  { feature: 'Results', other: 'Simple labels', ours: 'Deep cognitive insights' },
+  { feature: 'Experience', other: 'Feels like a test', ours: 'Feels like a conversation' },
 ];
 
 const fadeInUp = {
@@ -29,7 +29,7 @@ export function ComparisonTable() {
             <span>Other Tests</span>
           </div>
           <div className={`${styles.cell} ${styles.innerOSHeader}`}>
-            <span>Inner OS</span>
+            <span>Ours</span>
             <div className={styles.badge}>Recommended</div>
           </div>
         </div>
@@ -52,7 +52,7 @@ export function ComparisonTable() {
             </div>
             <div className={`${styles.cell} ${styles.innerOSCell}`}>
               <Check className={styles.checkIcon} size={16} />
-              {comparison.innerOS}
+              {comparison.ours}
             </div>
           </motion.div>
         ))}

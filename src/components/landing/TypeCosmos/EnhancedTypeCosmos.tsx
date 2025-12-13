@@ -41,7 +41,7 @@ export function EnhancedTypeCosmos() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className={styles.title}>32 archetypes, one inner OS</h2>
+          <h2 className={styles.title}>32 archetypes, one system</h2>
           <p className={styles.subtitle}>
             We've mapped 32 distinct patterns of motivation, perception, and behavior.
             Hover to explore—click to dive deep.

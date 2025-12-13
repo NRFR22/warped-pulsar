@@ -14,7 +14,7 @@ export default function ResultPage() {
     return (
         <main className={styles.container}>
             <div className={styles.hero}>
-                <p className={styles.label}>Your inner operating system</p>
+                <p className={styles.label}>Your personality type</p>
                 <h1 className={styles.title}>You are {resultType.name}</h1>
                 <p className={styles.subline}>{resultType.code} · {resultType.family} Archetype</p>
                 <p className="text-xl text-gray-700 max-w-2xl mx-auto">
@@ -53,7 +53,7 @@ export default function ResultPage() {
             <div className={styles.nextSteps}>
                 <Card className="flex flex-col gap-4 items-start">
                     <h3 className="font-bold text-lg">Not sure?</h3>
-                    <p className="text-gray-600">Keep talking to your inner OS and see if your type stabilizes or shifts.</p>
+                    <p className="text-gray-600">Keep talking and see if your type stabilizes or shifts.</p>
                     <Link href="/chat">
                         <Button variant="secondary">Return to chat</Button>
                     </Link>

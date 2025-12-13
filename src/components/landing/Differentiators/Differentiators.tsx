@@ -17,7 +17,7 @@ export function Differentiators() {
         >
           <h2 className={styles.title}>Not just another personality test</h2>
           <p className={styles.subtitle}>
-            See how Inner OS compares to traditional personality assessments
+            See how we compare to traditional personality assessments
           </p>
         </motion.div>
 

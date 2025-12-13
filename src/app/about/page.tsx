@@ -7,9 +7,9 @@ export default function AboutPage() {
         <main className={styles.container}>
             <header className={styles.hero}>
                 <p className={styles.kicker}>ABOUT THE SYSTEM</p>
-                <h1 className={styles.title}>Inside the 32-type inner OS</h1>
+                <h1 className={styles.title}>Inside the 32-type system</h1>
                 <p className={styles.subtitle}>
-                    inner OS is a voice-first personality lab. We listen to how you narrate real situations, then map the repeated patterns of motivation, perception, and decision making.
+                    This is a voice-first personality lab. We listen to how you narrate real situations, then map the repeated patterns of motivation, perception, and decision making.
                 </p>
                 <div className={styles.heroStats}>
                     <div className={styles.statCard}>
@@ -29,7 +29,7 @@ export default function AboutPage() {
 
             <section className={styles.section}>
                 <div className={styles.sectionHeader}>
-                    <h2 className={styles.sectionTitle}>Why we built inner OS</h2>
+                    <h2 className={styles.sectionTitle}>Why we built this</h2>
                     <p className={styles.sectionLead}>
                         Traditional tests rely on self-report sliders. We wanted a system that listens to the way you process stories in real time and reflects that back with language that actually feels human.
                     </p>
@@ -78,7 +78,7 @@ export default function AboutPage() {
 
             <section className={styles.section}>
                 <div className={styles.sectionHeader}>
-                    <h2 className={styles.sectionTitle}>What makes inner OS different</h2>
+                    <h2 className={styles.sectionTitle}>What makes this different</h2>
                     <p className={styles.sectionLead}>A conversational AI front end with a nerdy typology engine behind it.</p>
                 </div>
                 <div className={styles.bentoGrid}>
@@ -106,7 +106,7 @@ export default function AboutPage() {
                 <ul className={styles.guardrailList}>
                     <li>
                         <span className={styles.guardrailLabel}>Pop psychology, not diagnosis.</span>
-                        <span>Use inner OS as a mirror and a conversation starter, never as medical advice.</span>
+                        <span>Use this as a mirror and a conversation starter, never as medical advice.</span>
                     </li>
                     <li>
                         <span className={styles.guardrailLabel}>Transparent language.</span>
@@ -121,12 +121,12 @@ export default function AboutPage() {
 
             <div className={styles.ctaBlock}>
                 <div>
-                    <h3>Ready to meet your inner operating system?</h3>
+                    <h3>Ready to discover your personality type?</h3>
                     <p>Jump into a voice session or browse all 32 archetypes to find the one that resonates.</p>
                 </div>
                 <div className={styles.ctaButtons}>
                     <Link href="/chat">
-                        <Button>Talk to your inner OS</Button>
+                        <Button>Talk to your Personality</Button>
                     </Link>
                     <Link href="/types">
                         <Button variant="secondary">Browse the 32 types</Button>

@@ -13,7 +13,7 @@ export function Footer() {
                     <Link href="/disclaimer" className={styles.link}>Disclaimers</Link>
                 </div>
                 <p className={styles.disclaimer}>
-                    inner OS is a pop-psychology tool, not a mental health or clinical assessment.
+                    This is a pop-psychology tool, not a mental health or clinical assessment.
                 </p>
             </div>
         </footer>

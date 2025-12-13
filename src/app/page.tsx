@@ -83,7 +83,7 @@ export default function Home() {
               </div>
               <h3 className={styles.stepTitle}>Step 2 – The engine listens</h3>
               <p className={styles.stepText}>
-                Behind the scenes, inner OS analyzes patterns in your language and responses.
+                Behind the scenes, we analyze patterns in your language and responses.
               </p>
             </Card>
           </motion.div>

@@ -421,6 +421,22 @@ export function ChatInterface() {
         }
     };
 
+    // DEBUG: Show dummy results button
+    const showDummyResults = () => {
+        setResult({
+            top_type: { type: 'Ne-Fi', score: 18.5, observer: 'Ne', decider: 'Fi', observer_score: 10.2, decider_score: 8.3 },
+            runner_ups: [
+                { type: 'Ne-Ti', score: 15.2, observer: 'Ne', decider: 'Ti', notes: 'Strong Ne signals' },
+                { type: 'Fi-Ne', score: 14.8, observer: 'Ne', decider: 'Fi', notes: 'Could be Fi first' },
+                { type: 'Ni-Fe', score: 12.1, observer: 'Ni', decider: 'Fe', notes: 'Some Ni patterns' },
+                { type: 'Se-Fi', score: 10.5, observer: 'Se', decider: 'Fi', notes: 'Less likely' },
+                { type: 'Ti-Ne', score: 9.8, observer: 'Ne', decider: 'Ti', notes: 'Possible but unlikely' },
+            ],
+            observer_first: true,
+        });
+        setSessionState('results');
+    };
+
     // Loading screen
     if (sessionState === 'loading') {
         return (
@@ -444,7 +460,7 @@ export function ChatInterface() {
                         <div className={styles.codeContent}>
                             <div className={styles.alphaNotice}>
                                 <span className={styles.alphaTag}>Alpha Release</span>
-                                <p className={styles.alphaHeadline}>Welcome to the InnerOS Typing Assessment</p>
+                                <p className={styles.alphaHeadline}>Welcome to the Personality Typing Assessment</p>
                                 <p className={styles.alphaBody}>
                                     You've been invited to participate in our alpha program. Your feedback during this phase
                                     is invaluable in shaping the future of personality typing technology.
@@ -526,6 +542,23 @@ export function ChatInterface() {
                                 By continuing, you agree to participate in this alpha program.
                                 Your responses will be used to improve our typing algorithms.
                             </p>
+
+                            {/* DEBUG BUTTON - Remove before production */}
+                            <button
+                                onClick={showDummyResults}
+                                style={{
+                                    marginTop: '1rem',
+                                    padding: '0.5rem 1rem',
+                                    fontSize: '0.75rem',
+                                    background: '#ef4444',
+                                    color: 'white',
+                                    border: 'none',
+                                    borderRadius: '0.25rem',
+                                    cursor: 'pointer',
+                                }}
+                            >
+                                [DEBUG] Show Results Page
+                            </button>
                         </div>
                     </div>
                 </div>
