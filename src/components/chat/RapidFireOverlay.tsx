@@ -110,28 +110,22 @@ export function RapidFireOverlay({ sessionId, isActive, onClose }: Props) {
 
                 <p className={styles.question}>{question.text}</p>
 
+                <div className={styles.labels}>
+                    <span className={styles.leftLabel}>{question.option_1}</span>
+                    <span className={styles.rightLabel}>{question.option_5}</span>
+                </div>
+
                 <div className={styles.buttons}>
-                    <button
-                        className={`${styles.optionButton} ${styles.leftOption} ${selectedValue === 1 ? styles.selected : ''}`}
-                        onClick={() => handleAnswer(1)}
-                        disabled={isLoading}
-                    >
-                        {question.option_1}
-                    </button>
-                    <button
-                        className={`${styles.optionButton} ${styles.middleOption} ${selectedValue === 3 ? styles.selected : ''}`}
-                        onClick={() => handleAnswer(3)}
-                        disabled={isLoading}
-                    >
-                        Either / Both
-                    </button>
-                    <button
-                        className={`${styles.optionButton} ${styles.rightOption} ${selectedValue === 5 ? styles.selected : ''}`}
-                        onClick={() => handleAnswer(5)}
-                        disabled={isLoading}
-                    >
-                        {question.option_5}
-                    </button>
+                    {[1, 2, 3, 4, 5].map((value) => (
+                        <button
+                            key={value}
+                            className={`${styles.optionButton} ${selectedValue === value ? styles.selected : ''}`}
+                            onClick={() => handleAnswer(value)}
+                            disabled={isLoading}
+                        >
+                            {value}
+                        </button>
+                    ))}
                 </div>
 
                 {showFeedback && (

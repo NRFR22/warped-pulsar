@@ -65,59 +65,74 @@
     text-align: center;
 }
 
-/* Option buttons */
+/* Labels above buttons */
+.labels {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    padding: 0 0.25rem;
+}
+
+.leftLabel,
+.rightLabel {
+    font-size: 0.75rem;
+    color: var(--color-muted-foreground);
+    max-width: 40%;
+    line-height: 1.3;
+}
+
+.leftLabel {
+    text-align: left;
+}
+
+.rightLabel {
+    text-align: right;
+}
+
+/* 5 Option buttons in a row */
 .buttons {
     display: flex;
-    flex-direction: column;
     gap: 0.5rem;
     margin-bottom: 0.5rem;
 }
 
 .optionButton {
-    width: 100%;
-    padding: 0.875rem 1rem;
+    flex: 1;
+    aspect-ratio: 1;
+    max-width: 60px;
     border: 2px solid var(--color-border);
     border-radius: 0.75rem;
     background: var(--color-secondary);
     color: var(--color-foreground);
-    font-size: 0.9375rem;
-    font-weight: 500;
+    font-size: 1.125rem;
+    font-weight: 600;
     cursor: pointer;
-    transition: all 0.12s ease;
-    text-align: center;
-    line-height: 1.3;
+    transition: all 0.1s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .optionButton:hover:not(:disabled) {
     border-color: var(--color-primary);
-    background: rgba(var(--color-primary-rgb, 99, 102, 241), 0.08);
-    transform: scale(1.02);
+    background: rgba(var(--color-primary-rgb, 99, 102, 241), 0.1);
+    transform: scale(1.08);
 }
 
 .optionButton:active:not(:disabled) {
-    transform: scale(0.98);
+    transform: scale(0.95);
 }
 
 .optionButton.selected {
     background: var(--color-primary);
     border-color: var(--color-primary);
     color: white;
+    transform: scale(1.05);
 }
 
 .optionButton:disabled {
     opacity: 0.6;
     cursor: not-allowed;
-}
-
-.middleOption {
-    font-size: 0.8125rem;
-    padding: 0.625rem 1rem;
-    opacity: 0.7;
-    border-style: dashed;
-}
-
-.middleOption:hover:not(:disabled) {
-    opacity: 1;
 }
 
 /* Feedback flash */
@@ -160,11 +175,12 @@
     }
 
     .optionButton {
-        padding: 0.75rem 0.875rem;
-        font-size: 0.875rem;
+        max-width: 50px;
+        font-size: 1rem;
     }
 
-    .middleOption {
-        padding: 0.5rem 0.875rem;
+    .leftLabel,
+    .rightLabel {
+        font-size: 0.6875rem;
     }
 }
