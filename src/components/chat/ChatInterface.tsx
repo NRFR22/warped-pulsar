@@ -444,12 +444,12 @@ export function ChatInterface() {
                                                 ref={codeInputRef}
                                                 type="text"
                                                 className={styles.codeInput}
-                                                placeholder="e.g. E61282A4"
+                                                placeholder="e.g. A1B2"
                                                 value={accessCode}
                                                 onChange={(e) => setAccessCode(e.target.value.toUpperCase())}
                                                 onKeyDown={handleCodeKeyDown}
                                                 disabled={status === 'processing'}
-                                                maxLength={8}
+                                                maxLength={4}
                                                 autoComplete="off"
                                             />
                                         </div>
