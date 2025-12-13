@@ -114,15 +114,26 @@ export function ChatInterface() {
     ];
 
     const [thinkingIndex, setThinkingIndex] = useState(0);
+    const [showLongWaitMessage, setShowLongWaitMessage] = useState(false);
 
     useEffect(() => {
-        if (status !== 'processing') return;
+        if (status !== 'processing') {
+            setShowLongWaitMessage(false);
+            return;
+        }
 
         const interval = setInterval(() => {
             setThinkingIndex(prev => (prev + 1) % thinkingPhrases.length);
-        }, 3000);
+        }, 6000);
 
-        return () => clearInterval(interval);
+        const longWaitTimer = setTimeout(() => {
+            setShowLongWaitMessage(true);
+        }, 25000);
+
+        return () => {
+            clearInterval(interval);
+            clearTimeout(longWaitTimer);
+        };
     }, [status, thinkingPhrases.length]);
 
     // Save session to localStorage
@@ -638,9 +649,15 @@ export function ChatInterface() {
                                 <span className={styles.typingDot}></span>
                                 <span className={styles.typingDot}></span>
                             </div>
-                            <p className={styles.processingHint} key={thinkingIndex}>
-                                {thinkingPhrases[thinkingIndex]}...
-                            </p>
+                            {showLongWaitMessage ? (
+                                <p className={styles.longWaitHint}>
+                                    This is taking longer than usual. We're doing deeper analysis. We're probably going into Phase 2...
+                                </p>
+                            ) : (
+                                <p className={styles.processingHint} key={thinkingIndex}>
+                                    {thinkingPhrases[thinkingIndex]}...
+                                </p>
+                            )}
                         </div>
                     )}
                 </div>
